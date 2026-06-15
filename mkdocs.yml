@@ -27,3 +27,7 @@ nav:
   - Hardware: hardware.md
   - Software: software.md
   - GUI: user_interface.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
