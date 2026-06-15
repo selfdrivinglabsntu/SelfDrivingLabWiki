@@ -1,5 +1,6 @@
 # Welcome to the Codebase Guide
 This wiki serves as the central source of truth for our development team.
+hello world
 
 ## Quick Links
 * [Architecture Overview](architecture.md)
