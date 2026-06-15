@@ -1,6 +1,6 @@
 # Bill of Materials
 
-??? note "## 3D Printer (Click to expand)"
+??? note "3D Printer"
     Our machine was developed based off the [Creality Ender-3 S1](https://www.creality.com/products/creality-ender-3-s1-3d-printer).
     
     ![Creality Ender-3 S1 3D Printer](https://cdn.creality.com/product-detial/us/creality-ender-3-s1-3d-printer/b5eadd06dd183bda9c1f47d245de2f59_540x.jpg)
