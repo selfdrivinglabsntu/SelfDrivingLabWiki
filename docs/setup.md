@@ -1,2 +1,3 @@
 # Getting Started
-Steps to clone, install dependencies, and run this project locally.
+So you've decided you want a cheap liquid handler.
+
