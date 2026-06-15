@@ -1,5 +1,5 @@
-site_name: "Codebase Guide"
-site_description: "Internal developer documentation and architecture guide"
+site_name: "HEIMDALL Wiki"
+site_description: "A guide to building your own Low-Cost Liquid Handler"
 
 theme:
   name: material
@@ -23,5 +23,7 @@ theme:
 # This defines the sidebar structure of your wiki
 nav:
   - Home: index.md
-  - Architecture: architecture.md
   - Getting Started: setup.md
+  - Hardware: hardware.md
+  - Software: software.md
+  - GUI: user_interface.md
