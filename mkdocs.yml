@@ -16,21 +16,31 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
   features:
-    - navigation.tabs      # Top navigation bar
+    # - navigation.tabs      # Top navigation bar
     - navigation.indexes   # Allows folders to have their own landing pages
     - search.suggest       # Smart search bar dropdowns
+    - navigation.footer
 
 # This defines the sidebar structure of your wiki
 nav:
   - Home: index.md
-  - Getting Started: setup.md
-  - Hardware: hardware/hardware.md
-  - Software: software.md
-  - GUI: user_interface.md
+  - Overview: setup.md
+  - Bill of materials: hardware/bill_of_materials.md
+  - Repository: software/git.md
+  - Printing instructions: hardware/printing_parts.md
+  - Firmware: software/firmware.md
+  - Assembly: hardware/assembly.md
+  - Electronics: hardware/electronics.md
+  - GUI: software/GUI.md
+ 
 
 markdown_extensions:
   - admonition
   - pymdownx.details
+<<<<<<< HEAD
 
 extra_css:
   - assets/styles.css
+=======
+  - attr_list
+>>>>>>> 70c3d622f688fd00544c8040ff7d7defe3aea8ae
