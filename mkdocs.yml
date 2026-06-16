@@ -24,10 +24,13 @@ theme:
 nav:
   - Home: index.md
   - Getting Started: setup.md
-  - Hardware: hardware.md
+  - Hardware: hardware/hardware.md
   - Software: software.md
   - GUI: user_interface.md
 
 markdown_extensions:
   - admonition
   - pymdownx.details
+
+extra_css:
+  - assets/styles.css

@@ -14,3 +14,11 @@
 
     ![X-Axis Motor Outside Frame (Recommended)](images/xmotor_outside.jpg)
     *Figure 2: Preferred external layout maximizing clear movement area.*
+
+??? note "Bill of Materials"
+    <iframe
+        src="https://docs.google.com/spreadsheets/d/1vUAy_0eO1tAADhC35Ow7ZKr6H-OSMsKH6FNNoEm6aiM/edit?usp=sharing"
+        width="100%"
+        height="800"
+        frameborder="0">
+    </iframe>
