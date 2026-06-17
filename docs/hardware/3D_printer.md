@@ -13,3 +13,5 @@ If you do not have access to these models, and are looking for others, we would 
 
 ![X-Axis Motor Outside Frame (Recommended)](images/xmotor_outside.jpg)
 *Figure 2: Preferred external layout maximizing clear movement area.*
+
+Additionally, do make sure that your 3D printer mainboard has port for connecting a external z-limit switch. 

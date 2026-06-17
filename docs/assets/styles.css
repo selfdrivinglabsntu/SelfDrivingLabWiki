@@ -28,3 +28,94 @@ summary {
 details[open] {
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
+
+:root{
+  --flow-accent:      #0e7c86;   /* -> var(--md-primary-fg-color)  */
+  --flow-accent-soft: #0e7c8618;
+  --flow-card-bg:     #ffffff;   /* -> var(--md-default-bg-color)  */
+  --flow-card-border: #e3e6ea;
+  --flow-text:        #1c2126;   /* -> var(--md-default-fg-color)  */
+  --flow-muted:       #5c6873;
+  --flow-line:        #c4ccd4;   /* connector color                */
+  --flow-gap:         2.6rem;    /* vertical gap = arrow length     */
+  --flow-radius:      12px;
+  --flow-maxw:        100%;
+}
+
+.flow{
+  max-width:var(--flow-maxw); margin-inline:auto;
+  display:flex; flex-direction:column; align-items:stretch;
+  gap:var(--flow-gap); counter-reset:step;
+}
+
+.flow-step{
+  position:relative;
+  background:var(--flow-card-bg);
+  border:1px solid var(--flow-card-border);
+  border-left:3px solid var(--flow-accent);
+  border-radius:var(--flow-radius);
+  padding:1.05rem 1.15rem 1.05rem 1.25rem;
+  box-shadow:0 1px 2px rgba(16,24,32,.04), 0 4px 14px rgba(16,24,32,.04);
+}
+
+/* auto step number — reorder and it renumbers itself */
+.flow-step::before{
+  counter-increment:step; content:counter(step);
+  position:absolute; top:-12px; left:-13px;
+  width:26px; height:26px; display:grid; place-items:center;
+  font-size:.8rem; font-weight:700; font-variant-numeric:tabular-nums;
+  color:#fff; background:var(--flow-accent); border-radius:50%;
+  box-shadow:0 0 0 3px var(--flow-card-bg);
+}
+
+/* connector: one masked SVG (line + arrowhead) in the gap below */
+.flow-step:not(:last-child)::after{
+  content:""; position:absolute; left:50%;
+  bottom:calc(-1 * var(--flow-gap)); transform:translateX(-50%);
+  width:18px; height:var(--flow-gap); background-color:var(--flow-line);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2018%2044'%3E%3Cpath%20d='M9%200%20V33'%20stroke='black'%20stroke-width='2'/%3E%3Cpath%20d='M9%2044%20L3.5%2032%20H14.5%20Z'/%3E%3C/svg%3E") no-repeat center / contain;
+          mask:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2018%2044'%3E%3Cpath%20d='M9%200%20V33'%20stroke='black'%20stroke-width='2'/%3E%3Cpath%20d='M9%2044%20L3.5%2032%20H14.5%20Z'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+.flow-step :first-child{ margin-top:0; }
+.flow-step :last-child{ margin-bottom:0; }
+.flow-step .flow-title{ margin:0; color:var(--flow-text); font-size:1rem; font-weight:650; letter-spacing:-.005em; }
+.flow-step p{ margin:.4rem 0 0; color:var(--flow-muted); font-size:.92rem; line-height:1.55; }
+.flow-step img{ display:block; width:100%; height:auto; border-radius:8px; margin-top:.7rem; }
+
+/* decision card */
+.flow-step.is-decision{ border:1px dashed var(--flow-accent); border-left:1px dashed var(--flow-accent); background:var(--flow-accent-soft); }
+.flow-step .flow-eyebrow{ margin:0 0 .3rem; font-size:.66rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--flow-accent); }
+
+/* branch */
+.flow-split{ display:flex; gap:1rem; align-items:flex-start; }
+.flow-branch{ flex:1 1 0; display:flex; flex-direction:column; gap:var(--flow-gap); }
+.flow-branch-label{ align-self:center; margin:0 0 .2rem; font-size:.7rem; font-weight:700; padding:.2rem .6rem; border-radius:999px; color:var(--flow-accent); background:var(--flow-accent-soft); border:1px solid var(--flow-accent); }
+.flow-branch .flow-step::before{ content:""; counter-increment:none; width:0; height:0; box-shadow:none; }  /* alternates aren't numbered */
+
+/* grid of sub-cards inside a step */
+.flow-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+  gap:.7rem;
+  margin-top:.85rem;
+}
+.flow-grid-item{
+  background:var(--flow-accent-soft);
+  border:1px solid var(--flow-card-border);
+  border-radius:8px;
+  padding:.7rem .8rem;
+}
+.flow-grid-item .flow-grid-title{
+  margin:0 0 .15rem;
+  font-size:.9rem; font-weight:650;
+  color:var(--flow-text);
+}
+.flow-grid-item p{
+  margin:.2rem 0 0;
+  font-size:.85rem; line-height:1.45;
+  color:var(--flow-muted);
+}
+.flow-grid-item img{ border-radius:6px; margin-top:.5rem; }
+
+@media (max-width:520px){ .flow-split{ flex-direction:column; } }
