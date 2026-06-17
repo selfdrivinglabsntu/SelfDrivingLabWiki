@@ -119,3 +119,11 @@ details[open] {
 .flow-grid-item img{ border-radius:6px; margin-top:.5rem; }
 
 @media (max-width:520px){ .flow-split{ flex-direction:column; } }
+
+
+.center {
+  display: block;
+  /* margin-left: auto;
+  margin-right: auto; */
+  margin-inline: auto;
+}
