@@ -145,7 +145,7 @@ We highly recommend 3D printing both the **8-sample holder** and the **12-sample
 
 Repeat 1-8 for any other equipment.
 
-### 1.7. Calibrating Pipette Dispense Volume
+### 1.6. Calibrating Pipette Dispense Volume
 
 The liquid handler controls volume delivery using a linear actuator that runs for a calculated duration of time. Because friction, tubing diameter, and actuator speed vary by setup, you must calibrate the relationship between actuator runtime and actual volume dispensed. 
 
