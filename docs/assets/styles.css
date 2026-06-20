@@ -152,3 +152,12 @@ details[open] {
 .flow-step img.img-full{ width:100%; max-width:100%; }
  
 @media (max-width:520px){ .flow-split{ flex-direction:column; } }
+@media (max-width:520px){ .flow-split{ flex-direction:column; } }
+
+
+.center {
+  display: block;
+  /* margin-left: auto;
+  margin-right: auto; */
+  margin-inline: auto;
+}
