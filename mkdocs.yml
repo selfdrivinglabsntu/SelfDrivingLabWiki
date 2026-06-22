@@ -42,4 +42,3 @@ markdown_extensions:
 
 extra_css:
   - assets/styles.css
-  - attr_list

@@ -146,10 +146,12 @@ details[open] {
   color:var(--flow-muted);
 }
 
-.flow-step img.img-xs{ width:auto;  max-width:120px; }
+.flow-step img.img-xs{ width:auto;  max-width:120px;}
+.flow-step img.img-sm-left{ width:auto;  max-width:240px;}
 .flow-step img.img-sm{ width:auto;  max-width:240px; margin-inline:auto; display:block;}
 .flow-step img.img-md{ width:auto;  max-width:400px; margin-inline:auto; display:block;}
-.flow-step img.img-full{ width:100%; max-width:100%; }
+.flow-step img.img-full{ width:100%; max-width:100%;}
+.flow-step img.img-icon{ width: 60px;  max-height:100px;}
  
 @media (max-width:520px){ .flow-split{ flex-direction:column; } }
 @media (max-width:520px){ .flow-split{ flex-direction:column; } }
@@ -160,4 +162,46 @@ details[open] {
   /* margin-left: auto;
   margin-right: auto; */
   margin-inline: auto;
+}
+
+.center-p { margin:.4rem 0 0; color:var(--flow-muted); font-size:.8rem; line-height:1.55; text-align:center;}
+
+img {
+  max-width: 100%;            /* Essential: prevents images from overflowing mobile screens */
+  height: auto;               /* Maintains correct aspect ratio */
+  display: block;             /* Removes unwanted line-height bottom spacing */
+  object-fit: contain;        /* Ensures images scale cleanly without distorting */
+}
+
+img.img-xs { 
+  width: 100%;  
+  max-width: 120px; 
+}
+
+img.img-sm-left { 
+  width: 100%;  
+  max-width: 240px; 
+}
+
+img.img-sm { 
+  width: 100%;  
+  max-width: 240px; 
+  margin-inline: auto; 
+}
+
+img.img-md { 
+  width: 100%;  
+  max-width: 400px; 
+  margin-inline: auto; 
+}
+
+img.img-full { 
+  width: 100%; 
+  max-width: 100%; 
+}
+
+img.img-icon { 
+  width: 60px;  
+  max-height: 100px; 
+  object-fit: contain; /* Ensures icons don't squash or stretch */
 }

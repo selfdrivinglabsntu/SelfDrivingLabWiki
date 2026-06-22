@@ -262,14 +262,56 @@ The tip disposal and the 3D printer bed plate are fixed onto the aluminium heat 
 
 
 
-**Removing the magnetic base stuck on top of the aluminium heat bed**  
+**Removing the magnetic base** 
+
+<div class="flow-grid" markdown>
+<div class="flow-grid-item" markdown>
+You will need
+{: .flow-grid-title }
+
+![plier](images/icons/plier.svg){.img-icon}
+![screwdriver](images/icons/screwdriver.svg){.img-icon}
+![labour](images/icons/labour_1to2.svg){.img-icon}
+
+</div>
+
+</div>
+
 The magnetic base is stuck onto the aluminium heat bed using a very strong adhesive. We suggest using strong pliars to rip off the magnetic base and an extra pair of hands to hold down the 3D printer while the other person removes the magnetic base.
 
 ![remove magnetic base](images/magnetic_base_removal.png)
 <p class="p-1">Figure 5: Magnetic base removal. (A) Photograph of magnetic base. (B) Magnetic base being removed.</p>
 
 **Installing Bed Plate and Tip Disposal Module**  
-You will notice that there are 4 screws that connect the manual levelling knobs to the aluminium bed. We will make use of these screws to fix our bed plate and tip disposal 3D prints onto the aluminium bed.
+You will notice that there are 4 screws that connect the manual levelling knobs to the aluminium bed. We will make use of these screws to fix our bed plate and tip disposal onto the aluminium bed.
+
+
+
+
+</div>
+
+<div class="flow-step" markdown>
+##**Installation of the Tip Ejector and Camera Mount**
+
+<div class="flow-grid" markdown>
+<div class="flow-grid-item" markdown>
+You will need
+{: .flow-grid-title }
+
+![screwdriver](images/icons/screwdriver.svg){.img-icon}
+![nut_1](images/icons/x2%20M5x10mm.svg){.img-icon}
+![nut_2](images/icons/x2orx4%20M5x20mm.svg){.img-icon}
+
+</div>
+
+</div>
+
+
+![remove magnetic base](images/magnetic_base_removal.png)
+<p class="p-1">Figure 5: Magnetic base removal. (A) Photograph of magnetic base. (B) Magnetic base being removed.</p>
+
+**Installing Bed Plate and Tip Disposal Module**  
+You will notice that there are 4 screws that connect the manual levelling knobs to the aluminium bed. We will make use of these screws to fix our bed plate and tip disposal onto the aluminium bed.
 
 
 
