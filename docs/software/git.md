@@ -19,6 +19,6 @@ Unzip the downloaded folder and you are good to go!
 3. Under the **HTTPS** tab, copy the repository URL.
 4. Open your terminal or command prompt, navigate to where you want to save the project, and run:
 
-   ```bash
+   ```
    git clone <copied link>
    ```

@@ -39,6 +39,9 @@ markdown_extensions:
   - pymdownx.details
   - md_in_html
   - attr_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: true
 
 extra_css:
   - assets/styles.css
