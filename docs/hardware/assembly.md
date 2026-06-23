@@ -1,7 +1,7 @@
 # Hardware Assembly Guide
 
 ## Overview
-This page contains instructions for the hardware assembly of the Automated Liquid Handler. Please refer to the [3D printing files] and the [Bill of Materials](bill_of_materials.md) for the relevant parts. 
+This page contains instructions for the hardware assembly of the Automated Liquid Handler. Please refer to the [3D printing files](https://github.com/selfdrivinglabsntu/SelfDrivingLab/tree/main/Hardware) and the [Bill of Materials](bill_of_materials.md) for the relevant parts. 
 
 <div class="flow" markdown>
 
@@ -108,42 +108,35 @@ Components
 Linear Actuator
 {: .flow-grid-title }
 
-![M3 screws](image/)
+![linear Actuator](images/components/linear_actuator.png)
 </div>
 
 <div class="flow-grid-item" markdown>
 Stepper Motor
 {: .flow-grid-title }
 
-![M3 screws](image/)
+![Stepper Motor](images/components/stepper_motor.webp)
 </div>
 
 <div class="flow-grid-item" markdown>
 Linear Rail
 {: .flow-grid-title }
 
-![M3 screws](image/)
+![Linear Rail](images/components/linear_rail.jfif)
 </div>
 
 <div class="flow-grid-item" markdown>
 Belt
 {: .flow-grid-title }
 
-![M3 screws](image/)
-</div>
-
-<div class="flow-grid-item" markdown>
-Power Adaptor 12V
-{: .flow-grid-title }
-
-![M3 screws](image/)
+![belt](images/components/belt.webp){.img-xxs}
 </div>
 
 <div class="flow-grid-item" markdown>
 Assembled PCB Board
 {: .flow-grid-title }
 
-![M3 screws](image/)
+![assembled pcb](images/components/assembled_pcb.jfif){.img-xxs}
 </div>
 
 </div>
@@ -154,30 +147,8 @@ Mechanical Fastners
 <div class="flow-grid" markdown>
 
 <div class="flow-grid-item" markdown>
-M2x20mm 
-{: .flow-grid-title }
-![M3 screws](image/)
-<p>Head Cap Screws</p>
-</div>
-
-<div class="flow-grid-item" markdown>
-M3x30mm 
-{: .flow-grid-title }
-![M3 screws](image/)
-<p>Head Cap Screws</p>
-</div>
-
-<div class="flow-grid-item" markdown>
-M5x20mm 
-{: .flow-grid-title }
-![M3 screws](image/)
-<p>Head Cap Screws</p>
-</div>
-
-<div class="flow-grid-item" markdown>
-M5x25mm 
-{: .flow-grid-title }
-![M3 screws](image/)
+M2x20mm x10  
+M3x20   x20
 <p>Head Cap Screws</p>
 </div>
 
@@ -195,10 +166,10 @@ M5x25mm
 Assembling Ender 3 S1
 {: .flow-title }
 
-Follow the User Manual Instructions, but do the following:
+Follow the Creality User Manual Instructions, but:
 
-- Skip Nozzle assembly and wire clamp installation
-    - Dismantle the nozzle assembly and keep the **extruder sprite board** aside 
+- Skip nozzle assembly and wire clamp installation
+    - Dismantle the nozzle assembly and keep the **extruder sprite board** (Figure 1) aside 
 - Install the Gantry Frame
 - Do not install the filament spool holder and filament sensor
 
@@ -214,7 +185,7 @@ Modifying Existing Ender 3 S1
 Dismantle your 3D printer as follow:
 
 - Remove the nozzle assembly and wire clamp 
-    - Dismantle the nozzle assembly and keep the **extruder sprite board** aside 
+    - Dismantle the nozzle assembly and keep the **extruder sprite board** (Figure 1) aside 
 - Remove filament spool holder and filament sensor
 
 </div>
@@ -228,6 +199,23 @@ Dismantle your 3D printer as follow:
 <div class="flow-step" markdown>
 ##**Installation of z-limit switch**
 
+<div class="flow-grid" markdown>
+<div class="flow-grid-item" markdown>
+You will need
+{: .flow-grid-title }
+
+<div class="parts-grid" markdown>
+
+![screwdriver](images/icons/screwdriver.svg){.img-icon}
+
+![screw1](images/icons/x2%20M5x10mm%20screw.svg){.img-icon}
+
+![screw2](images/icons/x2%20M5x6mm%20screw.svg){.img-icon}
+
+</div>
+</div>
+</div>
+
 **Why we need a z-limit switch?**  
 Traditionally, z-homing on the Ender 3 S1 is performed using a BL Touch sensor. This sensor operates strictly in the downward direction, meaning the Z = 0 reference point is only established when the probe physically contacts the print bed. This is not suitable for the purpose of our project as the bed plate is occupied by liquid handling appratus such as the well plates, sample solution holders, tip holder and the tip ejection module. These obstructions will prevent homing in downwards direction. Thus, a limit switch is installed on the top of the printer frame to perform z-homing upwards i.e. when the gantry moves upwards and hits the limit switch the Z_Max is recorded. 
 
@@ -238,20 +226,23 @@ Remove the bottom casing of the printer.
 <p class="p-1">Figure 2: Unscrew bottom casing of the 3D printer.</p>
 
 
-Plug the z-limit switch into port J713 as shown in Figure 3 (A).  
+Plug the z-limit switch into port J713 as shown in Figure 3A.  
 
 ![Bottom Cover](images/z-limit%20switch%20port.png)
 <p class="p-1">Figure 3: Left - Diagramatic representation and description of mainboard interfaces and connections, Right - Photograph of mainboard with z-limit switch pugged in</p>
 
-**Make a note of:**  
-  - The chip used on the mainboard for your printer as it will be needed when compiling custom [Marlin Firmware](). 
+>**Important:** Note down the version of the chip on the mainboard for your printer as it will be needed when compiling the custom [Marlin Firmware](../software/firmware.md). 
 
 **Mounting the z-limit switch**  
 The z-limit switch was mounted as shown in Figure 3.
 
-![z-limit switch mount](images/z-limit%20installation.png)
+![z-limit switch mount](images/sketches/Z_limit_switch.svg){.center}
 
-<p class="p-1">Figure 4: Z-limit switch installation. (A) Close-up of the Z-limit switch. The switch secures to the mount with two M3 x 6 mm screws; the mount fastens to the 3D printer's aluminium extrusion using two M5 x 10mm screws. (B) Photograph of installed z-limit switch.</p>
+<p class="p-1">Figure 4: Left - location for mounting z-limit switch. Right - Close-up of the Z-limit switch installation The switch secures to the mount with two M3 x 6 mm screws; the mount fastens to the 3D printer's aluminium extrusion using two M5 x 10mm screws.</p>
+
+![photo z-limit switch mount](images/components/z_limit_switch.jpeg){.center .img-sm}
+<p class="p-1">Figure : Photograph of z-limit switch installed.</p>
+
 
 </div>
 
@@ -269,68 +260,107 @@ The tip disposal and the 3D printer bed plate are fixed onto the aluminium heat 
 You will need
 {: .flow-grid-title }
 
-![plier](images/icons/plier.svg){.img-icon}
+<div class="parts-grid" markdown>
+
+![plier](images/icons/plier.svg){.img-icon} 
+
 ![screwdriver](images/icons/screwdriver.svg){.img-icon}
+
 ![labour](images/icons/labour_1to2.svg){.img-icon}
 
 </div>
 
 </div>
 
-The magnetic base is stuck onto the aluminium heat bed using a very strong adhesive. We suggest using strong pliars to rip off the magnetic base and an extra pair of hands to hold down the 3D printer while the other person removes the magnetic base.
+</div>
+
+The magnetic base is stuck onto the aluminium heat bed using a very strong adhesive. We suggest using strong pliers to rip off the magnetic base and an extra pair of hands to hold down the 3D printer while the other person removes the magnetic base.
 
 ![remove magnetic base](images/magnetic_base_removal.png)
 <p class="p-1">Figure 5: Magnetic base removal. (A) Photograph of magnetic base. (B) Magnetic base being removed.</p>
 
 **Installing Bed Plate and Tip Disposal Module**  
-You will notice that there are 4 screws that connect the manual levelling knobs to the aluminium bed. We will make use of these screws to fix our bed plate and tip disposal onto the aluminium bed.
+You will notice that there already exist 4 screws that connect the manual levelling knobs to the aluminium bed. We will make use of these screws to fix our bed plate and tip disposal onto the aluminium bed.
 
+![photo z-limit switch mount](images/sketches/bed_plate%20and%20tip_disposal.svg){.center}
+<p class="p-1">Figure 6: Screw in bed plate and tip disposal. Replace springs with stand offs.</p>
 
+<div class="parts-grid" markdown>
 
+![manual leveling knob](images/leveling_knob.jpeg){.img-sm} 
+
+![bed plate and tip disposal](images/bed_plate_tip_disposal.jpeg){.img-sm}  
+
+</div>
 
 </div>
 
 <div class="flow-step" markdown>
-##**Installation of the Tip Ejector and Camera Mount**
+##**Installation of Tip Ejector and Camera Mount**
 
 <div class="flow-grid" markdown>
 <div class="flow-grid-item" markdown>
 You will need
 {: .flow-grid-title }
 
+<div class="parts-grid" markdown>
+
+![plier](images/icons/plier.svg){.img-icon} 
+
 ![screwdriver](images/icons/screwdriver.svg){.img-icon}
-![nut_1](images/icons/x2%20M5x10mm.svg){.img-icon}
-![nut_2](images/icons/x2orx4%20M5x20mm.svg){.img-icon}
+
+![labour](images/icons/labour_1to2.svg){.img-icon}
 
 </div>
-
+</div>
 </div>
 
+<div class="parts-grid" markdown>
 
-![remove magnetic base](images/magnetic_base_removal.png)
-<p class="p-1">Figure 5: Magnetic base removal. (A) Photograph of magnetic base. (B) Magnetic base being removed.</p>
+![tip ejector 1](images/sketches/Tip_ejector_2screws.svg){.img-sm}
 
-**Installing Bed Plate and Tip Disposal Module**  
-You will notice that there are 4 screws that connect the manual levelling knobs to the aluminium bed. We will make use of these screws to fix our bed plate and tip disposal onto the aluminium bed.
+![tip ejector 2](images/sketches/Tip_ejector_4screws.svg){.img-sm}
 
-
-
+</div>
 
 </div>
 
 <div class="flow-step" markdown>
-Installation of Tip Disposal Module
-{: .flow-title }
+##**Installation of Frame**
 
+<div class="flow-grid" markdown>
+<div class="flow-grid-item" markdown>
+You will need
+{: .flow-grid-title }
+
+<div class="parts-grid" markdown>
+
+![plier](images/icons/plier.svg){.img-icon} 
+
+![screwdriver](images/icons/screwdriver.svg){.img-icon}
+
+![labour](images/icons/labour_1to2.svg){.img-icon}
+
+</div>
+</div>
+</div>
+
+<div class="parts-grid" markdown>
+
+
+![Frame side view](images/sketches/frame_side_view.svg){.img-sm}
+
+
+</div>
+
+Add images
 
 </div>
 
 <div class="flow-step" markdown>
 
-{: .flow-title }
 
 
-</div>
 
 </div>
 

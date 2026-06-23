@@ -1,7 +1,8 @@
 .parts-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
 }
 
 .parts-card {
@@ -178,6 +179,12 @@ img.img-xs {
   max-width: 120px; 
 }
 
+img.img-xxs { 
+  width: 100%;  
+  max-width: 80px; 
+  margin-inline: auto;
+}
+
 img.img-sm-left { 
   width: 100%;  
   max-width: 240px; 
@@ -200,8 +207,10 @@ img.img-full {
   max-width: 100%; 
 }
 
-img.img-icon { 
-  width: 60px;  
-  max-height: 100px; 
-  object-fit: contain; /* Ensures icons don't squash or stretch */
+.grid{
+  display:flex; flex-direction:column;
+  background:var(--flow-accent-soft);
+  border:1px solid var(--flow-card-border);
+  border-radius:8px;
+  padding:.7rem .8rem;
 }
