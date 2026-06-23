@@ -79,7 +79,7 @@ Flashing custom firmware on an Ender 3 S1 can sometimes be tricky. Here are some
 Install the following:
 
 - **Visual Studio Code**
-    - Insert link
+    - [https://code.visualstudio.com/](https://code.visualstudio.com/)  
 
 - **PlatformIO Extension**  
     1. Open VS Code  
@@ -109,7 +109,7 @@ Figure 5. Location of configuration files
 
 Replace the existing files.
 
-#### 1.1.4. Editing the code
+#### 1.1.4. Editing the code (WIP)
 Most of the customization occurs in `Marlin/Configuration.h` and `Marlin/Configuration_adv.h`
 
 1. Disable the BL Touch sensor
