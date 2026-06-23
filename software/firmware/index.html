@@ -1,0 +1,1286 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guide to building your own Low-Cost Liquid Handler">
+      
+      
+      
+      
+        <link rel="prev" href="../../hardware/printing_parts/">
+      
+      
+        <link rel="next" href="../../hardware/assembly/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Firmware - HEIMDALL Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/styles.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guide-to-compiling-your-own-custom-marlin-firmware" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="HEIMDALL Wiki" class="md-header__button md-logo" aria-label="HEIMDALL Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HEIMDALL Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Firmware
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HEIMDALL Wiki" class="md-nav__button md-logo" aria-label="HEIMDALL Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    HEIMDALL Wiki
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/bill_of_materials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bill of materials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/printing_parts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Printing instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firmware
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#settings-changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings changed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-flashing-firmware-on-your-ender-3-s1-with-stm32f4-chip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Flashing firmware on your Ender 3 S1 with STM32F4 chip
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Flashing firmware on your Ender 3 S1 with STM32F4 chip">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-steps-for-flashing-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1. Steps for flashing firmware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.1. Steps for flashing firmware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#011-formatting-the-sd-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1.1. Formatting the SD card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#012-copy-the-contents-of-the-firmware-folder-to-your-formatted-sd-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1.2. Copy the contents of the firmware folder to your formatted SD card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#013-flashing-your-sd-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1.3. Flashing your SD card
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.2. Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-flashing-firmware-on-any-other-printer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Flashing firmware on any other printer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Flashing firmware on any other printer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-compiling-custom-marlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Compiling Custom Marlin
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1. Compiling Custom Marlin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.1. Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112download-marlin-source-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.2.Download Marlin Source Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-obtain-the-example-configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.3. Obtain the Example Configuration Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-editing-the-code-wip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.4. Editing the code (WIP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#115-compiling-the-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.5 Compiling the firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-the-correct-sd-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. The correct SD card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-flashing-the-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Flashing the Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-testing-for-successfull-firmware-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Testing for successfull Firmware upload
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Testing for successfull Firmware upload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-check-z_max-z-limit-using-pronterface-or-gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Check z_max z-limit using pronterface or GUI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-open-pronterface-or-gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Open pronterface or GUI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/assembly/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assembly
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/electronics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electronics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#settings-changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings changed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-flashing-firmware-on-your-ender-3-s1-with-stm32f4-chip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Flashing firmware on your Ender 3 S1 with STM32F4 chip
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Flashing firmware on your Ender 3 S1 with STM32F4 chip">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-steps-for-flashing-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1. Steps for flashing firmware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0.1. Steps for flashing firmware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#011-formatting-the-sd-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1.1. Formatting the SD card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#012-copy-the-contents-of-the-firmware-folder-to-your-formatted-sd-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1.2. Copy the contents of the firmware folder to your formatted SD card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#013-flashing-your-sd-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1.3. Flashing your SD card
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.2. Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-flashing-firmware-on-any-other-printer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Flashing firmware on any other printer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Flashing firmware on any other printer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-compiling-custom-marlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Compiling Custom Marlin
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1. Compiling Custom Marlin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.1. Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112download-marlin-source-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.2.Download Marlin Source Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-obtain-the-example-configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.3. Obtain the Example Configuration Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-editing-the-code-wip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.4. Editing the code (WIP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#115-compiling-the-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.5 Compiling the firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-the-correct-sd-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. The correct SD card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-flashing-the-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Flashing the Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-testing-for-successfull-firmware-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Testing for successfull Firmware upload
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Testing for successfull Firmware upload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-check-z_max-z-limit-using-pronterface-or-gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Check z_max z-limit using pronterface or GUI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-open-pronterface-or-gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Open pronterface or GUI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="guide-to-compiling-your-own-custom-marlin-firmware">Guide to compiling your own custom Marlin Firmware</h1>
+<p>Compiling custom Marlin firmware is essential for our liquid handling system as the stock Ender 3 S1 printers are hardcoded to use the BR Touch sensor to probe the print bed to define the Z-min. </p>
+<p>Since we have customized our printer 3D printer to perform Z-max homing due to design constraints of the customized 3D bed plates, editing the firmware's directional and endstop settings are needed. </p>
+<h2 id="settings-changed">Settings changed</h2>
+<ul>
+<li>Z Homing direction </li>
+<li>Endstop pin assignment</li>
+<li>Software travel limits</li>
+<li>Changing Z bump when homing</li>
+<li>Other settings to ensure a smooth compilation of the Marlin Firmware</li>
+</ul>
+<p>The firmware is a <code>.bin</code> file in the Firmware folder of the repository. This contains the machine-readable code that the Ender 3 S1 understands.</p>
+<h2 id="0-flashing-firmware-on-your-ender-3-s1-with-stm32f4-chip">0. Flashing firmware on your Ender 3 S1 with STM32F4 chip</h2>
+<p>If you have not already done so, follow the instructions to <a href="../git/">download the repository</a>.</p>
+<p>To flash the firmware on your printer's SD card, you will need the <a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/tree/main/Firmware">Firmware folder</a> of the respository. </p>
+<h3 id="01-steps-for-flashing-firmware">0.1. Steps for flashing firmware</h3>
+<h4 id="011-formatting-the-sd-card">0.1.1. Formatting the SD card</h4>
+<ul>
+<li>Set the file system to FAT32</li>
+<li>Set the allocation unit size to 4096</li>
+<li>8GB SD card that came with the printer are most reliable, but anything less than 32 GB should work</li>
+</ul>
+<h4 id="012-copy-the-contents-of-the-firmware-folder-to-your-formatted-sd-card">0.1.2. Copy the contents of the firmware folder to your formatted SD card</h4>
+<ul>
+<li>The folders/file private, <code>DWIN_SET</code>, <code>TJC_SET</code>, and <code>firmware.zlib</code> are for updating the firmware display. </li>
+<li><code>STM32F4_UPDATE</code> folder contains your custom firmware file <code>firmware-2ndApril2_4.bin</code>  </li>
+</ul>
+<p class="center-p"><img alt="firmware files" class="img-center img-full" src="../images/firmware_files.png" />
+Figure 1. Files/Folders to copy and paste in the root folder of formatted SD card.</p>
+<h4 id="013-flashing-your-sd-card">0.1.3. Flashing your SD card</h4>
+<ul>
+<li>Turn off your printer. Wait 20 seconds to power cycle your printer.</li>
+<li>While your printer is off, insert your SD card into the slot. </li>
+<li>Turn the printer on. You will see the creality loading screen briefly while the board updates.  </li>
+</ul>
+<p class="center-p"><img alt="loading screen" class="img-center img-sm" src="../images/creality_loading_screen.jpeg" />
+Figure 2. Creality loading screen </p>
+<ul>
+<li>Once you see the main menu, the code has successfully flashed. The main menu is for visual aid only; it is not functional.</li>
+</ul>
+<p class="center-p"><img alt="main menu" class="img-center img-sm" src="../images/creality_main_menu.jpeg" />
+Figure 3. Main Menu</p>
+<ul>
+<li>Turn off the power again for 20 seconds, remove the SD card, and turn on to start using your 3D printer.  </li>
+</ul>
+<blockquote>
+<p><strong>NOTE:</strong> DO NOT INSERT YOUR SD CARD WHEN YOUR PRINTER IS TURING ON. IT CAN CAUSE THE BOOTLOADER TO HANG. ALWAYS MAKE SURE PRINTER IS OFF BEFORE INSERTING THESD CARD.</p>
+</blockquote>
+<h3 id="02-troubleshooting">0.2. Troubleshooting</h3>
+<p>Flashing custom firmware on an Ender 3 S1 can sometimes be tricky. Here are somes specific requirements and common issues to be aware of.</p>
+<ol>
+<li>
+<p><strong>STM32F4_UPDATE folder:</strong> If you are only updating the mainboard and not the display of your printer you can technicaly just flash the <code>.bin file</code>. However, from our experience it is much reliable to place your firmware in a folder named <code>STM32F4_UPDATE</code> before flashing. This is becuase the bootloader of the Ender 3 S1 with the STM32F4 chip, often only looks for the firmware in folder named exactly <code>STM32F4_UPDATE</code> (the name is case sensitive).</p>
+</li>
+<li>
+<p><strong>Firmware file naming:</strong>  The bootloader can be picky about the filename. The printer will often ignore a <code>.bin file</code> if it has the exact same name as the last one it flashed. Rename your file to something simple and unique, like <code>firmware123.bin or f1.bin</code>, before flashing again.</p>
+</li>
+<li>
+<p><strong>Display screen stuck on splash screen/loading page or blank:</strong> If your display screen is stuck on the loading page or is showing a blank screen for more than 2 mins, it could mean several things:</p>
+<ol>
+<li>
+<p><strong>Firmware flashed properly but the screen is not compatible.</strong> You can check this by conecting your printer to your computer and try operating the printer through pronterface. If you send the M119 command and see "z_max: open" it means that your firmware flashed properly.    </p>
+<p>You will have to update your screen again seprately.</p>
+</li>
+<li>
+<p><strong>Boatloader Hang:</strong></p>
+<ol>
+<li>Power-cycle your printer for a 1 minute and try flashing the firmware again.</li>
+<li>If the above doesn't work, download the <a href="https://www.creality.com/download/creality-ender-3-s1-3d-printer">Official Creality firmware</a> and flash it. Sometimes the bootloader needs to be "primed" by an official Creality firmware before it will accept a custom one.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Firmware not flashing:</strong></p>
+<ol>
+<li>Ensure that your chip is <code>STM32F4</code> and not <code>STM32F1</code>. You can verify this by checking which chip version is written on the mainboard.</li>
+<li>Please make sure that your SD card is formatted properly. </li>
+</ol>
+</li>
+</ol>
+<h2 id="1-flashing-firmware-on-any-other-printer">1. Flashing firmware on any other printer</h2>
+<h3 id="11-compiling-custom-marlin">1.1. Compiling Custom Marlin</h3>
+<h4 id="111-prerequisites">1.1.1. Prerequisites</h4>
+<p>Install the following:</p>
+<ul>
+<li>
+<p><strong>Visual Studio Code</strong></p>
+<ul>
+<li><a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>  </li>
+</ul>
+</li>
+<li>
+<p><strong>PlatformIO Extension</strong>  </p>
+<ol>
+<li>Open VS Code  </li>
+<li>Go to Extensions   (Ctrl+Shift+V)</li>
+<li>Search for <strong>PlatformIO IDE</strong>  </li>
+<li>Install it </li>
+</ol>
+</li>
+</ul>
+<h4 id="112download-marlin-source-code">1.1.2.Download Marlin Source Code</h4>
+<p>Visit and download <a href="https://marlinfw.org/meta/download/">Marlin-2.1.2.7 source code </a>.<br />
+Extract the folder.</p>
+<h4 id="113-obtain-the-example-configuration-files">1.1.3. Obtain the Example Configuration Files</h4>
+<p>Many boards and printers already have tested configurations.
+Visit and download the <a href="https://github.com/MarlinFirmware/Configurations/tree/release-2.1.2.7">configuration files</a>.</p>
+<p>Locate the configuration files for your printer and firmware version.</p>
+<p class="center-p"><img alt="example configuration files" class="img-center img-md" src="../images/config_files.png" /> 
+Figure 4. Location of configuration files</p>
+<p>Copy configuration.h and configuration_adv.h from the example files into your main Marlin folder of the source code.</p>
+<p class="center-p"><img alt="marlin files" class="img-center img-md" src="../images/marlin_files.png" /> 
+Figure 5. Location of configuration files</p>
+<p>Replace the existing files.</p>
+<h4 id="114-editing-the-code-wip">1.1.4. Editing the code (WIP)</h4>
+<p>Most of the customization occurs in <code>Marlin/Configuration.h</code> and <code>Marlin/Configuration_adv.h</code></p>
+<ol>
+<li>Disable the BL Touch sensor</li>
+<li>Define Z_Max endstop switch</li>
+<li>Set Z_max pos to 250</li>
+<li>Z_max direction</li>
+<li>Bump </li>
+<li>Other changes</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> You might not need to make the PID control changes for your compilation. But for us, without incorporating these changes we could not successfully compile software.</p>
+</blockquote>
+<h4 id="115-compiling-the-firmware">1.1.5 Compiling the firmware</h4>
+<ol>
+<li>Open platform.ini</li>
+<li>locate <code>default_envs = mega2560</code> and change it to your board environment.</li>
+</ol>
+<p class="center-p"><img alt="alt text" src="../image.png" />
+Figure 6. The default_envs is changed from mega250 to STM32F401RC_creality, which is the build enviornment for Ender 3 S1 STM32F4 chip. </p>
+<h3 id="12-the-correct-sd-card">1.2. The correct SD card</h3>
+<p>Not all printers utilize the standard SD card for flashing the firmware. You might need to use a micro sd card and format it accordingly to flash your code.</p>
+<p>For example, another printer that we modified was a Ender 3 V2 Neo for which the firmware was flashed using a micro sd card by simply placing the <code>.bin</code> file in the root folder. </p>
+<h3 id="13-flashing-the-firmware">1.3. Flashing the Firmware</h3>
+<p>Follow steps <a href="#013-flashing-your-sd-card">0.1.3. Flashing you SD Card</a>.</p>
+<h2 id="2-testing-for-successfull-firmware-upload">2. Testing for successfull Firmware upload</h2>
+<h3 id="21-check-z_max-z-limit-using-pronterface-or-gui">2.1. Check z_max z-limit using pronterface or GUI</h3>
+<p>Open up pronterface send the M119 command. Do you see the Z_MAX instead of the Z_MIN switch. </p>
+<h3 id="22-open-pronterface-or-gui">2.2. Open pronterface or GUI</h3>
+<p>Home the Z-axis. If the gantry moves upwards and stops successfully when the z-limit switch is triggered (you can either <a href="">mount the z-limit switch</a> or simply click it to test before mounting it), you have successfully flashed the firmware. :) </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../hardware/printing_parts/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Printing instructions">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Printing instructions
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../hardware/assembly/" class="md-footer__link md-footer__link--next" aria-label="Next: Assembly">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Assembly
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.indexes", "search.suggest", "navigation.footer"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

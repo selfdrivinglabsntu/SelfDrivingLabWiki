@@ -1,0 +1,2321 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guide to building your own Low-Cost Liquid Handler">
+      
+      
+      
+      
+        <link rel="prev" href="../../hardware/electronics/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>GUI - HEIMDALL Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/styles.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guide-to-our-gui" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="HEIMDALL Wiki" class="md-header__button md-logo" aria-label="HEIMDALL Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HEIMDALL Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GUI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HEIMDALL Wiki" class="md-nav__button md-logo" aria-label="HEIMDALL Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    HEIMDALL Wiki
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/bill_of_materials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bill of materials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/printing_parts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Printing instructions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../firmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/assembly/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assembly
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/electronics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electronics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Prerequisites
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-install-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1. Install Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-create-a-virtual-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.2. Create a Virtual Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-install-dependancies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.3. Install dependancies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-get-a-gemini-api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.4 Get a Gemini API key
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-setting-up-a-new-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Setting Up a New Handler
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Setting Up a New Handler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-setting-volume-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Setting Volume Limits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-setting-decimal-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Setting Decimal Position
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-callibrating-volume-adjust-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Callibrating volume adjust position
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-callibrating-tip-disposal-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Callibrating tip disposal sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-callibrating-equipment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5. Callibrating equipment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-calibrating-pipette-dispense-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6. Calibrating Pipette Dispense Volume
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-basic-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Basic operation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Basic operation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#20-running-the-gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.0. Running the GUI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-connecting-to-esp-printer-and-camera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Connecting to ESP, printer and camera
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-configure-plate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Configure Plate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. Configure Plate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-equipment-management-bar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. Equipment Management Bar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.1. Equipment Management Bar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2211-add-equipment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.1. Add Equipment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2212-delete-equipment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.2. Delete Equipment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2213-printer-selection-dropdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.3. Printer Selection (Dropdown)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2214-preset-selection-dropdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.4. Preset Selection (Dropdown)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2215-save-preset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.5. Save Preset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2216-reset-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.6. Reset Volume
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-equipment-configuration-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. Equipment Configuration Menu
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.2. Equipment Configuration Menu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2221-equipment-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.1. Equipment Type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2222-equipment-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.2. Equipment Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2223-origin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.3. Origin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2224-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.4. Move
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2225-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.5. Set
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2226-save" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.6. Save
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-plate-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. Plate Layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-assignment-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Assignment Tab
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. Assignment Tab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#230-what-is-an-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.0. What is an Assignment?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#231-assignment-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. Assignment Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3.1. Assignment Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2311-assignment-information-and-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1.1. Assignment Information and Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2312-assignment-adding-and-deleting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1.2. Assignment Adding and Deleting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2313-assignment-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1.3. Assignment Name
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2314-assignment-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1.4. Assignment Volume
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-assignment-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. Assignment Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-assignment-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3. Assignment Execution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3.3. Assignment Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2331-volume-adjustment-toggle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3.1. Volume Adjustment Toggle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2332-clear-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3.2. Clear Console
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2333-generate-g-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3.3. Generate G-code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2334-send" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3.4. Send
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Manual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. Manual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-moving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1. Moving
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4.1. Moving">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2411-movement-d-pad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1.1 Movement D-pad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2412-position-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1.2 Position Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-homing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2. Homing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-pipette-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3 Pipette Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-advanced-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Advanced operation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Advanced operation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-setting-up-new-equipment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Setting Up New Equipment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Setting Up New Equipment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step Setup:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Prerequisites
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-install-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.1. Install Python
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-create-a-virtual-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.2. Create a Virtual Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-install-dependancies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.3. Install dependancies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-get-a-gemini-api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0.4 Get a Gemini API key
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-setting-up-a-new-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Setting Up a New Handler
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Setting Up a New Handler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-setting-volume-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Setting Volume Limits
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-setting-decimal-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Setting Decimal Position
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-callibrating-volume-adjust-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Callibrating volume adjust position
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-callibrating-tip-disposal-sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Callibrating tip disposal sequence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-callibrating-equipment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5. Callibrating equipment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-calibrating-pipette-dispense-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6. Calibrating Pipette Dispense Volume
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-basic-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Basic operation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Basic operation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#20-running-the-gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.0. Running the GUI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21-connecting-to-esp-printer-and-camera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Connecting to ESP, printer and camera
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-configure-plate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Configure Plate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. Configure Plate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-equipment-management-bar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. Equipment Management Bar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.1. Equipment Management Bar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2211-add-equipment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.1. Add Equipment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2212-delete-equipment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.2. Delete Equipment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2213-printer-selection-dropdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.3. Printer Selection (Dropdown)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2214-preset-selection-dropdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.4. Preset Selection (Dropdown)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2215-save-preset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.5. Save Preset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2216-reset-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.6. Reset Volume
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-equipment-configuration-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. Equipment Configuration Menu
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.2. Equipment Configuration Menu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2221-equipment-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.1. Equipment Type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2222-equipment-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.2. Equipment Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2223-origin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.3. Origin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2224-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.4. Move
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2225-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.5. Set
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2226-save" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.6. Save
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-plate-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. Plate Layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-assignment-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Assignment Tab
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. Assignment Tab">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#230-what-is-an-assignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.0. What is an Assignment?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#231-assignment-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. Assignment Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3.1. Assignment Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2311-assignment-information-and-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1.1. Assignment Information and Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2312-assignment-adding-and-deleting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1.2. Assignment Adding and Deleting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2313-assignment-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1.3. Assignment Name
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2314-assignment-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1.4. Assignment Volume
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-assignment-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. Assignment Selection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-assignment-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3. Assignment Execution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3.3. Assignment Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2331-volume-adjustment-toggle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3.1. Volume Adjustment Toggle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2332-clear-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3.2. Clear Console
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2333-generate-g-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3.3. Generate G-code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2334-send" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3.4. Send
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Manual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. Manual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-moving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1. Moving
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4.1. Moving">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2411-movement-d-pad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1.1 Movement D-pad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2412-position-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1.2 Position Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-homing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2. Homing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-pipette-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3 Pipette Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-advanced-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Advanced operation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Advanced operation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-setting-up-new-equipment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Setting Up New Equipment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. Setting Up New Equipment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step Setup:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="guide-to-our-gui">Guide to our GUI</h1>
+<p>Our GUI provides a visual interface for configuring the liquid handling system and creating automated workflows.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Easily customizable plate, labware, and handler configurations</li>
+<li>Visual deck layout and equipment management</li>
+<li>Define and execute liquid handling operations</li>
+<li>Configuration-based setup for adapting to different hardware arrangements</li>
+<li>Support for custom workflows and automation sequences</li>
+</ul>
+<p>The GUI source code is located in the GUI folder of the repository, while all system and equipment configurations are stored in the configs folder. This is so hardware setups and workflows can be modified without changing the core application code.</p>
+<h2 id="0-prerequisites">0. Prerequisites</h2>
+<p>If you have not already done so, follow the instructions to <a href="../git/">download the repository</a>.</p>
+<p>To run our GUI, you will need to have Python installed on your device, along with some packages.</p>
+<h3 id="01-install-python">0.1. Install Python</h3>
+<p>Install Python 3.10 or newer:</p>
+<ul>
+<li>https://www.python.org/downloads/</li>
+</ul>
+<p>During installation (Windows), make sure to check:
+- "Add Python to PATH"</p>
+<p>Verify installation:</p>
+<pre><code class="language-bash">python --version
+pip --version
+</code></pre>
+<h3 id="02-create-a-virtual-environment">0.2. Create a Virtual Environment</h3>
+<p>Navigate to within the <code>GUI</code> folder in your local repository, and run</p>
+<pre><code class="language-bash">python -m venv .venv
+</code></pre>
+<p>This creates a virtual environment, which keeps stuff needed to run our GUI seperate from the rest of the stuff on your.</p>
+<p>Activate the virtual environment by running:</p>
+<pre><code class="language-bash">.venv\Scripts\activate
+</code></pre>
+<p>If you get a permission error while activating the environment, run:</p>
+<pre><code class="language-bash">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+</code></pre>
+<p>Then rerun</p>
+<pre><code class="language-bash">.venv\Scripts\activate
+</code></pre>
+<h3 id="03-install-dependancies">0.3. Install dependancies</h3>
+<p>Upgrade pip:</p>
+<pre><code class="language-bash">pip install --upgrade pip
+</code></pre>
+<p>Install required packages:</p>
+<pre><code class="language-bash">pip install numpy scipy pyserial spatialmath-python google-generativeai python-dotenv opencv-python
+</code></pre>
+<h3 id="04-get-a-gemini-api-key">0.4 Get a Gemini API key</h3>
+<p><a href="https://www.google.com/aclk?sa=L&amp;pf=1&amp;ai=DChsSEwiEjOfn142VAxXmiWYCHQIUHEcYACICCAEQARoCc20&amp;co=1&amp;ase=2&amp;gclid=CjwKCAjw6MPRBhBTEiwAd-7Mr2ZbTChhUKYpnTNHp_X28Ozr_jtnZicKrHvAJZqWRulg4AAOXcprthoCOzwQAvD_BwE&amp;cid=CAASugHkaPTZP0jViqOWFle6ECBEyZSN7pHJ1vp9DAzYcEf4y-rOuvTi3OjLuHlly1xVg8amdNTbfB4iuSd1Q_fPFCThw-iOmVMGjVzKv62vXu35oTy8QfaMLNPAhCx9VxnHy0s-lFXIrnd8Qb3sauvhuPJYk7Z9ZRXa7mi7SokCm41UfhQZRtLtIsKd2UyD7OdjvhOoj8FxBKSpKaOaeMfv1kGGSOgfwbYFe_MQj2KB1Jit3xVxUmqBlR3hAKU&amp;cce=2&amp;category=acrcp_v1_32&amp;sig=AOD64_3VQgsLZEOCMuMqcpeJk-h72p3b5w&amp;q&amp;nis=4&amp;adurl=https://ai.google.dev/gemini-api/docs/api-key?utm_source%3Dgoogle%26utm_medium%3Dcpc%26utm_campaign%3DCloud-SS-DR-AIS-FY26-global-gsem-1713578%26utm_content%3Dtext-ad%26utm_term%3DKW_gemini%2520api%2520key%26gad_source%3D1%26gad_campaignid%3D23417416052%26gbraid%3D0AAAAACn9t67MEGb9dGMcPK0_kesYeoFk0%26gclid%3DCjwKCAjw6MPRBhBTEiwAd-7Mr2ZbTChhUKYpnTNHp_X28Ozr_jtnZicKrHvAJZqWRulg4AAOXcprthoCOzwQAvD_BwE&amp;ved=2ahUKEwizxODn142VAxWda2wGHRh6OQQQqyQoAHoECBYQHA">Generate an API key</a>. </p>
+<p>Create a .env file within the <code>GUI</code> folder.</p>
+<p><img alt=".env file location" src="../images/env_location.png" /></p>
+<p>In the new file, paste:</p>
+<pre><code>GEMINI_API_KEY=&lt;your key here&gt;
+</code></pre>
+<h2 id="1-setting-up-a-new-handler">1. Setting Up a New Handler</h2>
+<p>Open <code>GUI/configs/printers.yaml</code> using a code editor or text editor.</p>
+<p><img alt="Handler config file location" src="../images/printer_config.png" /></p>
+<p>This file contains the configuration settings for each handler.</p>
+<p><img alt="Handler settings" src="../images/printer_settings.png" /></p>
+<h3 id="11-setting-volume-limits">1.1. Setting Volume Limits</h3>
+<p>Set <code>min_vol</code> and <code>max_vol</code> to the minimum and maximum volumes (in μL) supported by your pipette, respectively.</p>
+<h3 id="12-setting-decimal-position">1.2. Setting Decimal Position</h3>
+<p>Set <code>decimal_position</code> to match the location of the decimal point on the pipette display.</p>
+<p>Examples:</p>
+<ul>
+<li>If the display shows <code>1000</code> for <strong>100.0 μL</strong>, set <code>decimal_position</code> to <code>1</code>.</li>
+<li>If the display shows <code>1000</code> for <strong>1000 μL</strong>, set <code>decimal_position</code> to <code>0</code>.</li>
+</ul>
+<h3 id="13-callibrating-volume-adjust-position">1.3. Callibrating volume adjust position</h3>
+<p><a href="#20-running-the-gui">Run the GUI</a> and <a href="#21-connecting-to-esp-printer-and-camera">connect to the printer</a>.</p>
+<p>Go to the <a href="#24-manual">Manual Tab</a>. Open your camera and use the <a href="#2411-movement-d-pad">d-pad</a> to adjust the pipette until you can clearly see the volume readout in the center of the camera feed. Use the <a href="#2412-position-control">Set button</a> to get this position, and edit vol_adjust_position to this coordinate.</p>
+<h3 id="14-callibrating-tip-disposal-sequence">1.4. Callibrating tip disposal sequence</h3>
+<p>This is what the tip disposal sequence looks like.</p>
+<p><img alt="Tip disposal sequence" src="../images/tip_disposal%20sequence.png" /></p>
+<p>In order to callibrate the tip disposal sequence, using the dpad, move your pipette until it is in the tip ejection position.</p>
+<p><img alt="Tip ejection position" src="../images/tip_ejection_position.jpeg" /></p>
+<p>Then, execute the tip ejection in reverse, starting by moving it down by dispose_actuate_z. You should change any of the values to avoid collision between your pipette and the tip disposal chamber. After finishing the sequence, use the <a href="#2412-position-control">Set button</a> to get this position, and edit dispose_start to this coordinate.</p>
+<blockquote>
+<p><strong>IMPORTANT:</strong> Any time you edit the <code>printer.yaml</code> configuration file, you must close and re-open the GUI for the changes to take effect.</p>
+</blockquote>
+<h3 id="15-callibrating-equipment">1.5. Callibrating equipment</h3>
+<p>We highly recommend 3D printing both the <strong>8-sample holder</strong> and the <strong>12-sample holder</strong>, as these serve as ideal standardized tools for calibrating your handler.</p>
+<ol>
+<li>Navigate to the <a href="#222-equipment-configuration-menu">Configure Plate</a> tab and click the <strong>Add</strong> button.</li>
+<li>Select your corresponding <strong>Type</strong> and <strong>Model</strong>, and ensure <strong>(new)</strong> is selected in the origin dropdown menu.</li>
+<li>Go to the <a href="#24-manual"><strong>Manual</strong></a> tab.</li>
+<li><a href="#242-homing"><strong>Home</strong></a> the liquid handler (all axes).</li>
+<li>Use the <a href="#2411-movement-d-pad">D-pad</a> to move the pipette directly over the equipment's physical <strong>Anchor Position</strong>. Ensure the tip is perfectly centered over the vessel and lowered to a depth <em>just below the surface level</em> of the liquid.</li>
+<li>
+<p>Open your local configuration file at <code>GUI/configs/equipment.yaml</code>, locate your specific equipment model, and find its defined <code>z-drop</code> value.</p>
+<p><img alt="equipment.yaml location" src="../images/equipment.yaml.png" /> <img alt="z drop" src="../images/z_drop.png" /></p>
+</li>
+<li>
+<p>Return to the manual controls and <strong>raise</strong> the pipette upward by that exact <code>z-drop</code> value.</p>
+</li>
+<li>Switch back to the <strong>Configure Plate</strong> tab, and on the active equipment menu, click <strong>Set</strong> to capture the coordinates, then click <strong>Save</strong>.</li>
+</ol>
+<p>Repeat 1-8 for any other equipment.</p>
+<h3 id="16-calibrating-pipette-dispense-volume">1.6. Calibrating Pipette Dispense Volume</h3>
+<p>The liquid handler controls volume delivery using a linear actuator that runs for a calculated duration of time. Because friction, tubing diameter, and actuator speed vary by setup, you must calibrate the relationship between actuator runtime and actual volume dispensed. </p>
+<p>This is achieved by running a test protocol, weighing the dispensed liquid on a precision scale, and adjusting the software timing factor accordingly.</p>
+<ol>
+<li><strong>Prepare the Test:</strong> Fill a source vessel with deionised water. Weigh a few (we did six) empty, clean target vessels. (recommended using a scale that can measure up to .1mg)</li>
+<li><strong>Execute a Test Run:</strong> Place target vessels into holder. Use the GUI to program the handler to dispense a set target volume into the target vessels.</li>
+<li><strong>Weigh the Yield:</strong> Record the weight of the dispensed liquid in mg, and divide by 1.0033 to get volume in micro litres.</li>
+<li>
+<p><strong>Calculate and Adjust:</strong> * If the weight is <strong>lower</strong> than expected, your actuator needs to run longer. If the weight is <strong>higher</strong> than expected, the actuator needs to run for a shorter duration. Open printer.yaml and edit aspiration_actuation_time.</p>
+<blockquote>
+<p><strong>IMPORTANT:</strong> Any time you edit the <code>printer.yaml</code> configuration file, you must close and re-open the GUI for the changes to take effect.</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Repeat:</strong> Repeat this process until the physical weight consistently matches your target UI volume entry within your laboratory's acceptable margin of error.</p>
+</li>
+</ol>
+<p>Congratulations! Your HEIMDALL is ready to go!</p>
+<h2 id="2-basic-operation">2. Basic operation</h2>
+<h3 id="20-running-the-gui">2.0. Running the GUI</h3>
+<p>To run the GUI, open a command prompt in the GUI folder and run:</p>
+<pre><code class="language-bash">.venv/Scripts/activate
+python main.py
+</code></pre>
+<h3 id="21-connecting-to-esp-printer-and-camera">2.1. Connecting to ESP, printer and camera</h3>
+<p>It is highly recommended to use <strong>Device Manager</strong> to identify the correct ports for the ESP and printer. You can do this by unplugging and replugging the USB devices and observing which COM ports appear and disappear.</p>
+<p>Once identified, set the respective ports in the connection bar.</p>
+<p>If the port does not appear in the dropdown menu, click <strong>Refresh Ports</strong>. If it still does not appear, check Device Manager again to confirm whether the device is being detected.</p>
+<p><img alt="Connection bar" src="../images/connection_bar.png" /></p>
+<p>After selecting the correct ports, press <strong>Connect</strong> and wait. (Be patient — this may take a few moments.)</p>
+<h3 id="22-configure-plate">2.2. Configure Plate</h3>
+<p>Your GUI should initialise on this tab. To access this tab, click on the "Configure Plate" button at the top of your screen. This is where you define the equipment layout on your plate.</p>
+<p><img alt="Configuration UI" src="../images/configuration_tab.png" /></p>
+<h4 id="221-equipment-management-bar">2.2.1. Equipment Management Bar</h4>
+<p><img alt="Equipment Management Bar" src="../images/equipment_bar.png" /></p>
+<h5 id="2211-add-equipment">2.2.1.1. Add Equipment</h5>
+<p>Opens the <strong>Equipment Configuration Menu</strong> to add a new piece of equipment to your current plate layout.</p>
+<h5 id="2212-delete-equipment">2.2.1.2. Delete Equipment</h5>
+<p>Removes the selected equipment from your plate. </p>
+<blockquote>
+<p><strong>How to use:</strong> Click the specific equipment's Configuration Menu first, then click this button to delete it.</p>
+</blockquote>
+<h5 id="2213-printer-selection-dropdown">2.2.1.3. Printer Selection (Dropdown)</h5>
+<p>Switches between active liquid handler profiles defined in <code>printer.yaml</code>. Use this if your system controls multiple liquid handling units.</p>
+<h5 id="2214-preset-selection-dropdown">2.2.1.4. Preset Selection (Dropdown)</h5>
+<p>Loads a <strong>Preset</strong> (a saved layout of equipment and their assigned origin points) so you do not have to rebuild your plate layout from scratch.</p>
+<h5 id="2215-save-preset">2.2.1.5. Save Preset</h5>
+<p>Saves the current plate layout. </p>
+<ul>
+<li><strong>Overwriting:</strong> If an existing preset is selected, clicking this overwrites it.</li>
+<li><strong>Creating New:</strong> If <strong>(new)</strong> is selected, you will be prompted to enter a name for the new preset.</li>
+</ul>
+<h5 id="2216-reset-volume">2.2.1.6. Reset Volume</h5>
+<p>The liquid handler lowers the pipette tip into the bottle based on the calculated amount of liquid left in hte bottle. It will usually assume a bottle is filled to capacity unless otherwise defined.</p>
+<ul>
+<li><strong>Adjust Volume:</strong> Click a specific source bottle to manually enter its remaining volume (underestimating is recommended).</li>
+<li><strong>Reset Volume:</strong> Click the <strong>Reset Volume</strong> button to reset all source volumes back to maximum capacity.</li>
+</ul>
+<h4 id="222-equipment-configuration-menu">2.2.2. Equipment Configuration Menu</h4>
+<p><img alt="Equipment Configuration Menu" src="../images/equipment_ui.png" /></p>
+<p>This menu appears when a new piece of equipment is added. Each configured menu represents a physical item positioned on your plate layout. </p>
+<p>Every item requires three primary definitions: an <strong>Equipment Type</strong>, a specific <strong>Equipment Model</strong>, and an <strong>Origin Point</strong>.</p>
+<h5 id="2221-equipment-type">2.2.2.1. Equipment Type</h5>
+<p>Defines the functional role of the equipment. Select this based on your planned protocol operations:</p>
+<ul>
+<li><strong>Source:</strong> The vessel where liquid is drawn or picked up from.</li>
+<li><strong>Target:</strong> The vessel where liquid is dispensed.</li>
+<li><strong>TipHolder:</strong> The rack where clean pipette tips are stored for pickup.</li>
+</ul>
+<h5 id="2222-equipment-model">2.2.2.2. Equipment Model</h5>
+<p>Selects the specific physical footprint or brand layout (e.g., <em>96-Well Plate</em>, <em>50mL Trough</em>) matching your hardware. This tells the system the exact dimensions, spacing, and depths of the vessels. </p>
+<blockquote>
+<p>⚠️ <strong>Important:</strong> Each configuration profile only supports <strong>one uniform vessel type</strong>. If you are using a physical rack or holder that contains a mix of different vessels (e.g., tubes with varying volumes, diameters, or starting heights), you must define them as separate equipment entries in the software for each distinct vessel type.</p>
+</blockquote>
+<h5 id="2223-origin">2.2.2.3. Origin</h5>
+<p>Defines the physical starting coordinate (X, Y, Z) for the equipment on the liquid handler deck. The system uses this reference point to automatically calculate the positions of all other vessels or positions on that item.</p>
+<p>Only one specific vessel acts as the <strong>Anchor Position</strong> (origin). When you select an <strong>Equipment Model</strong>, a visual map of the layout will appear on the right side of the screen with a red dot marking this Anchor Position. </p>
+<blockquote>
+<p><strong>Important:</strong> When physically calibrating and saving the equipment's origin on the deck, you must align the liquid handler's pipette tip precisely with the specific bottle, tube, or well marked by the red dot.</p>
+</blockquote>
+<h5 id="2224-move">2.2.2.4. Move</h5>
+<p>Commands the liquid handler to navigate directly to the <strong>Anchor Position</strong> of the selected equipment. </p>
+<blockquote>
+<p>⚠️ <strong>Warning:</strong> Always home the liquid handler before using this function. If the machine is not homed, coordinates will be inaccurate, risking a collision with the edge of the workspace or hardware. Use this button primarily to verify that your calibrated origin is correct.</p>
+</blockquote>
+<h5 id="2225-set">2.2.2.5. Set</h5>
+<p>Queries the liquid handler for its current real-time coordinates and automatically populates the X, Y, and Z input fields. Use this tool after manually jogging the pipette tip precisely over the physical Anchor Position to instantly capture its coordinates.</p>
+<h5 id="2226-save">2.2.2.6. Save</h5>
+<p>Saves the currently entered coordinates to the system.</p>
+<ul>
+<li><strong>Overwriting:</strong> If an existing origin point is selected, clicking this will overwrite it.</li>
+<li><strong>Creating New:</strong> If <strong>(new)</strong> is selected, you will be prompted to enter a unique name to save the new origin point.</li>
+</ul>
+<h4 id="223-plate-layout">2.2.3. Plate Layout</h4>
+<p><img alt="Plate UI" src="../images/plate_ui.png" /></p>
+<p>On the right side of the screen, a visual grid displays a live approximation of your physical plate layout. </p>
+<ul>
+<li><strong>Collision Warning:</strong> If you notice equipment grids overlapping or clipping into each other on the screen, immediately double-check that you have calibrated and saved your <strong>Anchor Positions</strong> correctly.</li>
+<li><strong>Source Volume Management:</strong> This interactive map also serves as a shortcut for inventory tracking. You can click directly on any <strong>Source</strong> equipment vessel to open a pop-up menu and manually update its estimated remaining liquid volume.</li>
+</ul>
+<h3 id="23-assignment-tab">2.3. Assignment Tab</h3>
+<p>Click the <strong>Assignment</strong> button at the top of the screen to access this tab. This interface is where you define and manage the exact fluid transfer routines your liquid handler will execute.</p>
+<p><img alt="Assignment UI" src="../images/assignment_tab.png" /></p>
+<h4 id="230-what-is-an-assignment">2.3.0. What is an Assignment?</h4>
+<p>An <strong>Assignment</strong> is a single protocol instruction consisting of four components: a designated <strong>Tip</strong>, a <strong>Source</strong> vessel, one or more <strong>Target</strong> vessels, and a specified transfer <strong>Volume</strong>.</p>
+<h4 id="231-assignment-management">2.3.1. Assignment Management</h4>
+<p><img alt="Assignment Management" src="../images/assignment_management.png" /></p>
+<h5 id="2311-assignment-information-and-selection">2.3.1.1. Assignment Information and Selection</h5>
+<p>This pane lists your created routines using the format: <code>[Assignment Name] T: [Tip] S: [Source] T: [Targets]</code>.
+* Click an assignment from the list to select it. All subsequent edits or configurations will apply strictly to this active selection.</p>
+<h5 id="2312-assignment-adding-and-deleting">2.3.1.2. Assignment Adding and Deleting</h5>
+<ul>
+<li><strong>Add:</strong> Creates a new, blank assignment.</li>
+<li><strong>Delete:</strong> Permanently removes the currently selected assignment from the queue.</li>
+</ul>
+<h5 id="2313-assignment-name">2.3.1.3. Assignment Name</h5>
+<p>To rename your selection, type a unique name into the text input field and click <strong>Apply Name</strong>.</p>
+<h5 id="2314-assignment-volume">2.3.1.4. Assignment Volume</h5>
+<p>Enter your target transfer volume and click <strong>Save Volume</strong>. </p>
+<blockquote>
+<p>⚠️ <strong>Error:</strong> If the entered volume exceeds or falls below the physical capabilities of your installed pipette tip, the system will throw a validation error.</p>
+</blockquote>
+<h4 id="232-assignment-selection">2.3.2. Assignment Selection</h4>
+<p><img alt="Plate UI" src="../images/plate_ui.png" /></p>
+<p>To build the fluid pathway for your active assignment, click directly on the respective buttons to select the <strong>Source</strong>, <strong>Tip</strong>, and <strong>Targets</strong>.</p>
+<h4 id="233-assignment-execution">2.3.3. Assignment Execution</h4>
+<p><img alt="Gcode Panel" src="../images/gcode_panel.png" /></p>
+<h5 id="2331-volume-adjustment-toggle">2.3.3.1. Volume Adjustment Toggle</h5>
+<p>Toggles pipette volume adjustment on and off.</p>
+<h5 id="2332-clear-console">2.3.3.2. Clear Console</h5>
+<p>Clears all log outputs, status messages, and history from the console display window.</p>
+<h5 id="2333-generate-g-code">2.3.3.3. Generate G-code</h5>
+<p>Genenerates instructios (G-code) that controls the handler. The generated code will populate directly in the panel for your review.</p>
+<h5 id="2334-send">2.3.3.4. Send</h5>
+<p>Transmits the generated G-code script to the liquid handler to begin execution.</p>
+<h3 id="24-manual">2.4. Manual</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>BE VERY CAREFUL when using this tab, as you can easily ram your pipette into the surrounding equipment or the bed, which may cause severe damage (speaking from experience).</p>
+</div>
+<h4 id="241-moving">2.4.1. Moving</h4>
+<p>There are two options for moving your pipette:</p>
+<h5 id="2411-movement-d-pad">2.4.1.1 Movement D-pad</h5>
+<p><img alt="Movement D-Pad controls" src="../images/manual_dpad.png" /></p>
+<p>The Movement D-pad provides manual control of the pipette, similar to a classic directional game controller. Each direction button moves the pipette along a selected axis (X, Y, or Z depending on the active mode), allowing for precise positioning within the workspace.</p>
+<p>The movement distance per button press is defined by the <strong>step size selection</strong>, which sets the interval of each incremental move.</p>
+<h5 id="2412-position-control">2.4.1.2 Position Control</h5>
+<div class="center">
+<p><img alt="Move/Set position control" src="../images/manual_get_set.png" /></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before using these controls, you should <a href="#242-homing">home</a> the machine to ensure coordinates are accurate.</p>
+</div>
+<p>The <strong>Set</strong> button reads the current position of the printer and updates the displayed coordinates accordingly.</p>
+<p>The <strong>Move</strong> button commands the printer to move to the coordinates entered by the user.</p>
+<h4 id="242-homing">2.4.2. Homing</h4>
+<p><img alt="Homing buttons" src="../images/manual_home.png" /></p>
+<ul>
+<li><strong>Home All</strong>: Homes all axes in sequence (Z axis first, followed by X and Y).</li>
+<li><strong>Home X / Y / Z</strong>: Homes the selected axes individually.</li>
+<li><strong>Motors On</strong>: Engages the stepper motors, enabling controlled motion. Manual movement of the system is disabled while motors are active.</li>
+<li><strong>Motors Off</strong>: Disengages the stepper motors, allowing the system to be moved manually.</li>
+</ul>
+<p>Homing is the process of moving the liquid handler to a known reference position so that the system can establish a consistent and accurate coordinate frame. This ensures that all subsequent movements are based on a fixed, repeatable origin.</p>
+<p>During a homing operation, the handler moves along each axis toward its respective limit switches. Once a limit switch is triggered, that position is defined as the axis reference (zero position), and the system resets its coordinate frame accordingly.</p>
+<h4 id="243-pipette-functions">2.4.3  Pipette Functions</h4>
+<p><img alt="Pipette controls" src="../images/manual_pipette_controls.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be careful when using these controls. Pressing <strong>Prime</strong> or <strong>Dispense</strong> multiple times in quick succession may cause the actuator to extend excessively, which can potentially damage the pipette. Press once and wait for the system response before issuing another command.</p>
+</div>
+<ul>
+<li><strong>Prime</strong>: Prepares the pipette by filling the system and removing air bubbles.</li>
+<li><strong>Aspirate</strong>: Draws liquid into the pipette.</li>
+<li><strong>Dispense</strong>: Releases liquid from the pipette.</li>
+</ul>
+<p><img alt="Volume controls" src="../images/manual_volume_control.png" /></p>
+<p>The volume controls allow adjustment of the target dispensing or aspirating volume.</p>
+<ul>
+<li><strong>Increase / Decrease Volume</strong>: Adjusts the set volume in defined increments.</li>
+<li><strong>Adjust Volume</strong>: Commands the system to calibrate or apply the selected volume setting.</li>
+</ul>
+<p>Ensure that both the <strong>camera</strong> and <strong>printer</strong> are properly connected before starting volume adjustment, as the system relies on feedback from both components for accurate calibration.</p>
+<h2 id="3-advanced-operation">3. Advanced operation</h2>
+<h3 id="31-setting-up-new-equipment">3.1. Setting Up New Equipment</h3>
+<p>To add a completely custom piece of equipment or rack that is not included by default, you must define its physical dimensions and layout parameters in the configuration files.</p>
+<h4 id="step-by-step-setup">Step-by-Step Setup:</h4>
+<ol>
+<li>Open your configuration directory and locate the <code>equipment.yaml</code> file.</li>
+<li>Scroll to the top of the file, copy the template block provided under the <strong>Sample Equipment</strong> comment, and paste it at the bottom of the file.</li>
+<li>Update the parameters to match your custom hardware based on the definitions below:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>x</code></td>
+<td style="text-align: left;">The physical distance (pitch) horizontally between the centers of adjacent vessels.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>y</code></td>
+<td style="text-align: left;">The physical distance (pitch) vertically between the centers of adjacent vessels.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>rows</code></td>
+<td style="text-align: left;">The total number of rows in the equipment grid.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>cols</code></td>
+<td style="text-align: left;">The total number of columns in the equipment grid.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>z-drop</code></td>
+<td style="text-align: left;">For Source and Target types: The vertical distance the pipette is lowered from the zero-clearance origin point to safely reach the fluid surface. For TipHolder types, distance lowered to retrieve tip.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>z-lift</code></td>
+<td style="text-align: left;">For TipHolder types: Distance to lift after getting tip to clear the tip holder.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>liquid-height</code></td>
+<td style="text-align: left;">The distance from the top surface of the liquid to the internal bottom of the vessel. <em>(Note: Always underestimate this value for safety).</em></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>liquid-amount</code></td>
+<td style="text-align: left;">The total volume capacity of the liquid inside the vessel. <em>(Note: Always underestimate this value to prevent liquid level miscalculations).</em></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../hardware/electronics/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Electronics">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Electronics
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.indexes", "search.suggest", "navigation.footer"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
