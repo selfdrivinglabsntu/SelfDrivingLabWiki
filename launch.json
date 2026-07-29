@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "C:/Users/Admin/Downloads/Anushree_piper_2/piper_2", "-l", "5173"],
+      "port": 5173
+    }
+  ]
+}

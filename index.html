@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- set the theme before first paint so there's no flash of the wrong palette -->
+<script>document.documentElement.dataset.theme=localStorage.getItem('piper-theme')||'dark';</script>
+<title>HEIMDALL — Automated Liquid Handling</title>
+<meta name="description" content="HEIMDALL is open, closed-loop, automated liquid handling. Precise pipetting on open hardware — built to accelerate scientific discovery.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/sections.css">
+
+  <!-- three.js is vendored locally (vendor/three) — this import map lets GLTFLoader's
+       bare `from 'three'` resolve without a bundler. -->
+  <script type="importmap">
+  { "imports": { "three": "./vendor/three/three.module.min.js" } }
+  </script>
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true">
+  <div class="grid" data-parallax="0.15"></div>
+  <div class="halo"></div>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand" aria-label="HEIMDALL home">
+      <!-- Drop your logo at assets/logo.png (or .svg) — falls back to the text mark until then. -->
+      <img src="assets/logo.png" alt="HEIMDALL @NTU MSE"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="brand-text" style="display:none"><span class="mark"></span>HEIMDALL</span>
+    </a>
+    <nav class="nav-links">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to light theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="build.html" class="btn btn-solid navcta">Build your own</a>
+      <a href="build.html" class="btn btn-solid" style="display:inline-block">Build your own</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <!-- Background video — drop your file at assets/hero.mp4 (optional poster at assets/hero-poster.jpg).
+       If the file is missing the hero just shows the dark background, so nothing breaks. -->
+  <video class="hero-video" autoplay muted loop playsinline preload="auto"
+         poster="assets/hero-poster.jpg" aria-hidden="true" tabindex="-1">
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-fade" aria-hidden="true"></div>
+
+  <div class="wrap hero-inner">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow hero-eyebrow">Open hardware · Automated pipetting</div>
+        <h1 class="wordmark" aria-label="HEIMDALL">
+          <span>HEIMDALL</span>
+        </h1>
+        <p class="hero-tag">Automated liquid handling, <span class="accent">for everyone.</span></p>
+        <p class="hero-sub"><span class ="accent">Precise, VLM based closed-loop pipetting built on open hardware — so any lab can automate the bench and accelerate discovery.</span></p>
+        <div class="hero-cta">
+          <a href="build.html" class="btn btn-solid">Build your own</a>
+          <a href="#loop" class="btn">See how it works</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT 3D — scroll-driven orbit around assets/heimdall.glb -->
+<section class="product3d" id="product">
+  <div class="wrap product3d-head">
+    <h2 data-reveal>HEIMDALL</h2>
+  </div>
+  <div class="product3d-pin" id="product3dPin">
+    <div class="product3d-stage" id="product3dStage">
+      <canvas id="product3dCanvas"></canvas>
+      <div class="product3d-loading" id="product3dLoading">
+        <span class="product3d-loading-bar"><span></span></span>
+        <span>Loading model…</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PURPOSE -->
+<section class="block wrap purpose" id="purpose">
+  <div class="eyebrow" data-reveal>Our purpose</div>
+  <h2 data-reveal>Democratizing self-driving labs for accelerating scientific discovery</h2>
+  <p class="lead" data-reveal>
+    One of the major bottlenecks in scientific discovery—particularly in high-throughput
+    experimentation—is the reliance on manual, repetitive laboratory workflows.
+    While commercial laboratory automation systems exist, they are prohibitively expensive
+    for small labs and startups. Heimdall harnesses 3D printing technology to make
+    laboratory automation affordable and precise, reducing human error, improving reproducibility,
+    and enabling researchers to spend more time innovating instead of performing repetitive tasks.
+  </p>
+  <p class="purpose-close" data-reveal>When self-driving labs become open access, imagination becomes reality.</p>
+</section>
+
+<!-- CLOSED LOOP -->
+<section class="block wrap" id="loop">
+  <div class="loop-grid">
+    <div class="loop-copy">
+      <div class="eyebrow" data-reveal>Closed loop volume correction</div>
+      <h2 data-reveal>Vision-Guided Precision</h2>
+      <p class="lead" data-reveal>You set a target volume, and HEIMDALL closes the loop: a camera photographs the pipette's volume dial, a Gemini vision-language model (VLM) reads the current volume, and a stepper motor turns the dial to the correct target volume.</p>
+      <div class="loop-badge" data-reveal><span class="loop-badge-dot"></span>Vision powered by <b>Gemini-2.5-flash</b> · VLM</div>
+      <!-- <p class="loop-hint" data-reveal>Hover a step to follow the loop.</p> -->
+    </div>
+
+    <div class="loop-stage" data-reveal>
+      <svg class="loop-svg" viewBox="0 0 360 360" width="360" height="360">
+        <defs>
+          <linearGradient id="loopgrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="var(--accent-2)"/>
+            <stop offset="1" stop-color="var(--accent)"/>
+          </linearGradient>
+          <filter id="nodeglow" x="-70%" y="-70%" width="240%" height="240%">
+            <feGaussianBlur stdDeviation="4" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <circle cx="180" cy="180" r="120" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+        <circle id="loopPath" cx="180" cy="180" r="120" fill="none" stroke="url(#loopgrad)"
+          stroke-width="2" stroke-linecap="round" transform="rotate(-90 180 180)"/>
+        <!-- step nodes are generated by js/modules/loop.js -->
+        <g id="loopNodes"></g>
+      </svg>
+      <div class="loop-center" id="loopCenter" aria-live="polite">
+        <span class="lc-num"></span>
+        <span class="lc-title"></span>
+        <span class="lc-desc"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECISION -->
+<section class="block wrap" id="precision">
+  <div class="prec-head">
+    <div class="prec-head-title">
+      <div class="eyebrow" data-reveal>Precision</div>
+      <h2 data-reveal>Every position, every volume, every move deliberate.</h2>
+    </div>
+    <p class="lead" data-reveal>HEIMDALL moves on a repeatable coordinate system and targets standard or custom labware down to the individual well — the whole plate mapped, addressable, and logged.</p>
+  </div>
+  <div class="prec-grid">
+    <div class="plate" data-reveal>
+      <svg class="plate-svg" id="plateSvg" viewBox="0 0 480 320" aria-hidden="true"></svg>
+      <p class="stat-desc">Target acquired. Dispense sequence initiated.</p>
+    </div>
+    <div class="stat-row">
+      <div class="stat" data-reveal>
+        <h3 class="stat-title">Perfect coordinates</h3>
+        <p class="stat-desc">Driven by G-codes, lead screws and a GUI that makes configuring well plate coordinates effortless, Heimdall delivers accurate, repeatable positioning across every experiment.</p>
+      </div>
+      <div class="stat" data-reveal>
+        <h3 class="stat-title">Calibrated for precision</h3>
+        <p class="stat-desc">A linear-actuator piston for reliable, repeatable volumetric aspiration and dispensation.</p>
+      </div>
+      <div class="stat" data-reveal>
+        <h3 class="stat-title">Emulates human technique</h3>
+        <p class="stat-desc">Reverse pipetting, tip-dipping, and controlled tip agitation — the same moves a skilled hand makes.</p>
+      </div>
+      <div class="stat" data-reveal>
+        <h3 class="stat-title"><span class="accent"><span data-count="100" data-val>0</span>%</span> logged</h3>
+        <p class="stat-desc">Every action written to CSV — ready to replay.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN HARDWARE & SOFTWARE -->
+<section class="block wrap openstack" id="open-hardware">
+  <div class="openstack-grid">
+    <div class="openstack-copy">
+      <div class="eyebrow" data-reveal>Open hardware &amp; software</div>
+      <h2 data-reveal>Build it. Modify it.<br>Make it yours.</h2>
+      <p class="lead" data-reveal>Heimdall is built on an open ecosystem. Its 3D-printable hardware designs, electronics, Marlin firmware, G-code workflows, and control software are openly available, enabling anyone to build, customize, and extend the platform while accelerating collaborative scientific innovation.</p>
+    </div>
+    <div class="openstack-logos" data-reveal>
+      <figure class="stack-logo">
+        <img src="assets/marlin_logo.png" alt="Marlin firmware" onerror="this.style.display='none'">
+        <figcaption>Firmware · Marlin</figcaption>
+      </figure>
+      <figure class="stack-logo">
+        <img src="assets/python_logo.webp" alt="Python" onerror="this.style.display='none'">
+        <figcaption>Software · Python</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="block wrap" id="features">
+  <div class="feat-head">
+    <h2 data-reveal>What makes it<br>state of the art.</h2>
+    <p class="lead" style="max-width:34ch" data-reveal>Five things HEIMDALL refuses to compromise on.</p>
+  </div>
+  <div class="features">
+    <div class="feat wide" data-reveal>
+      <div class="tag">Precision</div>
+      <svg class="glyph" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="13" cy="13" r="10"/><path d="M13 3v6M13 17v6M3 13h6M17 13h6"/><circle cx="13" cy="13" r="2" fill="currentColor" stroke="none"/></svg>
+      <h3>Repeatable to the microliter</h3>
+      <p>Coordinate-driven motion and automated liquid aspiration and dispensation keep every draw honest, well after well.</p>
+    </div>
+    <div class="feat third" data-reveal>
+      <div class="tag">Closed loop</div>
+      <svg class="glyph" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 13a9 9 0 1 1 3 6.7"/><path d="M4 20v-5h5"/></svg>
+      <h3>See, correct, repeat</h3>
+      <p>Vision in the loop make sures no error go unrectified. Approximately 1-5 API calls for volume change and error correction.</p>
+    </div>
+    <div class="feat third" data-reveal>
+      <div class="tag">Discovery</div>
+      <svg class="glyph" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M13 2v4M13 20v4M4 13H0M26 13h-4"/><path d="M6 6l3 3M17 17l3 3M20 6l-3 3M9 17l-3 3"/><circle cx="13" cy="13" r="4"/></svg>
+      <h3>Accelerates discovery</h3>
+      <p>Queue protocols and let them run — even overnight.</p>
+    </div>
+    <div class="feat half" data-reveal>
+      <div class="tag">Low cost</div>
+      <svg class="glyph" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="7" width="20" height="14" rx="2"/><path d="M3 11h20M7 17h4"/></svg>
+      <h3>A fraction of what's in the market</h3>
+      <p>Built on a modified 3D-printer platform, less than USD $500 — automation your budget can actually reach.</p>
+    </div>
+    <div class="feat half" data-reveal>
+      <div class="tag">Open access</div>
+      <svg class="glyph" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 11V8a5 5 0 0 1 10 0"/><rect x="5" y="11" width="16" height="11" rx="2"/><path d="M13 15v3"/></svg>
+      <h3>Open hardware, open software</h3>
+      <p>Every part list, board, and line of control code is yours to inspect, fork, and improve.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- FINAL CTA -->
+<section class="block cta-final" id="build">
+  <div class="halo2"></div>
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;margin-bottom:26px" data-reveal>What are you waiting for?</div>
+    <h2 data-reveal>Build your own.</h2>
+    <p class="lead" data-reveal>Open the docs, source the parts, and put automated pipetting on your bench this week.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap" data-reveal>
+      <a href="build.html" class="btn btn-solid">Guided Build</a>
+      <a href="https://github.com/selfdrivinglabsntu/SelfDrivingLabWiki" class="btn">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-col">
+      <div class="foot-line"><img class="foot-logo-ngenuity" src="/assets/logo.png" alt="Heimdall_logo"> — Automated liquid handling</div>
+      <div class="foot-line">
+        <a href="https://www.ngenuitylab.net/" target="_blank">
+          <img class="foot-logo-ngenuity" src="/assets/NGenuity_lab_logo.png" alt="NGenuity_lab_logo">
+        </a> — Self-driving labs for materials science
+      </div>
+    </div>
+    <div class="foot-col foot-col-center">
+      <div class="foot-links">
+        <a href="https://github.com/selfdrivinglabsntu/SelfDrivingLabWiki">GitHub</a>
+        <a href="https://www.ngenuitylab.net/contact/">Reach Us</a>
+      </div>
+    </div>
+    <div class="foot-col foot-col-end">
+      <a href="https://www.ntu.edu.sg" target="_blank">
+        <img class="foot-logo-ntu" src="/assets/ntu_logo.png" alt="Nanyang Technological University">
+      </a>
+    </div>
+    <div class="foot-copyright">© 2026 NGenuity Lab · NTU School of Materials Science & Engineering</div>
+  </div>
+</footer>
+
+<script src="vendor/gsap/gsap.min.js"></script>
+<script src="vendor/gsap/ScrollTrigger.min.js"></script>
+
+<script src="js/theme.js"></script>
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>

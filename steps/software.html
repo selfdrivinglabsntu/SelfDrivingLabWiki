@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.dataset.theme=localStorage.getItem('piper-theme')||'dark';</script>
+<title>Software — HEIMDALL build</title>
+<meta name="description" content="Software setup guide for building your own HEIMDALL automated pipette.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/sections.css">
+<link rel="stylesheet" href="../css/build.css">
+</head>
+<body data-step="software">
+
+<div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
+
+<header class="build-nav">
+  <div class="build-nav-inner">
+    <a href="../index.html" class="build-brand" aria-label="HEIMDALL home">
+      <img src="../assets/logo.png" alt="HEIMDALL @NTU MSE"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="brand-text" style="display:none"><span class="mark"></span>HEIMDALL</span>
+    </a>
+    <div class="build-nav-actions">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to light theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="../build.html" class="back">← Build hub</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap step-main">
+  <div class="step-head">
+    <span class="step-num">Step 04</span>
+    <h1>Software</h1>
+    <p class="lead">Install the control GUI and connect it to your HEIMDALL.</p>
+    <span class="step-status"><span class="step-status-text">In progress</span></span>
+  </div>
+
+  <div class="step-content">
+    <p class="placeholder-note">Placeholder — software setup coming later.</p>
+    <h3>Install &amp; connect</h3>
+    <p>TBD — install the control software, pair with the board, and run a test dispense.</p>
+  </div>
+
+  <div class="step-actions">
+    <button class="btn btn-solid complete-btn" type="button">Mark step complete</button>
+    <span class="hint">You can undo this anytime.</span>
+  </div>
+
+  <nav class="step-nav" aria-label="Step navigation"></nav>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-col">
+      <div class="foot-line"><img class="foot-logo-ngenuity" src="/assets/logo.png" alt="Heimdall_logo"> — Automated liquid handling</div>
+      <div class="foot-line">
+        <a href="https://www.ngenuitylab.net/" target="_blank">
+          <img class="foot-logo-ngenuity" src="/assets/NGenuity_lab_logo.png" alt="NGenuity_lab_logo">
+        </a> — Self-driving labs for materials science
+      </div>
+    </div>
+    <div class="foot-col foot-col-center">
+      <div class="foot-links">
+        <a href="#">GitHub</a>
+        <a href="https://www.ngenuitylab.net/contact/">Reach Us</a>
+      </div>
+    </div>
+    <div class="foot-col foot-col-end">
+      <a href="https://www.ntu.edu.sg" target="_blank">
+        <img class="foot-logo-ntu" src="/assets/ntu_logo.png" alt="Nanyang Technological University">
+      </a>
+    </div>
+    <div class="foot-copyright">© 2026 NGenuity Lab · NTU School of Materials Science & Engineering</div>
+  </div>
+</footer>
+
+<script src="../js/theme.js"></script>
+<script type="module" src="../js/build-step.js"></script>
+</body>
+</html>

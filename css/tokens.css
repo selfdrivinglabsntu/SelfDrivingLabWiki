@@ -1,0 +1,55 @@
+/* PIPER — design tokens
+   Part of the PIPER landing page. Edit design tokens in tokens.css. */
+
+:root{
+    --bg:#07080B;
+    --bg-2:#0C0F15;
+    --surface:#0E121A;
+    --line:#1A2029;
+    --line-2:#242C38;
+    --text:#E9EDF2;
+    --muted:#79828E;
+    --muted-2:#565E6A;
+    --accent:#57CDFF;      /* ice-blue glow */
+    --accent-2:#79F2D8;    /* aqua meniscus */
+    --on-accent:#04222E;   /* text/ink on accent fills */
+    /* glows derive from --accent, so a new accent recolors them automatically */
+    --glow:color-mix(in srgb, var(--accent) 50%, transparent);
+    --glow-soft:color-mix(in srgb, var(--accent) 12%, transparent);
+
+    /* metallic hero wordmark fill — always this bright gradient, dark or
+       light theme, since the hero video/scrim stays dark in both */
+    --wordmark-grad:linear-gradient(180deg,#fff 0%,#B9C4CE 60%,#7C8894 100%);
+    /* soft glow tint behind the product viewer — a no-op (equals --bg-2) in
+       dark mode; light mode gives it a pale Apple-style blue (see below) */
+    --product-glow:var(--bg-2);
+
+    --display:'Sora',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+
+    --maxw:1180px;
+    --pad:clamp(20px,5vw,64px);
+    --logo-bg:#9fdaf4d6;
+  }
+
+  /* light theme — inspired by apple.com: off-white surfaces, near-black text,
+     Apple's system blue as the accent. Toggled via [data-theme] on <html>,
+     see js/theme.js. --glow/--glow-soft aren't redeclared: they're defined in
+     terms of var(--accent), so they pick up the new accent automatically. */
+  :root[data-theme="light"]{
+    --bg:#F5F5F7;
+    --bg-2:#FFFFFF;
+    --surface:#FBFBFD;
+    --line:#D2D2D7;
+    --line-2:#E8E8ED;
+    --text:#1D1D1F;
+    --muted:#6E6E73;
+    --muted-2:#86868B;
+    --accent:#0071E3;
+    --accent-2:#1453e5;
+    --accent-3: #FFFFFF;
+    --on-accent:#FFFFFF;
+    --product-glow:#EAF2FB;
+    --logo-bg:#FFFFFF;
+  }

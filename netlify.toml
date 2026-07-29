@@ -1,0 +1,6 @@
+# Netlify configuration for the PIPER static site.
+# There is no build step — Netlify just serves the files as-is.
+
+[build]
+  command = ""    # nothing to compile; plain HTML/CSS/JS
+  publish = "."   # site root: index.html lives at the top level
