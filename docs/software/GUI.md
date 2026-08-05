@@ -67,7 +67,7 @@ pip install --upgrade pip
 ```
 Install required packages:
 ```bash
-pip install numpy scipy pyserial spatialmath-python google-generativeai python-dotenv opencv-python
+pip install numpy scipy pyserial spatialmath-python google-generativeai python-dotenv opencv-python google-genai pymodbus zmq
 ```
 
 ### 0.4 Get a Gemini API key
