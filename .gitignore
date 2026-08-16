@@ -26,3 +26,6 @@ Thumbs.db
 # claude code (local-machine config, not part of the site)
 .claude/
 settings.local.json
+
+#large files
+assets/Hero.mp4
