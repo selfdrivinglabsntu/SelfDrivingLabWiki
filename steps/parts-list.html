@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.dataset.theme=localStorage.getItem('piper-theme')||'dark';</script>
+<title>Parts List — HEIMDALL build</title>
+<meta name="description" content="Every 3D printed part and component needed to build your own HEIMDALL — check them off as you gather them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/sections.css">
+<link rel="stylesheet" href="../css/build.css">
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
+
+<header class="build-nav">
+  <div class="build-nav-inner">
+    <a href="../index.html" class="build-brand" aria-label="HEIMDALL home">
+      <img src="../assets/logo.png" alt="HEIMDALL @NTU MSE"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="brand-text" style="display:none"><span class="mark"></span>HEIMDALL</span>
+    </a>
+    <div class="build-nav-actions">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to light theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="../build.html" class="back">← Build hub</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap step-main">
+  <div class="step-head">
+    <span class="step-num" aria-hidden="true">&nbsp;</span>
+    <h1>Parts List</h1>
+    <p class="lead">Gather all items.</p>
+    <p class="parts-progress"><b data-parts-done>0</b> of <span data-parts-total>0</span> gathered</p>
+  </div>
+
+  <section class="parts-section">
+    <p class="parts-section-label">3D Printed Parts</p>
+    <div class="parts-grid">
+
+      <div class="part-card" data-part="tip-holder">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Tip Holder</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/tip-holder-2-200ul.png" alt="Tip Holder (2–200 µL)"></div>
+      </div>
+      
+      <div class="part-card" data-part="bed-plate">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Bed Plate</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/bed-plate.png" alt="Bed Plate"></div>
+      </div>
+
+      <div class="part-card" data-part="tip-disposal">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Tip Disposal</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/tip-disposal.png" alt="Tip Disposal"></div>
+      </div>
+
+      <div class="part-card" data-part="tip-ejector">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Tip Ejector</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/tip-ejector.png" alt="Tip Ejector"></div>
+      </div>
+
+      <div class="part-card" data-part="tip-catcher">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Tip Catcher</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/tip-catcher.png" alt="Tip Catcher"></div>
+      </div>
+
+      <div class="part-card" data-part="camera-mount">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Camera Mount</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/camera-mount.png" alt="Camera Mount"></div>
+      </div>
+
+      <div class="part-card" data-part="96-well-plate-holder">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">96 Well Plate Holder</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/96-well-plate-holder.png" alt="96 Well Plate Holder"></div>
+      </div>
+
+      <div class="part-card" data-part="sample-holder">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Sample Holder</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/sample-holder.png" alt="Sample Holder"></div>
+      </div>
+
+      <div class="part-card" data-part="frame">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Frame</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/frame.png" alt="Frame"></div>
+      </div>
+
+      <div class="part-card" data-part="frame-linear-actuator-mount">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Frame Linear Actuator Mount</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/frame-linear-actuator-mount.png" alt="Frame Linear Actuator Mount"></div>
+      </div>
+
+      <div class="part-card" data-part="pipette-bracket">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Pipette Bracket</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/pipette-bracket.png" alt="Pipette Bracket"></div>
+      </div>
+
+      <div class="part-card" data-part="z-limit-switch-mount">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Z-limit switch mount</h4>
+        <div class="part-thumb"><img src="../Images/CAD_Images/z-limit-bracket.png" alt="Z-limit switch mount"></div>
+      </div>
+
+    </div>
+
+    <div class="parts-section-actions">
+      <a class="parts-banner-btn" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+        Download Parts
+      </a>
+    </div>
+  </section>
+
+  <section class="parts-section">
+    <p class="parts-section-label">Components</p>
+    <div class="parts-grid">
+
+      <div class="part-card" data-part="linear-actuator">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Linear Actuator</h4>
+        <div class="part-thumb"><img src="../Images/components/linear-actuator.png" alt="Linear Actuator"></div>
+      </div>
+
+      <div class="part-card" data-part="stepper-motor">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Stepper Motor</h4>
+        <div class="part-thumb"><img src="../Images/components/stepper-motor.webp" alt="Stepper Motor"></div>
+      </div>
+
+      <div class="part-card" data-part="linear-rail">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Linear Rail</h4>
+        <div class="part-thumb"><img src="../Images/components/linear-rail.jpg" alt="Linear Rail"></div>
+      </div>
+
+      <div class="part-card" data-part="belt">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Belt</h4>
+        <div class="part-thumb"><img src="../Images/components/belt.webp" alt="Belt"></div>
+      </div>
+
+      <div class="part-card" data-part="assembled-pcb">
+        <span class="part-check" aria-hidden="true"></span>
+        <h4 class="part-name">Assembled PCB Board</h4>
+        <div class="part-thumb"><img src="../Images/components/assembled-pcb.jpg" alt="Assembled PCB Board"></div>
+      </div>
+
+    </div>
+
+    <div class="parts-section-actions">
+      <a class="parts-banner-btn" href="bom.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+        Go to BOM
+      </a>
+    </div>
+  </section>
+
+  <div class="step-actions">
+    <a class="btn btn-solid" href="assembly.html">← Back to Assembly</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-col">
+      <div class="foot-line"><img class="foot-logo-ngenuity" src="/assets/logo.png" alt="Heimdall_logo"> — Automated liquid handling</div>
+      <div class="foot-line">
+        <a href="https://www.ngenuitylab.net/" target="_blank">
+          <img class="foot-logo-ngenuity" src="/assets/NGenuity_lab_logo.png" alt="NGenuity_lab_logo">
+        </a> — Self-driving labs for materials science
+      </div>
+    </div>
+    <div class="foot-col foot-col-center">
+      <div class="foot-links">
+        <a href="#">GitHub</a>
+        <a href="https://www.ngenuitylab.net/contact/">Reach Us</a>
+      </div>
+    </div>
+    <div class="foot-col foot-col-end">
+      <a href="https://www.ntu.edu.sg" target="_blank">
+        <img class="foot-logo-ntu" src="/assets/ntu_logo.png" alt="Nanyang Technological University">
+      </a>
+    </div>
+    <div class="foot-copyright">© 2026 NGenuity Lab · NTU School of Materials Science & Engineering</div>
+  </div>
+</footer>
+
+<script src="../js/theme.js"></script>
+<script src="../js/parts-checklist.js"></script>
+</body>
+</html>

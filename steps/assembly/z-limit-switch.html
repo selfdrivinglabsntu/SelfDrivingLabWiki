@@ -63,9 +63,37 @@
 
     <h3>Steps</h3>
     <ol>
-      <li>Remove the bottom casing of the printer</li>
-      <li>Plug the z-limit switch into port J713 as shown in Figure 3A.</li>
-      
+      <li>
+        Remove the bottom casing of the printer
+        <figure class="step-figure">
+          <img src="../../Images/step-1/printer_bottom.jpg" alt="Bottom casing removed from the printer">
+          <figcaption>Figure 1: Unscrewed bottom of the 3D printer.</figcaption>
+        </figure>
+      </li>
+      <li>
+        Plug the z-limit switch into port J713 as shown
+        <figure class="step-figure">
+          <img src="../../Images/step-1/z-limit-switch-port.png" alt="z-limit switch plugged into port J713">
+          <figcaption>Figure 2: Left - Diagramatic representation and description of mainboard interfaces and connections, Right - Photograph of mainboard with z-limit switch pugged in</figcaption>
+        </figure>
+
+        <div class="callout-row">
+          <div class="callout-important">
+            <p><strong>Important:</strong> Note down the version of the chip on the mainboard for your printer as it will be needed when compiling the custom Marlin Firmware.</p>
+          </div>
+          <div class="chip-version-box">
+            <label for="chipVersionInput">Enter Chip Version:</label>
+            <input type="text" id="chipVersionInput" placeholder="e.g. v4.2.2" autocomplete="off">
+          </div>
+        </div>
+      </li>
+      <li>
+        Mounting the z-limit switch
+        <figure class="step-figure step-figure--sm">
+          <img src="../../Images/step-1/z_limit_switch.jpeg" alt="The z-limit switch">
+          <figcaption>Figure 3: Photograph of the z-limit switch mounted</figcaption>
+        </figure>
+      </li>
     </ol>
   </div>
 
@@ -100,5 +128,6 @@
 </footer>
 
 <script src="../../js/theme.js"></script>
+<script src="../../js/chip-version.js"></script>
 </body>
 </html>
