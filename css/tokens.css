@@ -24,6 +24,16 @@
        dark mode; light mode gives it a pale Apple-style blue (see below) */
     --product-glow:var(--bg-2);
 
+    /* fixed "light island" surface — a handful of elements (step-card list,
+       banner CTA) are meant to read as bright, high-contrast objects sitting
+       on the ambient canvas in BOTH themes, so unlike the tokens above these
+       don't flip under [data-theme="light"] */
+    --island-bg:#FFFFFF;
+    --island-text:#15181D;
+    --island-muted:#6B7280;
+    --island-line:rgba(15,18,23,.09);
+    --panel-bg:#EAF2F5;   /* pale blue-gray info panel — e.g. the "You will need" card */
+
     --display:'Sora',system-ui,sans-serif;
     --body:'Inter',system-ui,sans-serif;
     --mono:'IBM Plex Mono',ui-monospace,monospace;

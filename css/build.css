@@ -109,6 +109,85 @@
 .bom-table th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2)}
 .bom-table td{color:var(--muted)}
 
+/* ---------- parts-list banner (full-bleed within a .step-main step page) ----------
+   Breaks out of the 820px step column to span the viewport edge-to-edge, then
+   re-centers its content at the wider site max-width. Uses overflow-x:hidden
+   on body (base.css) as the guard against the 100vw-vs-scrollbar sliver. */
+.parts-banner{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);
+  margin-top:36px;margin-bottom:8px;
+  background:var(--accent);color:var(--on-accent);text-align:center}
+.parts-banner-inner{max-width:var(--maxw);margin:0 auto;padding:56px var(--pad);}
+.parts-banner h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.6vw,36px);margin-bottom:10px}
+.parts-banner p{max-width:52ch;margin:0 auto 26px;font-size:15px;line-height:1.6;opacity:.88}
+.parts-banner-btn{display:inline-flex;align-items:center;gap:9px;
+  background:var(--island-bg);color:var(--island-text);
+  font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.02em;
+  border-radius:99px;padding:12px 22px;box-shadow:0 6px 18px rgba(0,0,0,.18);
+  transition:transform .2s,box-shadow .2s}
+.parts-banner-btn svg{width:15px;height:15px;flex:none}
+.parts-banner-btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.24)}
+
+/* ---------- assembly step-card list ----------
+   Deliberately "light island" cards (fixed white, not theme-flipped — see
+   --island-* in tokens.css) so they read as bright, tappable objects against
+   the ambient canvas in both themes, the same way .parts-banner-btn does. */
+.steps-heading{font-size:clamp(22px,3vw,30px);margin-bottom:6px}
+.steps-heading .accent{text-decoration:underline;text-decoration-color:var(--accent-2);
+  text-decoration-thickness:3px;text-underline-offset:6px}
+.steps-sub{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted-2);margin-bottom:20px}
+
+.assembly-steps{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.assembly-step-card{position:relative;z-index:1;display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  background:var(--island-bg);border:1px solid var(--island-line);border-radius:12px;
+  padding:20px 24px;box-shadow:0 1px 3px rgba(15,18,23,.05);
+  transition:border-color .25s,box-shadow .25s,transform .25s}
+.assembly-step-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(15,18,23,.12)}
+.assembly-step-card.is-next{border-color:var(--accent);
+  box-shadow:0 0 0 1px var(--accent),0 10px 26px var(--glow-soft)}
+
+.step-card-dot{flex:none;width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--island-line);display:block}
+.assembly-step-card.is-complete .step-card-dot{border-color:var(--accent);background:var(--accent)}
+
+.step-card-body{flex:1 1 320px;min-width:0}
+.step-card-body h3{font-family:var(--display);font-weight:600;font-size:16px;color:var(--island-text);
+  margin:0 0 4px}
+.step-card-body p{color:var(--island-muted);font-size:13.5px;line-height:1.55;margin:0 0 8px}
+.step-card-time{display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--island-muted)}
+.step-card-time svg{width:13px;height:13px}
+
+.step-card-start{flex:none;display:inline-flex;align-items:center;justify-content:center;
+  background:var(--island-text);color:var(--island-bg);
+  font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.04em;
+  border-radius:99px;padding:11px 30px;transition:opacity .2s}
+.step-card-start:hover{opacity:.82}
+
+@media(max-width:640px){
+  .assembly-step-card{padding:18px 20px}
+  .step-card-start{width:100%;padding:12px 20px;margin-top:4px}
+}
+
+/* ---------- "You will need" panel (sub-step pages) ----------
+   Fixed light panel (see --panel-bg / --island-* in tokens.css) — same
+   theme-independent-island treatment as the step cards on the Assembly
+   overview page, so tool/part call-outs read consistently everywhere. */
+.need-card{position:relative;z-index:1;background:var(--panel-bg);border-radius:16px;
+  padding:28px 30px;margin:24px 0 34px}
+.need-heading{font-family:var(--display);font-weight:700;font-size:19px;color:var(--island-text);
+  margin-bottom:20px}
+.need-list{display:flex;flex-wrap:wrap;align-items:flex-end;gap:36px}
+.need-item{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:56px}
+.need-icon{width:56px;height:56px;object-fit:contain;flex:none}
+.need-label{font-family:var(--display);font-weight:700;font-size:13px;line-height:1.3;
+  color:var(--island-text);text-align:center;white-space:pre-line}
+
+@media(max-width:640px){
+  .need-card{padding:22px 20px}
+  .need-list{gap:26px}
+}
+
 .step-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:42px}
 .complete-btn.is-complete{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
 .step-actions .hint{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted-2)}
