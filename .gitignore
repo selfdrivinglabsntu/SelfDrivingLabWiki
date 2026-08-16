@@ -1,9 +1,17 @@
 # dependencies
 node_modules/
+# NOTE: vendor/ (three.js, GSAP) is intentionally NOT ignored — those files
+# are loaded directly by index.html at runtime and must be committed, or the
+# site breaks for anyone who isn't the machine that originally downloaded them.
 
 # build output
 dist/
 .cache/
+
+# env / secrets
+.env
+.env.*
+!.env.example
 
 # logs
 *.log
@@ -15,5 +23,6 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
-#claude
+# claude code (local-machine config, not part of the site)
 .claude/
+settings.local.json
