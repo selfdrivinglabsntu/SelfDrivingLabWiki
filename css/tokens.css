@@ -32,6 +32,9 @@
     --island-text:#15181D;
     --island-muted:#6B7280;
     --island-line:rgba(15,18,23,.09);
+    --island-link:#0F766E; /* darker tone of --accent-2's mint/teal hue, legible on
+                               the fixed-light island panels in dark theme too —
+                               --accent-2 itself (#79F2D8) is tuned for a dark bg */
     --panel-bg:#EAF2F5;   /* pale blue-gray info panel — e.g. the "You will need" card */
 
     --display:'Sora',system-ui,sans-serif;

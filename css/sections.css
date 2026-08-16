@@ -210,23 +210,9 @@
   .feat-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
     margin-bottom:56px;flex-wrap:wrap}
   .feat-head h2{font-size:clamp(30px,4.6vw,52px);max-width:14ch}
-  .features{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);
-    border:1px solid var(--line);border-radius:6px;overflow:hidden}
-  .feat{background:var(--bg-2);padding:34px 30px;position:relative;transition:background .4s}
-  .feat:hover{background:var(--surface)}
-  .feat.wide{grid-column:span 3}
-  .feat.third{grid-column:span 2}
-  .feat.half{grid-column:span 3}
-  .feat .tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--accent);
-    text-transform:uppercase;margin-bottom:auto}
-  .feat h3{font-family:var(--display);font-weight:600;font-size:clamp(20px,2.4vw,26px);
-    margin:26px 0 12px;letter-spacing:-.01em}
-  .feat p{color:var(--muted);font-size:15px;max-width:34ch}
-  .feat .glyph{position:absolute;top:30px;right:30px;color:var(--muted-2);opacity:.7}
-  @media(max-width:860px){
-    .features{grid-template-columns:1fr}
-    .feat.wide,.feat.third,.feat.half{grid-column:span 1}
-  }
+  /* the 6-card .feat/.features grid this used to hold was replaced by the
+     .feature-wheel SVG (see below in this file) — removed rather than left
+     as dead CSS */
 
   /* ---------- build / open ---------- */
   .build{border-top:1px solid var(--line)}
@@ -282,6 +268,25 @@
   .foot-logo-ngenuity{height:50px;width:auto;background:var(--logo-bg);border-radius:5px;padding:6px 10px}
   .foot-logo-ntu{height:120px;width:auto;background:var(--logo-bg);border-radius:5px;padding:2px 5px;margin-top:8px}
   .foot-line a {display: inline-block; vertical-align: middle;}
+
+  /* ---------- feature wheel (replaces the old feature-card grid) ----------
+     Fixed palette, deliberately NOT theme-linked — this is a branded
+     infographic (pastel wedges + dark ink text), same "always looks the
+     same" logic as the --island-* tokens, just scoped locally since it's
+     homepage-only rather than a reusable design-system color. */
+  .feature-wheel-wrap{display:flex;justify-content:center;margin-top:20px}
+  .feature-wheel{width:100%;max-width:600px;height:auto}
+  .fw-wedge{stroke:var(--bg);stroke-width:2}
+  .fw-wedge.modularity{fill:#A9D6E5}
+  .fw-wedge.open-source{fill:#C7C08A}
+  .fw-wedge.low-cost{fill:#D6D6D6}
+  .fw-wedge.repairability{fill:#BDAEDD}
+  .fw-wedge.compactness{fill:#BFDDAA}
+  .fw-wedge.expandability{fill:#DDACAC}
+  .fw-label{font-family:var(--display);font-weight:700;font-size:25px;fill:#1A1A1A}
+  .fw-ring{fill:none;stroke:#E23B3B;stroke-width:6}
+  .fw-badge-bg{fill:#EFAC5E}
+  .fw-badge-text{font-family:var(--display);font-weight:700;font-size:26px;fill:#1A1A1A;text-anchor:middle}
 
   /* ---------- responsive ---------- */
   @media(max-width:900px){

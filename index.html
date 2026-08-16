@@ -204,39 +204,42 @@
 <section class="block wrap" id="features">
   <div class="feat-head">
     <h2 data-reveal>What makes it<br>state of the art.</h2>
-    <p class="lead" style="max-width:34ch" data-reveal>Five things HEIMDALL refuses to compromise on.</p>
+    <p class="lead" style="max-width:34ch" data-reveal>What HEIMDALL refuses to compromise on.</p>
   </div>
-  <div class="features">
-    <div class="feat wide" data-reveal>
-      <div class="tag">Precision</div>
-      <svg class="glyph" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="13" cy="13" r="10"/><path d="M13 3v6M13 17v6M3 13h6M17 13h6"/><circle cx="13" cy="13" r="2" fill="currentColor" stroke="none"/></svg>
-      <h3>Repeatable to the microliter</h3>
-      <p>Coordinate-driven motion and automated liquid aspiration and dispensation keep every draw honest, well after well.</p>
-    </div>
-    <div class="feat third" data-reveal>
-      <div class="tag">Closed loop</div>
-      <svg class="glyph" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 13a9 9 0 1 1 3 6.7"/><path d="M4 20v-5h5"/></svg>
-      <h3>See, correct, repeat</h3>
-      <p>Vision in the loop make sures no error go unrectified. Approximately 1-5 API calls for volume change and error correction.</p>
-    </div>
-    <div class="feat third" data-reveal>
-      <div class="tag">Discovery</div>
-      <svg class="glyph" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M13 2v4M13 20v4M4 13H0M26 13h-4"/><path d="M6 6l3 3M17 17l3 3M20 6l-3 3M9 17l-3 3"/><circle cx="13" cy="13" r="4"/></svg>
-      <h3>Accelerates discovery</h3>
-      <p>Queue protocols and let them run — even overnight.</p>
-    </div>
-    <div class="feat half" data-reveal>
-      <div class="tag">Low cost</div>
-      <svg class="glyph" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="7" width="20" height="14" rx="2"/><path d="M3 11h20M7 17h4"/></svg>
-      <h3>A fraction of what's in the market</h3>
-      <p>Built on a modified 3D-printer platform, less than USD $500 — automation your budget can actually reach.</p>
-    </div>
-    <div class="feat half" data-reveal>
-      <div class="tag">Open access</div>
-      <svg class="glyph" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 11V8a5 5 0 0 1 10 0"/><rect x="5" y="11" width="16" height="11" rx="2"/><path d="M13 15v3"/></svg>
-      <h3>Open hardware, open software</h3>
-      <p>Every part list, board, and line of control code is yours to inspect, fork, and improve.</p>
-    </div>
+  <div class="feature-wheel-wrap" data-reveal>
+    <svg class="feature-wheel" viewBox="0 0 600 600" role="img" aria-label="Six pillars of HEIMDALL: Modularity, Open Source, Low Cost, Repairability, Compactness, Expandability">
+      <defs>
+        <path id="fw-arc-modularity"    d="M86.96,177.0 A246,246 0 0,1 300.0,54.0" />
+        <path id="fw-arc-open-source"   d="M300.0,54.0 A246,246 0 0,1 513.04,177.0" />
+        <path id="fw-arc-low-cost"      d="M513.04,177.0 A246,246 0 0,1 513.04,423.0" />
+        <path id="fw-arc-repairability" d="M300.0,546.0 A246,246 0 0,0 513.04,423.0" />
+        <path id="fw-arc-compactness"   d="M86.96,423.0 A246,246 0 0,0 300.0,546.0" />
+        <path id="fw-arc-expandability" d="M86.96,177.0 A246,246 0 0,0 86.96,423.0" />
+        <clipPath id="fw-photo-clip"><circle cx="300" cy="300" r="166" /></clipPath>
+      </defs>
+
+      <path class="fw-wedge modularity"    d="M48.85,155.0 A290,290 0 0,1 300.0,10.0 L300.0,124.0 A176,176 0 0,0 147.58,212.0 Z" />
+      <path class="fw-wedge open-source"   d="M300.0,10.0 A290,290 0 0,1 551.15,155.0 L452.42,212.0 A176,176 0 0,0 300.0,124.0 Z" />
+      <path class="fw-wedge low-cost"      d="M551.15,155.0 A290,290 0 0,1 551.15,445.0 L452.42,388.0 A176,176 0 0,0 452.42,212.0 Z" />
+      <path class="fw-wedge repairability" d="M551.15,445.0 A290,290 0 0,1 300.0,590.0 L300.0,476.0 A176,176 0 0,0 452.42,388.0 Z" />
+      <path class="fw-wedge compactness"   d="M300.0,590.0 A290,290 0 0,1 48.85,445.0 L147.58,388.0 A176,176 0 0,0 300.0,476.0 Z" />
+      <path class="fw-wedge expandability" d="M48.85,445.0 A290,290 0 0,1 48.85,155.0 L147.58,212.0 A176,176 0 0,0 147.58,388.0 Z" />
+
+      <text class="fw-label" text-anchor="middle"><textPath href="#fw-arc-modularity" startOffset="50%">Modularity</textPath></text>
+      <text class="fw-label" text-anchor="middle"><textPath href="#fw-arc-open-source" startOffset="50%">Open Source</textPath></text>
+      <text class="fw-label" text-anchor="middle"><textPath href="#fw-arc-low-cost" startOffset="50%">Low Cost</textPath></text>
+      <text class="fw-label" text-anchor="middle"><textPath href="#fw-arc-repairability" startOffset="50%">Repairability</textPath></text>
+      <text class="fw-label" text-anchor="middle"><textPath href="#fw-arc-compactness" startOffset="50%">Compactness</textPath></text>
+      <text class="fw-label" text-anchor="middle"><textPath href="#fw-arc-expandability" startOffset="50%">Expandability</textPath></text>
+
+      <!-- Center: product photo, clipped to a circle, red ring framing it,
+           "Heimdall" badge overlapping the top edge. -->
+      <image href="Images/Heimdall.png" x="132" y="132" width="336" height="336"
+             preserveAspectRatio="xMidYMid slice" clip-path="url(#fw-photo-clip)" />
+      <circle class="fw-ring" cx="300" cy="300" r="168" />
+      <rect class="fw-badge-bg" x="220" y="143" width="160" height="44" rx="22" />
+      <text class="fw-badge-text" x="300" y="171">Heimdall</text>
+    </svg>
   </div>
 </section>
 

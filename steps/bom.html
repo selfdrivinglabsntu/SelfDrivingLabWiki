@@ -45,17 +45,84 @@
   </div>
 
   <div class="step-content">
-    <p class="placeholder-note">Placeholder — full parts list coming later.</p>
-    <h3>Parts</h3>
-    <table class="bom-table">
-      <thead><tr><th>Qty</th><th>Component</th><th>Notes / source</th></tr></thead>
-      <tbody>
-        <tr><td>1×</td><td>Motion platform (3D-printer base)</td><td>TBD</td></tr>
-        <tr><td>1×</td><td>Controller board (ESP32)</td><td>TBD</td></tr>
-        <tr><td>1×</td><td>Pipette / syringe assembly</td><td>TBD</td></tr>
-        <tr><td>—</td><td>Fasteners, wiring, tips…</td><td>TBD</td></tr>
-      </tbody>
-    </table>
+
+    <section class="parts-section">
+      <p class="parts-section-label">Key Items</p>
+      <div class="bom-wrapper">
+        <table class="bom-table" id="key-items-table">
+          <thead><tr><th style="width:44px">Status</th><th>Item</th><th>Link</th><th>Need</th></tr></thead>
+          <tbody id="key-items-body">
+            <tr><td colspan="4" class="bom-empty">Loading key items…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bom-callout">
+        <div class="bom-callout-photo">
+          <img src="https://cdn.creality.com/product-detial/us/creality-ender-3-s1-3d-printer/b5eadd06dd183bda9c1f47d245de2f59_540x.jpg" alt="Creality Ender-3 S1 3D Printer">
+        </div>
+        <div class="bom-callout-body">
+          <h4>3D Printer</h4>
+          <p>You should get a <a href="https://www.creality.com/products/creality-ender-3-s1-3d-printer" target="_blank" rel="noopener noreferrer">Creality Ender-3 S1</a> printer (preferable) or a <a href="https://www.creality.com/products/creality-ender-3-s1-pro-fdm-3d-printer" target="_blank" rel="noopener noreferrer">Creality Ender-3 S1 Pro</a>. If you are unable to get access to either of these, refer to choosing your printer.</p>
+        </div>
+      </div>
+      <figure class="step-figure">
+        <img src="../Images/xmotor_outside.jpg" alt="X-Axis Motor Outside Frame (Recommended)">
+        <figcaption>Preferred external layout maximizing clear movement area.</figcaption>
+      </figure>
+
+      <div class="bom-callout">
+        <div class="bom-callout-photo">
+          <img src="../Images/pipette.png" alt="Precipette™ Pipette">
+        </div>
+        <div class="bom-callout-body">
+          <h4>Pipette</h4>
+          <p>Heimdall is designed to use <a href="https://www.4esci.com/Precipette-Pipettes-Single-channel-Adjustable-Volume-Pipette-pd47194942.html?srsltid=AfmBOoqAO3kqhTNZNMEfX73jpDfjbU-w6qV1anIF-a96RKfOx6sGQAOJ" target="_blank" rel="noopener noreferrer">Precipette™ Pipettes</a>.</p>
+          <p>It is highly recommended to source this exact model to guarantee compatibility with the 3D-printed mounts and drive gears. If you must use an alternative pipette, ensure it meets the following criteria:</p>
+          <ul>
+            <li><strong>Front-Facing Volume Display:</strong> the digital volume adjustment window must face directly forward to remain visible once mounted.</li>
+            <li><strong>Front-Facing Tip Ejection:</strong> the mechanical tip ejection mechanism must trigger from the front to properly interface with the automated tip disposal system.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="parts-section">
+      <p class="parts-section-label">Electronics</p>
+      <div class="bom-wrapper">
+        <table class="bom-table" id="electronics-table">
+          <thead><tr><th style="width:44px">Status</th><th>Item</th><th>Link</th><th>Need</th></tr></thead>
+          <tbody id="electronics-body">
+            <tr><td colspan="4" class="bom-empty">Loading electronics…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="parts-section">
+      <p class="parts-section-label">Hardware</p>
+      <div class="bom-wrapper">
+        <table class="bom-table" id="hardware-table">
+          <thead><tr><th style="width:44px">Status</th><th>Item</th><th>Link</th><th>Need</th></tr></thead>
+          <tbody id="hardware-body">
+            <tr><td colspan="4" class="bom-empty">Loading hardware…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="parts-section">
+      <p class="parts-section-label">Tools</p>
+      <div class="bom-wrapper">
+        <table class="bom-table" id="tools-table">
+          <thead><tr><th style="width:44px">Status</th><th>Item</th><th>Link</th><th>Need</th></tr></thead>
+          <tbody id="tools-body">
+            <tr><td colspan="4" class="bom-empty">Loading tools…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
   </div>
 
   <div class="step-actions">
@@ -92,6 +159,7 @@
 </footer>
 
 <script src="../js/theme.js"></script>
+<script src="../js/bom.js"></script>
 <script type="module" src="../js/build-step.js"></script>
 </body>
 </html>

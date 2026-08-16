@@ -104,10 +104,44 @@
   border:1px solid var(--line-2);border-radius:4px;padding:1px 6px;color:var(--text)}
 .placeholder-note{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
   color:var(--muted-2);border:1px dashed var(--line-2);border-radius:5px;padding:4px 9px;margin-bottom:6px}
-.bom-table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px}
-.bom-table th,.bom-table td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}
-.bom-table th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2)}
-.bom-table td{color:var(--muted)}
+/* ---------- BOM tables (live Google-Sheet-driven checklists) ----------
+   .bom-wrapper is the island panel each <table> sits in; .parts-section /
+   .parts-section-label (see parts-list page) provide the divider + category
+   label above each one, reused as-is for visual consistency. */
+.bom-wrapper{position:relative;z-index:1;background:var(--panel-bg);border-radius:12px;
+  padding:6px 22px;overflow-x:auto}
+.bom-table{width:100%;min-width:480px;border-collapse:collapse;margin:6px 0;font-size:14px}
+.bom-table th,.bom-table td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--island-line)}
+.bom-table tr:last-child td{border-bottom:0}
+.bom-table th{font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--island-muted)}
+.bom-table td{color:var(--island-text);font-size:13.5px}
+.bom-check-cell{width:44px;text-align:center!important}
+.bom-table input[type="checkbox"]{width:17px;height:17px;accent-color:var(--accent);cursor:pointer}
+.bom-link{display:inline-flex;align-items:center;gap:5px;color:var(--island-link);font-weight:500;
+  text-decoration:underline;text-underline-offset:2px}
+.bom-empty,.bom-error{text-align:center!important;color:var(--island-muted);font-family:var(--mono);
+  font-size:12.5px;padding:22px 10px!important}
+.bom-error{color:#c14848}
+
+/* ---------- key-item detail call-outs (3D Printer / Pipette) ---------- */
+.bom-callout{position:relative;z-index:1;display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;
+  background:var(--panel-bg);border-radius:12px;padding:24px 26px;margin-top:16px}
+.bom-callout-photo{flex:0 0 180px;display:flex;align-items:center;justify-content:center}
+.bom-callout-photo img{max-width:100%;max-height:190px;border-radius:8px;object-fit:contain}
+.bom-callout-body{flex:1 1 320px;min-width:0}
+.bom-callout-body h4{font-family:var(--display);font-weight:700;font-size:16px;color:var(--island-text);margin-bottom:8px}
+.bom-callout-body p{color:var(--island-muted);font-size:14px;line-height:1.65;margin-bottom:10px}
+.bom-callout-body p:last-child{margin-bottom:0}
+.bom-callout-body a{color:var(--island-link);text-decoration:underline;text-underline-offset:2px}
+.bom-callout-body ul{padding-left:20px;color:var(--island-muted);font-size:13.5px;line-height:1.7;margin-top:8px}
+.bom-callout-body ul strong{color:var(--island-text)}
+.bom-callout-caption{margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--island-muted);text-align:center}
+
+@media(max-width:600px){
+  .bom-wrapper{padding:6px 14px}
+  .bom-callout{padding:20px}
+}
 
 /* ---------- parts-list banner (full-bleed within a .step-main step page) ----------
    Breaks out of the 820px step column to span the viewport edge-to-edge, then
@@ -144,12 +178,10 @@
 
 .assembly-steps{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:8px}
 .assembly-step-card{position:relative;z-index:1;display:flex;align-items:center;gap:18px;flex-wrap:wrap;
-  background:var(--island-bg);border:1px solid var(--island-line);border-radius:12px;
-  padding:20px 24px;box-shadow:0 1px 3px rgba(15,18,23,.05);
-  transition:border-color .25s,box-shadow .25s,transform .25s}
-.assembly-step-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(15,18,23,.12)}
-.assembly-step-card.is-next{border-color:var(--accent);
-  box-shadow:0 0 0 1px var(--accent),0 10px 26px var(--glow-soft)}
+  background:var(--island-bg);border:1px solid var(--accent);border-radius:12px;
+  padding:20px 24px;box-shadow:0 0 0 1px var(--accent),0 1px 3px rgba(15,18,23,.05);
+  transition:box-shadow .25s,transform .25s}
+.assembly-step-card:hover{transform:translateY(-2px);box-shadow:0 0 0 1px var(--accent),0 10px 26px rgba(15,18,23,.12)}
 
 .step-card-dot{flex:none;width:20px;height:20px;border-radius:50%;
   border:2px solid var(--island-line);display:block}
@@ -236,6 +268,11 @@
 
 .parts-section{padding-top:30px;border-top:1px solid var(--line);margin-top:34px}
 .parts-section:first-of-type{margin-top:44px}
+/* .step-content already draws its own top border + padding (build.css above)
+   before the first section — without this, the BOM page (where .parts-section
+   sits inside .step-content, unlike the standalone parts-list page) would
+   double up: two rules and too much gap stacked back to back. */
+.step-content .parts-section:first-child{margin-top:0;padding-top:0;border-top:0}
 .parts-section-label{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--muted-2);margin-bottom:18px}
 
@@ -257,7 +294,7 @@
   border:solid var(--on-accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
 
 .part-more{margin-top:10px;background:none;border:0;padding:0;font-family:var(--body);font-size:12.5px;
-  color:var(--accent-2);text-decoration:underline;cursor:pointer}
+  color:var(--island-link);text-decoration:underline;cursor:pointer}
 .part-more-panel{margin-top:12px;padding-top:12px;border-top:1px solid var(--island-line);
   display:flex;flex-direction:column;align-items:center;gap:8px}
 .part-more-panel img{max-width:100%;max-height:82px;object-fit:contain}
