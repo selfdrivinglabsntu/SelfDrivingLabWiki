@@ -1,5 +1,6 @@
 site_name: "HEIMDALL Wiki"
 site_description: "A guide to building your own Low-Cost Liquid Handler"
+site_url: https://selfdrivinglabsntu.github.io/SelfDrivingLabWiki/
 
 theme:
   name: material
