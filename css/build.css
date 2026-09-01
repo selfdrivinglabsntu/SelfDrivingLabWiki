@@ -234,9 +234,26 @@
 .step-figure img{width:100%;border-radius:10px;border:1px solid var(--line-2);display:block}
 .step-figure figcaption{margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--muted-2);text-align:center}
 .step-figure-group{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:12px}
-.step-figure-group .step-figure{margin-top:0;flex:1 1 200px}
+/* margin:0 (not just margin-top) — .step-figure's own margin shorthand
+   sets left/right:auto for standalone centering, and auto side-margins on
+   a flex item individually absorb free space (the classic flexbox
+   auto-margin trick), which blew the gap between two grouped figures out
+   to ~63px instead of the intended 16px. Confirmed via measurement, not
+   flex-grow as first suspected — reset all four margin longhands here. */
+.step-figure-group .step-figure{margin:0;flex:1 1 200px}
 /* smaller variant — e.g. a supporting/secondary photo that doesn't need full size */
 .step-figure--sm{max-width:280px}
+/* medium variant — e.g. a 16:9 video paired with a portrait --sm photo:
+   video height = width * 9/16, so at equal width it renders far shorter
+   than a tall photo; a wider cap here gets it closer in visual weight
+   without matching the photo's height exactly (that'd take ~660px wide) */
+.step-figure--md{max-width:380px}
+/* embedded video (e.g. YouTube) sitting inside a .step-figure, same rounded/
+   bordered treatment as .step-figure img, sized by aspect-ratio instead of
+   a fixed height so it stays responsive at whatever width the figure gets */
+.step-video{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;
+  overflow:hidden;border:1px solid var(--line-2)}
+.step-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
 /* ---------- important note + persisted input (sub-step pages) ---------- */
 .callout-row{display:flex;flex-wrap:wrap;align-items:stretch;gap:16px;margin-top:16px}
