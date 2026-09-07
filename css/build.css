@@ -231,8 +231,18 @@
 
 /* ---------- in-step reference photos (sub-step pages) ---------- */
 .step-figure{margin:12px auto 0;max-width:480px}
-.step-figure img{width:100%;border-radius:10px;border:1px solid var(--line-2);display:block}
-.step-figure figcaption{margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--muted-2);text-align:center}
+/* :has(img) — scopes the white card frame to photo figures only, not the
+   video figure (.step-video already has its own dark-bordered box; double-
+   framing it wasn't asked for). position:relative;z-index:1 is the actual
+   fix for "seeing the grid in the image" — .step-figure never got the
+   same treatment .assembly-step-card needed for the same reason: a plain
+   block element with an opaque background still paints BELOW the fixed,
+   z-index:0 .ambient grid layer unless it's lifted into its own stacking
+   context, so the grid showed through even though the image is opaque. */
+.step-figure:has(img){position:relative;z-index:1;background:var(--island-bg);
+  border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(15,18,23,.06),0 10px 26px rgba(15,18,23,.08)}
+.step-figure img{width:100%;border-radius:6px;display:block}
+.step-figure figcaption{margin-top:10px;font-family:var(--mono);font-size:12px;color:var(--island-muted);text-align:center}
 .step-figure-group{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:12px}
 /* margin:0 (not just margin-top) — .step-figure's own margin shorthand
    sets left/right:auto for standalone centering, and auto side-margins on
@@ -247,13 +257,30 @@
    video height = width * 9/16, so at equal width it renders far shorter
    than a tall photo; a wider cap here gets it closer in visual weight
    without matching the photo's height exactly (that'd take ~660px wide) */
-.step-figure--md{max-width:380px}
+.step-figure--md{max-width:1080px}
 /* embedded video (e.g. YouTube) sitting inside a .step-figure, same rounded/
    bordered treatment as .step-figure img, sized by aspect-ratio instead of
    a fixed height so it stays responsive at whatever width the figure gets */
-.step-video{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;
+.step-video{position:relative;height:100%;aspect-ratio:16/9;border-radius:10px;
   overflow:hidden;border:1px solid var(--line-2)}
 .step-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ---------- explanation card (sub-step pages) ----------
+   Same fixed-light "island" surface as .need-card / .callout-important,
+   just with a visible --accent border instead of the vertical bar, and a
+   book icon — site colors/fonts standing in for the reference mockup's
+   peach/orange styling. */
+.explain-card{position:relative;z-index:1;display:flex;gap:16px;align-items:flex-start;
+  background:var(--panel-bg);border:1px solid var(--accent);border-radius:10px;
+  padding:22px 26px;margin-top:16px}
+.explain-icon{flex:none;width:22px;height:22px;color:var(--accent);margin-top:2px}
+.explain-body h4{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.02em;
+  text-transform:uppercase;color:var(--island-text);margin-bottom:10px}
+.explain-body p{color:var(--island-muted);font-size:14px;line-height:1.7}
+
+@media(max-width:520px){
+  .explain-card{padding:18px 20px;gap:12px}
+}
 
 /* ---------- important note + persisted input (sub-step pages) ---------- */
 .callout-row{display:flex;flex-wrap:wrap;align-items:stretch;gap:16px;margin-top:16px}
@@ -379,4 +406,27 @@
   .level-head{flex-wrap:wrap;gap:12px}
   .level-status{order:3;width:100%}
   .mascot{transform:scale(.82);transform-origin:0 100%}
+}
+
+/* ---------- image lightbox (js/lightbox.js) ----------
+   Click any in-step reference photo to view it larger. The overlay is a
+   single shared element injected once by the script, styled as a fixed
+   dark backdrop regardless of site theme — the conventional look for a
+   photo viewer, and it reads fine over either theme's page underneath. */
+.step-figure img{cursor:zoom-in}
+.lightbox-overlay{position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;
+  background:rgba(4,6,10,.88);padding:56px 40px;opacity:0;visibility:hidden;transition:opacity .25s}
+.lightbox-overlay.is-open{opacity:1;visibility:visible}
+.lightbox-overlay img{max-width:100%;max-height:80vh;border-radius:8px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);cursor:default;display:block}
+.lightbox-caption{position:absolute;left:0;right:0;bottom:22px;text-align:center;
+  font-family:var(--mono);font-size:12.5px;color:#D8DEE6;padding:0 60px}
+.lightbox-close{position:absolute;top:20px;right:24px;width:40px;height:40px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.lightbox-close:hover{background:rgba(255,255,255,.18)}
+.lightbox-close svg{width:18px;height:18px}
+
+@media(prefers-reduced-motion:reduce){
+  .lightbox-overlay{transition:none}
 }
