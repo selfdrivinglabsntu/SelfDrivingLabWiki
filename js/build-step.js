@@ -7,7 +7,7 @@
  *  - reversible completion (Mark complete ⇄ Undo) — undoing re-locks later steps,
  *  - prev / next / back navigation, generated from the level order.
  */
-import { LEVELS, load, persist, indexOf, isOpen } from './build-core.js';
+import { LEVELS, load, persist, indexOf, isOpen } from './build-core.js?v=2';
 import { initMascot } from './mascot.js';
 
 const id = document.body.dataset.step;

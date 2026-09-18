@@ -8,12 +8,12 @@
 <meta name="description" content="How to install the bed plate, tip disposal chute, and tip catcher on your HEIMDALL build.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/tokens.css">
 <link rel="stylesheet" href="../../css/base.css">
 <link rel="stylesheet" href="../../css/sections.css">
-<link rel="stylesheet" href="../../css/build.css">
+<link rel="stylesheet" href="../../css/build.css?v=6">
 </head>
 <body>
 
@@ -48,8 +48,8 @@
       <h3 class="need-heading">You will need</h3>
       <div class="need-list">
         <div class="need-item">
-          <svg class="need-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Phillips screwdriver"><path d="M14.5 3.5 20.5 9.5"/><path d="M17.5 6.5 8 16l-3 5 5-3 9.5-9.5"/><path d="M6 15l3 3"/></svg>
-          <span class="need-label"></span>
+          <img class="need-icon" src="../../Icons/plier.svg" alt="Pliers">
+          <span class="need-label">Pliers</span>
         </div>
         <div class="need-item">
           <img class="need-icon" src="../../Icons/screw.png" alt="M5 x 10mm screw">
@@ -73,7 +73,29 @@
       </li>
       <li>
         You'll find four screws already holding the manual levelling knobs to the aluminium bed. Reuse these to mount the bed plate and tip disposal, and swap the existing springs for the 3D-printed standoffs.
-        
+        <figure class="step-figure step-figure--md">
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/FHeAjnZPFO4"
+                    title="Mounting the bed plate and tip disposal"
+                    loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+          <figcaption>Assembly</figcaption>
+        </figure>
+        <div class="step-figure-group">
+          <figure class="step-figure">
+            <img src="../../Images/step-2/leveling_knob.jpeg" alt="Countersunk screw passing through the black bed plate and aluminium bed, with a standoff between the bed and the levelling knob below">
+            <figcaption>Figure 2: Bed plate corner — the countersunk screw goes through the bed plate and the aluminium bed, then down into the levelling knob. The screw head should sit flush with the plate.</figcaption>
+          </figure>
+          <figure class="step-figure">
+            <img src="../../Images/step-2/bed_plate_screw.jpeg" alt="Screw passing through the base of the tip disposal and the aluminium bed, held from underneath">
+            <figcaption>Figure 3: Tip disposal corner — the screw passes through the tip disposal base and the aluminium bed. Hold the knob steady from underneath while you tighten from the top.</figcaption>
+          </figure>
+        </div>
+        <figure class="step-figure step-figure--sm">
+          <img src="../../Images/step-2/bed_plate_tip_disposal.jpeg" alt="Finished deck: black bed plate screwed to the aluminium bed, with the tip disposal mounted at one corner">
+          <figcaption>Figure 4: Finished result — the bed plate screwed down at its corners, and the tip disposal mounted on the corner of the aluminium bed beside it. Check both sit flat and don't rock.</figcaption>
+        </figure>
       </li>
     </ol>
   </div>
@@ -109,5 +131,6 @@
 </footer>
 
 <script src="../../js/theme.js"></script>
+<script src="../../js/lightbox.js?v=2"></script>
 </body>
 </html>

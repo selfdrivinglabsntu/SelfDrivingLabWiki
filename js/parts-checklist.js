@@ -1,8 +1,7 @@
 /** Parts-list checklist page — tick/untick which parts you've gathered,
  *  persisted in localStorage. Each .part-card needs a unique data-part id.
- *  Cards are div-based (role="checkbox"), same custom-interactive-card
- *  pattern as the build hub's .level cards (js/build.js), not native
- *  <input type="checkbox">, so the whole card is one big click target. */
+ *  The .part-check box in the card's corner is the checkbox (role="checkbox");
+ *  the rest of the card opens the part's image larger (js/lightbox.js). */
 (function () {
   const KEY = 'heimdall-parts-checklist';
   const cards = document.querySelectorAll('.part-card[data-part]');
@@ -25,7 +24,8 @@
   function render(card) {
     const on = checked.has(card.dataset.part);
     card.classList.toggle('is-checked', on);
-    card.setAttribute('aria-checked', String(on));
+    const box = card.querySelector('.part-check');
+    if (box) box.setAttribute('aria-checked', String(on));
   }
 
   function toggle(card) {
@@ -36,20 +36,24 @@
     updateSummary();
   }
 
+  // Only the check box ticks/unticks — clicking the rest of the card opens
+  // the larger image (js/lightbox.js).
   cards.forEach((card) => {
-    card.setAttribute('role', 'checkbox');
-    card.setAttribute('tabindex', '0');
+    const box = card.querySelector('.part-check');
+    if (!box) return;
+    const name = card.querySelector('.part-name');
+    box.removeAttribute('aria-hidden');
+    box.setAttribute('role', 'checkbox');
+    box.setAttribute('tabindex', '0');
+    box.setAttribute('aria-label', 'Gathered: ' + (name ? name.textContent : card.dataset.part));
     render(card);
 
-    card.addEventListener('click', (e) => {
-      // "more options" (e.g. Tip Holder's second CAD variant) shouldn't also
-      // tick/untick the card it lives inside.
-      if (e.target.closest('[data-no-toggle]')) return;
+    box.addEventListener('click', (e) => {
+      e.stopPropagation();
       toggle(card);
     });
-    card.addEventListener('keydown', (e) => {
-      if (e.target.closest('[data-no-toggle]')) return;
-      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(card); }
+    box.addEventListener('keydown', (e) => {
+      if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); toggle(card); }
     });
   });
   updateSummary();

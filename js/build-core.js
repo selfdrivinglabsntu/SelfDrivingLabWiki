@@ -16,12 +16,13 @@
 export const STORAGE_KEY = 'heimdall-build-v1';
 
 export const LEVELS = [
-  { id: 'bom',         num: '01', title: 'Bill of Materials', sub: "Every part, board and consumable you'll need to source.",  file: 'bom.html' },
-  { id: 'assembly',    num: '02', title: 'Assembly',          sub: 'Mechanical build — frame, motion axes and the pipette mount.', file: 'assembly.html' },
-  { id: 'firmware',    num: '03', title: 'Firmware',          sub: 'Flash the controller and bring the motors to life.',        file: 'firmware.html' },
-  { id: 'software',    num: '04', title: 'Software',          sub: 'Install the control GUI and connect to your HEIMDALL.',     file: 'software.html' },
-  { id: 'calibration', num: '05', title: 'Calibration',       sub: 'Tune volumes and coordinates so every draw is accurate.',   file: 'calibration.html' },
-  { id: 'first-run',   num: '06', title: 'First Run',         sub: 'Load a protocol and run your first automated dispense.',    file: 'first-run.html' },
+  { id: 'bom',              num: '01', title: 'Bill of Materials',   sub: "Every part, board and consumable you'll need to source.",  file: 'bom.html' },
+  { id: 'printer-firmware', num: '02', title: '3D Printer Firmware', sub: "Flash the modified Marlin firmware onto the printer's mainboard.", file: 'printer-firmware.html' },
+  { id: 'assembly',         num: '03', title: 'Assembly',            sub: 'Mechanical build — frame, motion axes and the pipette mount.', file: 'assembly.html' },
+  { id: 'firmware',         num: '04', title: 'Firmware',            sub: 'Flash the controller and bring the motors to life.',        file: 'firmware.html' },
+  { id: 'software',         num: '05', title: 'Software',            sub: 'Install the control GUI and connect to your HEIMDALL.',     file: 'software.html' },
+  { id: 'calibration',      num: '06', title: 'Calibration',         sub: 'Tune volumes and coordinates so every draw is accurate.',   file: 'calibration.html' },
+  { id: 'first-run',        num: '07', title: 'First Run',           sub: 'Load a protocol and run your first automated dispense.',    file: 'first-run.html' },
 ];
 
 export function indexOf(id) {

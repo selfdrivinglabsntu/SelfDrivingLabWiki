@@ -65,4 +65,8 @@
     --on-accent:#FFFFFF;
     --product-glow:#EAF2FB;
     --logo-bg:#FFFFFF;
+    /* info panels ("You will need", BOM tables, part cards, …) — a slightly
+       deeper shade of the dark-theme #EAF2F5 so they stand out more against
+       the light page background */
+    --panel-bg:#DAE6EC;
   }

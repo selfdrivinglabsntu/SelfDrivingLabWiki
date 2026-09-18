@@ -1,10 +1,12 @@
-/** Click any in-step reference photo (.step-figure img) to view it larger
+/** Click any in-step reference photo (.step-figure img), parts-list
+ *  thumbnail (.part-thumb img) or BOM callout photo (.bom-callout-photo img)
+ *  to view it larger
  *  in a full-screen overlay. Generic — works on every matching image
  *  already on the page, no per-image markup needed beyond the existing
  *  .step-figure/figcaption structure. One shared overlay element, built
  *  once and reused for whichever image was clicked. */
 (function () {
-  const images = document.querySelectorAll('.step-figure img');
+  const images = document.querySelectorAll('.step-figure img, .part-thumb img, .bom-callout-photo img');
   if (!images.length) return;
 
   const overlay = document.createElement('div');
@@ -45,19 +47,32 @@
     if (lastFocused && lastFocused.focus) lastFocused.focus();
   }
 
+  // Each trigger is the element you click: the photo itself for step
+  // figures, the whole card for parts-list cards (except its check box).
   images.forEach((img) => {
-    img.setAttribute('role', 'button');
-    img.setAttribute('tabindex', '0');
-    if (!img.hasAttribute('aria-label')) {
-      img.setAttribute('aria-label', 'View larger: ' + (img.alt || 'image'));
+    const card = img.closest('.part-card');
+    const trigger = card || img;
+    trigger.setAttribute('tabindex', '0');
+    if (!card) trigger.setAttribute('role', 'button');
+    if (!trigger.hasAttribute('aria-label')) {
+      trigger.setAttribute('aria-label', 'View larger: ' + (img.alt || 'image'));
     }
 
     const openThis = () => {
       const figcaption = img.closest('figure') && img.closest('figure').querySelector('figcaption');
-      open(img.currentSrc || img.src, img.alt, figcaption ? figcaption.textContent : '');
+      const partName = card && card.querySelector('.part-name');
+      const callout = img.closest('.bom-callout');
+      const calloutTitle = callout && callout.querySelector('h4');
+      const caption = figcaption || partName || calloutTitle;
+      open(img.currentSrc || img.src, img.alt, caption ? caption.textContent : '');
     };
-    img.addEventListener('click', openThis);
-    img.addEventListener('keydown', (e) => {
+    const ignore = (e) => card && e.target.closest('.part-check, [data-no-toggle]');
+    trigger.addEventListener('click', (e) => {
+      if (ignore(e)) return;
+      openThis();
+    });
+    trigger.addEventListener('keydown', (e) => {
+      if (ignore(e) || e.target !== trigger) return;
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openThis(); }
     });
   });
