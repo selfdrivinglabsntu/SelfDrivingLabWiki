@@ -36,18 +36,184 @@
   </div>
 </header>
 
-<main class="wrap step-main">
+<main class="wrap step-main has-toc">
   <div class="step-head">
     <span class="step-num">Step 02</span>
     <h1>3D Printer Firmware</h1>
-    <p class="lead">Flash the modified Marlin firmware onto the printer's mainboard before you start the mechanical build.</p>
+    <p class="lead">Compile and flash custom Marlin firmware so the printer homes to Z-max instead of probing the bed.</p>
     <span class="step-status"><span class="step-status-text">In progress</span></span>
   </div>
 
-  <div class="step-content">
-    <p class="placeholder-note">Placeholder — 3D printer firmware instructions coming later.</p>
-    <h3>Flash the printer</h3>
-    <p>TBD — download the HEIMDALL Marlin firmware, copy it to the printer's SD card, and power-cycle the printer to install it.</p>
+  <aside class="guide-toc" aria-label="On this page">
+    <p class="guide-toc-title">On this page</p>
+    <!-- links are generated from the section headings by js/toc.js -->
+    <ol class="guide-toc-list"></ol>
+  </aside>
+
+  <div class="step-content guide">
+    <p>Compiling custom Marlin firmware is essential for our liquid handling system, as the stock Ender 3 S1 printers are hardcoded to use the BL Touch sensor to probe the print bed to define Z-min.</p>
+    <p>Since we have customized our 3D printer to perform Z-max homing due to design constraints of the customized 3D bed plates, the firmware's directional and endstop settings need to be edited.</p>
+
+    <div class="need-card">
+      <h3 class="need-heading">Settings changed</h3>
+      <ul class="guide-features">
+        <li>Z homing direction</li>
+        <li>Endstop pin assignment</li>
+        <li>Software travel limits</li>
+        <li>Z bump when homing</li>
+        <li>Other settings to ensure a smooth compilation of the Marlin firmware</li>
+      </ul>
+    </div>
+
+    <p>The firmware is a <code>.bin</code> file in the <a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/tree/main/Firmware" target="_blank" rel="noopener"><code>Firmware</code> folder</a> of the repository. This contains the machine-readable code that the Ender 3 S1 understands.</p>
+
+    <!-- ============ 0. Ender 3 S1 ============ -->
+    <section class="guide-section" id="ender-3-s1">
+      <h2>0. Flashing firmware on your Ender 3 S1 with STM32F4 chip</h2>
+      <p>If you have not already done so, download the repository. To flash the firmware onto your printer's SD card, you will need the <code>Firmware</code> folder of the repository.</p>
+
+      <h3 id="format-sd">0.1. Formatting the SD card</h3>
+      <ul>
+        <li>Set the file system to <strong>FAT32</strong>.</li>
+        <li>Set the allocation unit size to <strong>4096</strong>.</li>
+        <li>The 8&nbsp;GB SD card that came with the printer is the most reliable, but anything under 32&nbsp;GB should work.</li>
+      </ul>
+
+      <h3 id="copy-firmware">0.2. Copy the firmware folder to your SD card</h3>
+      <p>Copy the contents of the <code>Firmware</code> folder into the root of your formatted SD card.</p>
+      <ul>
+        <li><code>private</code>, <code>DWIN_SET</code>, <code>TJC_SET</code> and <code>firmware.zlib</code> are for updating the printer's display.</li>
+        <li>The <code>STM32F4_UPDATE</code> folder contains your custom firmware file, <code>firmware-2ndApril2_4.bin</code>.</li>
+      </ul>
+      <figure class="step-figure step-figure--lg">
+        <img src="../Images/GUI_&amp;_Firmware/firmware_files.png" alt="SD card root containing firmware.zlib and the DWIN_SET, private, STM32F4_UPDATE and TJC_SET folders">
+        <figcaption>Figure 1: Files and folders to copy into the root of the formatted SD card</figcaption>
+      </figure>
+
+      <h3 id="flash-sd">0.3. Flashing from the SD card</h3>
+      <ol>
+        <li>Turn off your printer and wait 20 seconds to power-cycle it.</li>
+        <li>While the printer is off, insert the SD card into the slot.</li>
+        <li>Turn the printer on. You will briefly see the Creality loading screen while the board updates.</li>
+        <li>
+          Once you see the main menu, the code has been flashed successfully. The main menu is for visual aid only; it is not functional.
+          <div class="step-figure-group">
+            <figure class="step-figure">
+              <img src="../Images/GUI_&amp;_Firmware/creality_loading_screen.jpeg" alt="Printer display showing the Creality loading screen">
+              <figcaption>Figure 2: Creality loading screen</figcaption>
+            </figure>
+            <figure class="step-figure">
+              <img src="../Images/GUI_&amp;_Firmware/creality_main_menu.jpeg" alt="Printer display showing the main menu after flashing">
+              <figcaption>Figure 3: Main menu</figcaption>
+            </figure>
+          </div>
+        </li>
+        <li>Turn the power off again for 20 seconds, remove the SD card, and turn the printer back on to start using it.</li>
+      </ol>
+      <div class="callout-warning">
+        <p><strong>Important:</strong> Do not insert the SD card while the printer is turning on — it can cause the bootloader to hang. Always make sure the printer is off before inserting the SD card.</p>
+      </div>
+
+      <h3 id="troubleshooting">0.4. Troubleshooting</h3>
+      <p>Flashing custom firmware on an Ender 3 S1 can sometimes be tricky. Here are some specific requirements and common issues to be aware of.</p>
+      <h4><code>STM32F4_UPDATE</code> folder</h4>
+      <p>If you are only updating the mainboard and not the display, you can technically flash just the <code>.bin</code> file. However, in our experience it is much more reliable to place the firmware in a folder named <code>STM32F4_UPDATE</code> before flashing. The bootloader of the Ender 3 S1 with the STM32F4 chip often only looks for firmware in a folder named exactly <code>STM32F4_UPDATE</code> (the name is case sensitive).</p>
+      <h4>Firmware file naming</h4>
+      <p>The bootloader can be picky about the filename. The printer will often ignore a <code>.bin</code> file with the exact same name as the last one it flashed. Rename your file to something simple and unique, like <code>firmware123.bin</code> or <code>f1.bin</code>, before flashing again.</p>
+      <h4>Display stuck on the splash screen, loading page or blank</h4>
+      <p>If the display is stuck on the loading page or shows a blank screen for more than 2 minutes, it could mean one of the following:</p>
+      <ol type="a">
+        <li><strong>The firmware flashed properly but the screen is not compatible.</strong> Check this by connecting the printer to your computer and operating it through Pronterface. If you send the <code>M119</code> command and see <code>z_max: open</code>, the firmware flashed properly. You will have to update the screen separately.</li>
+        <li><strong>Bootloader hang.</strong>
+          <ol type="i">
+            <li>Power-cycle the printer for 1 minute and try flashing the firmware again.</li>
+            <li>If that doesn't work, download the <a href="https://www.creality.com/download/creality-ender-3-s1-3d-printer" target="_blank" rel="noopener">official Creality firmware</a> and flash it. Sometimes the bootloader needs to be "primed" by official Creality firmware before it will accept a custom one.</li>
+          </ol>
+        </li>
+      </ol>
+      <h4>Firmware not flashing</h4>
+      <ol type="a">
+        <li>Ensure your chip is <strong>STM32F4</strong> and not STM32F1. You can verify this by checking the chip version written on the mainboard.</li>
+        <li>Make sure your SD card is formatted properly.</li>
+      </ol>
+    </section>
+
+    <!-- ============ 1. Other printers ============ -->
+    <section class="guide-section" id="other-printers">
+      <h2>1. Flashing firmware on any other printer</h2>
+
+      <h3 id="prerequisites">1.1. Prerequisites</h3>
+      <p>Install the following:</p>
+      <ul>
+        <li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a></li>
+        <li>The PlatformIO extension:
+          <ol>
+            <li>Open VS Code.</li>
+            <li>Go to Extensions (<code>Ctrl+Shift+X</code>).</li>
+            <li>Search for <strong>PlatformIO IDE</strong>.</li>
+            <li>Install it.</li>
+          </ol>
+        </li>
+      </ul>
+
+      <h3 id="marlin-source">1.2. Download the Marlin source code</h3>
+      <p>Download the <a href="https://marlinfw.org/meta/download/" target="_blank" rel="noopener">Marlin-2.1.2.7 source code</a> and extract the folder.</p>
+
+      <h3 id="example-configs">1.3. Get the example configuration files</h3>
+      <p>Many boards and printers already have tested configurations. Download the <a href="https://github.com/MarlinFirmware/Configurations/tree/release-2.1.2.7" target="_blank" rel="noopener">configuration files</a> and locate the ones for your printer and firmware version.</p>
+      <figure class="step-figure step-figure--sm">
+        <img src="../Images/GUI_&amp;_Firmware/config_files.png" alt="config/examples/Creality/Ender-3 S1/STM32F4 folder containing Configuration.h and Configuration_adv.h">
+        <figcaption>Figure 4: Location of the example configuration files</figcaption>
+      </figure>
+      <p style="margin-top:18px">Copy <code>Configuration.h</code> and <code>Configuration_adv.h</code> from the example files into the <code>Marlin</code> folder of the source code, replacing the existing files.</p>
+      <figure class="step-figure step-figure--sm">
+        <img src="../Images/GUI_&amp;_Firmware/marlin_files.png" alt="Marlin-2.1.2.7/Marlin folder containing Configuration.h and Configuration_adv.h">
+        <figcaption>Figure 5: Where to place the configuration files</figcaption>
+      </figure>
+
+      <h3 id="editing-code">1.4. Editing the code</h3>
+      <p class="placeholder-note">Work in progress — detailed code changes coming later.</p>
+      <p>Most of the customization happens in <code>Marlin/Configuration.h</code> and <code>Marlin/Configuration_adv.h</code>:</p>
+      <ol>
+        <li>Disable the BL Touch sensor</li>
+        <li>Define the Z-max endstop switch</li>
+        <li>Set the Z-max position to <code>250</code></li>
+        <li>Set the Z-max homing direction</li>
+        <li>Set the homing bump</li>
+        <li>Other changes</li>
+      </ol>
+      <div class="callout-warning">
+        <p><strong>Note:</strong> You might not need to make the PID control changes for your compilation. But for us, the firmware would not compile without them.</p>
+      </div>
+
+      <h3 id="compiling">1.5. Compiling the firmware</h3>
+      <ol>
+        <li>Open <code>platformio.ini</code>.</li>
+        <li>Locate <code>default_envs = mega2560</code> and change it to your board's environment.</li>
+      </ol>
+      <figure class="step-figure step-figure--md">
+        <img src="../Images/GUI_&amp;_Firmware/default_enviornment_platform_ini.png" alt="platformio.ini with default_envs set to STM32F401RC_creality">
+        <figcaption>Figure 6: <code>default_envs</code> changed from <code>mega2560</code> to <code>STM32F401RC_creality</code>, the build environment for the Ender 3 S1 STM32F4 chip</figcaption>
+      </figure>
+
+      <h3 id="sd-card">1.6. The correct SD card</h3>
+      <p>Not all printers use a standard SD card for flashing firmware. You might need to use a microSD card and format it accordingly.</p>
+      <p>For example, we also modified an Ender 3 V2 Neo, whose firmware was flashed from a microSD card by simply placing the <code>.bin</code> file in the root folder.</p>
+
+      <h3 id="flashing">1.7. Flashing the firmware</h3>
+      <p>Follow <a href="#flash-sd">0.3. Flashing from the SD card</a>.</p>
+    </section>
+
+    <!-- ============ 2. Testing ============ -->
+    <section class="guide-section" id="testing">
+      <h2>2. Testing the firmware upload</h2>
+
+      <h3 id="check-endstop">2.1. Check the Z-max limit switch</h3>
+      <p>Open Pronterface or the GUI and send the <code>M119</code> command. You should see <code>z_max</code> listed instead of the <code>z_min</code> switch.</p>
+
+      <h3 id="home-z">2.2. Home the Z-axis</h3>
+      <p>Home the Z-axis from Pronterface or the GUI. If the gantry moves upwards and stops when the Z-limit switch is triggered (you can mount the switch, or simply click it by hand to test before mounting), you have successfully flashed the firmware.</p>
+    </section>
   </div>
 
   <div class="step-actions">
@@ -84,7 +250,8 @@
 </footer>
 
 <script src="../js/theme.js"></script>
-<script type="module" src="../js/build-step.js?v=2"></script>
 <script src="../js/lightbox.js?v=2"></script>
+<script src="../js/toc.js"></script>
+<script type="module" src="../js/build-step.js?v=2"></script>
 </body>
 </html>

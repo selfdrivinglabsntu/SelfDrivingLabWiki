@@ -284,6 +284,10 @@
   .fw-wedge.compactness{fill:#BFDDAA}
   .fw-wedge.expandability{fill:#DDACAC}
   .fw-label{font-family:var(--display);font-weight:700;font-size:25px;fill:#1A1A1A}
+  /* White backdrop for the product photo in dark mode only; light mode
+     keeps the page background showing through. */
+  .fw-photo-bg{fill:none}
+  :root:not([data-theme="light"]) .fw-photo-bg{fill:#FFFFFF}
   .fw-ring{fill:none;stroke:#E23B3B;stroke-width:6}
   .fw-badge-bg{fill:#EFAC5E}
   .fw-badge-text{font-family:var(--display);font-weight:700;font-size:26px;fill:#1A1A1A;text-anchor:middle}

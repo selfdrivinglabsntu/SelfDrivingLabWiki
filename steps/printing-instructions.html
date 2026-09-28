@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.dataset.theme=localStorage.getItem('piper-theme')||'dark';</script>
+<title>Printing Instructions — HEIMDALL build</title>
+<meta name="description" content="Print settings and the full checklist of 3D printed parts for building your own HEIMDALL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/sections.css">
+<link rel="stylesheet" href="../css/build.css?v=8">
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
+
+<header class="build-nav">
+  <div class="build-nav-inner">
+    <a href="../index.html" class="build-brand" aria-label="HEIMDALL home">
+      <img src="../assets/logo.png" alt="HEIMDALL @NTU MSE"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="brand-text" style="display:none"><span class="mark"></span>HEIMDALL</span>
+    </a>
+    <div class="build-nav-actions">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to light theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="../build.html" class="back">← Build hub</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap step-main">
+  <div class="step-head step-head--with-btn">
+    <span class="step-num" aria-hidden="true">&nbsp;</span>
+    <h1>Printing Instructions</h1>
+    <p class="lead">Print settings and the full list of 3D printed parts for your machine.</p>
+    <a class="parts-banner-btn parts-head-btn" href="parts-list.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+      View Parts List
+    </a>
+  </div>
+
+  <div class="step-content guide">
+    <p>Before diving into the production of your parts, it is important to consider your manufacturing approach. The core spirit of this open-source project is to empower you to use a 3D printer to fabricate the entire machine yourself. However, practical testing has shown that printing every component locally can be highly time-consuming, requiring significant machine calibration, print time and post-processing.</p>
+    <p>If you are on a tight timeline or need maximum structural reliability right out of the box, we highly suggest outsourcing these files to a commercial 3D printing service (such as JLCPCB, PCBWay or Craftcloud) for rapid production.</p>
+
+    <!-- ============ 0. Print settings ============ -->
+    <section class="guide-section" id="print-settings">
+      <h2>0. Print settings</h2>
+      <p>If you choose to print the components yourself, group your print jobs using the following configurations to handle the different mechanical stresses experienced by the liquid handler:</p>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr><th>Part category</th><th>Wall loops / perimeters</th><th>Infill density</th><th>Top/bottom layers</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Gears</strong></td><td>4–5</td><td>100%</td><td>5</td></tr>
+            <tr><td><strong>Structural &amp; load-bearing parts</strong><br>(mounts, brackets, clamps)</td><td>4–5</td><td>40% (gyroid)</td><td>5</td></tr>
+            <tr><td><strong>Enclosures &amp; trays</strong><br>(electronics cases, sample/disposal holders)</td><td>2</td><td>15–20% (grid/gyroid)</td><td>2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 1. Checklist ============ -->
+    <section class="guide-section" id="parts-checklist">
+      <h2>1. 3D printed parts checklist</h2>
+      <p>All files are located in the <a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/tree/main/Hardware" target="_blank" rel="noopener"><code>Hardware</code> folder</a> of our repository.</p>
+
+      <h3 id="key-parts">1.1. Key parts</h3>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr><th>Part name</th><th>File</th><th>Print setting category</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frame</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/Frame.stl" target="_blank" rel="noopener">Frame.stl</a></td><td>Structural &amp; load-bearing</td></tr>
+            <tr><td>Upper Frame</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/Frame%20Linear%20Actuator%20Mount.stl" target="_blank" rel="noopener">Frame Linear Actuator Mount.stl</a></td><td>Structural &amp; load-bearing</td></tr>
+            <tr><td>Pipette Bracket</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/Pipette%20Bracket.stl" target="_blank" rel="noopener">Pipette Bracket.stl</a></td><td>Structural &amp; load-bearing</td></tr>
+            <tr><td>Driver Gear</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/Driver%20Gear.stl" target="_blank" rel="noopener">Driver Gear.stl</a></td><td>Gears</td></tr>
+            <tr><td>Driven Gear</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/Driven%20Gear.stl" target="_blank" rel="noopener">Driven Gear.stl</a></td><td>Gears</td></tr>
+            <tr><td>Tip Disposal</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/Tip%20Disposal.stl" target="_blank" rel="noopener">Tip Disposal.stl</a></td><td>Structural &amp; load-bearing</td></tr>
+            <tr><td>Tip Ejector</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/Tip%20Ejector.stl" target="_blank" rel="noopener">Tip Ejector.stl</a></td><td>Structural &amp; load-bearing</td></tr>
+            <tr><td>Tip Catcher</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/Tip%20Catcher.stl" target="_blank" rel="noopener">Tip Catcher.stl</a></td><td>Enclosures &amp; trays</td></tr>
+            <tr><td>Camera Mount</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/Board%20Camera%20Mount.stl" target="_blank" rel="noopener">Board Camera Mount.stl</a></td><td>Enclosures &amp; trays</td></tr>
+            <tr><td>Bed Plate</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/Bed%20plate.stl" target="_blank" rel="noopener">Bed plate.stl</a></td><td>Enclosures &amp; trays</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="accessories">1.2. Accessories</h3>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr><th>Part name</th><th>File</th><th>Print setting category</th><th>Description</th><th>Equipment model name</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>8 Sample Holder</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/8%20Sample%20Holder.stl" target="_blank" rel="noopener">8 Sample Holder.stl</a></td><td>Enclosures &amp; trays</td><td>Holds six 5&nbsp;mL and two 20&nbsp;mL bottles</td><td><code>6-5ml-sample-holder</code> &amp; <code>2-20ml-bottle-holder</code></td></tr>
+            <tr><td>12 Sample Holder</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/12%20Bottle%20Holder.stl" target="_blank" rel="noopener">12 Bottle Holder.stl</a></td><td>Enclosures &amp; trays</td><td>Holds twelve 4&nbsp;mL bottles</td><td><code>12-sample-holder</code></td></tr>
+            <tr><td>96 Wellplate Holder</td><td><a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/blob/main/Hardware/STL%20Files/96%20Wellplate%20Holder.stl" target="_blank" rel="noopener">96 Wellplate Holder.stl</a></td><td>Enclosures &amp; trays</td><td>Holds a 96-well plate</td><td><code>96-wellplate</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <div class="step-actions">
+    <a class="btn btn-solid" href="assembly.html">← Back to Assembly</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-col">
+      <div class="foot-line"><img class="foot-logo-ngenuity" src="/assets/logo.png" alt="Heimdall_logo"> — Automated liquid handling</div>
+      <div class="foot-line">
+        <a href="https://www.ngenuitylab.net/" target="_blank">
+          <img class="foot-logo-ngenuity" src="/assets/NGenuity_lab_logo.png" alt="NGenuity_lab_logo">
+        </a> — Self-driving labs for materials science
+      </div>
+    </div>
+    <div class="foot-col foot-col-center">
+      <div class="foot-links">
+        <a href="#">GitHub</a>
+        <a href="https://www.ngenuitylab.net/contact/">Reach Us</a>
+      </div>
+    </div>
+    <div class="foot-col foot-col-end">
+      <a href="https://www.ntu.edu.sg" target="_blank">
+        <img class="foot-logo-ntu" src="/assets/ntu_logo.png" alt="Nanyang Technological University">
+      </a>
+    </div>
+    <div class="foot-copyright">© 2026 NGenuity Lab · NTU School of Materials Science & Engineering</div>
+  </div>
+</footer>
+
+<script src="../js/theme.js"></script>
+</body>
+</html>

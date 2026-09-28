@@ -164,6 +164,8 @@
   border-radius:99px;padding:12px 22px;box-shadow:0 6px 18px rgba(0,0,0,.18);
   transition:transform .2s,box-shadow .2s}
 .parts-banner-btn svg{width:15px;height:15px;flex:none}
+.parts-banner-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.parts-head-btn{display:flex;width:fit-content;margin-top:28px}
 .parts-banner-btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.24)}
 
 /* ---------- assembly step-card list ----------
@@ -385,6 +387,9 @@
 
 .parts-section{padding-top:30px;border-top:1px solid var(--line);margin-top:34px}
 .parts-section:first-of-type{margin-top:44px}
+/* Parts List header ends in a button, so tighten the gap to the divider below it */
+.step-head--with-btn{margin-bottom:24px}
+.step-head--with-btn + .parts-section{margin-top:24px}
 /* .step-content already draws its own top border + padding (build.css above)
    before the first section — without this, the BOM page (where .parts-section
    sits inside .step-content, unlike the standalone parts-list page) would
