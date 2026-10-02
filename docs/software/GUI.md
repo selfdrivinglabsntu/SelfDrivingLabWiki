@@ -67,7 +67,7 @@ pip install --upgrade pip
 ```
 Install required packages:
 ```bash
-pip install numpy scipy pyserial spatialmath-python google-generativeai python-dotenv opencv-python
+pip install numpy scipy pyserial spatialmath-python google-generativeai python-dotenv opencv-python google-genai pymodbus zmq
 ```
 
 ### 0.4 Get a Gemini API key
@@ -110,7 +110,7 @@ Examples:
 
 [Run the GUI](#20-running-the-gui) and [connect to the printer](#21-connecting-to-esp-printer-and-camera).
 
-Go to the [Manual Tab](#24-manual). Open your camera and use the [d-pad](#2411-movement-d-pad) to adjust the pipette until you can clearly see the volume readout in the center of the camera feed. Use the [Set button](#2412-position-control) to get this position, and edit vol_adjust_position to this coordinate.
+Go to the [Manual Tab](#24-manual). Open your camera and use the [d-pad](#2411-movement-d-pad) to adjust the pipette until you can clearly see the volume readout in the center of the camera feed. Use the [Get button](#2412-position-control) to get this position, and edit vol_adjust_position to this coordinate.
 
 ### 1.4. Callibrating tip disposal sequence
 This is what the tip disposal sequence looks like.
@@ -121,7 +121,7 @@ In order to callibrate the tip disposal sequence, using the dpad, move your pipe
 
 ![Tip ejection position](images/tip_ejection_position.jpeg)
 
-Then, execute the tip ejection in reverse, starting by moving it down by dispose_actuate_z. You should change any of the values to avoid collision between your pipette and the tip disposal chamber. After finishing the sequence, use the [Set button](#2412-position-control) to get this position, and edit dispose_start to this coordinate.
+Then, execute the tip ejection in reverse, starting by moving it down by dispose_actuate_z. You should change any of the values to avoid collision between your pipette and the tip disposal chamber. After finishing the sequence, use the [Get button](#2412-position-control) to get this position, and edit dispose_start to this coordinate.
 
 > **IMPORTANT:** Any time you edit the `printer.yaml` configuration file, you must close and re-open the GUI for the changes to take effect.
 
