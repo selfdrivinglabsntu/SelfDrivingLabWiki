@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="../../css/tokens.css">
 <link rel="stylesheet" href="../../css/base.css">
 <link rel="stylesheet" href="../../css/sections.css">
-<link rel="stylesheet" href="../../css/build.css?v=6">
+<link rel="stylesheet" href="../../css/build.css?v=12">
 </head>
 <body>
 
@@ -47,13 +47,35 @@
     <div class="need-card">
       <h3 class="need-heading">You will need</h3>
       <div class="need-list">
-        <div class="need-item">
+        <div class="need-item" data-need="m5-x-10mm-x-2">
           <img class="need-icon" src="../../Icons/screw.png" alt="M5 x 10mm screw">
           <span class="need-label">M5 x 10mm<br>x 2</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
         </div>
-        <div class="need-item">
+        <div class="need-item" data-need="m3-x-6mm-x-2">
           <img class="need-icon" src="../../Icons/screw.png" alt="M3 x 6mm screw">
           <span class="need-label">M3 x 6mm<br>x 2</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="need-card">
+      <div class="need-list need-list--parts">
+        <div class="need-item need-item--part" data-need="frame">
+          <h4 class="part-name">Frame</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/frame.png" alt="Frame"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="frame-linear-actuator-mount">
+          <h4 class="part-name">Frame Linear Actuator Mount</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/frame-linear-actuator-mount.png" alt="Frame Linear Actuator Mount"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="pipette-bracket">
+          <h4 class="part-name">Pipette Bracket</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/pipette-bracket.png" alt="Pipette Bracket"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
         </div>
       </div>
     </div>
@@ -95,6 +117,7 @@
 </footer>
 
 <script src="../../js/theme.js"></script>
-<script src="../../js/lightbox.js?v=2"></script>
+<script src="../../js/step-checklist.js"></script>
+<script src="../../js/lightbox.js?v=4"></script>
 </body>
 </html>

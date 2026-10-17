@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="../../css/tokens.css">
 <link rel="stylesheet" href="../../css/base.css">
 <link rel="stylesheet" href="../../css/sections.css">
-<link rel="stylesheet" href="../../css/build.css?v=6">
+<link rel="stylesheet" href="../../css/build.css?v=12">
 </head>
 <body>
 
@@ -47,17 +47,40 @@
     <div class="need-card">
       <h3 class="need-heading">You will need</h3>
       <div class="need-list">
-        <div class="need-item">
+        <div class="need-item" data-need="pliers">
           <img class="need-icon" src="../../Icons/plier.svg" alt="Pliers">
           <span class="need-label">Pliers</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
         </div>
-        <div class="need-item">
+        <div class="need-item" data-need="m5-x-10mm-x-2">
           <img class="need-icon" src="../../Icons/screw.png" alt="M5 x 10mm screw">
           <span class="need-label">M5 x 10mm<br>x 2</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
         </div>
-        <div class="need-item">
+        <div class="need-item" data-need="m3-x-6mm-x-2">
           <img class="need-icon" src="../../Icons/screw.png" alt="M3 x 6mm screw">
           <span class="need-label">M3 x 6mm<br>x 2</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="need-card">
+      <div class="need-list need-list--parts">
+        <div class="need-item need-item--part" data-need="bed-plate">
+          <h4 class="part-name">Bed Plate</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/bed-plate.png" alt="Bed Plate"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="tip-disposal">
+          <h4 class="part-name">Tip Disposal</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/tip-disposal.png" alt="Tip Disposal"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="tip-catcher">
+          <h4 class="part-name">Tip Catcher</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/tip-catcher.png" alt="Tip Catcher"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
         </div>
       </div>
     </div>
@@ -65,14 +88,14 @@
     <h3>Instructions</h3>
     <ol>
       <li>
-        Remove the magnetic base — it's held on with a very strong adhesive. Use a pair of pliers to pull it off, and have a second person hold the printer steady while you do.
+        Remove the magnetic base — it's held on with a very strong adhesive. Use a pair of pliers to pull it off, and if your are finding it difficult ask a buddy to hold the printer steady while you remove the magnetic base.
         <figure class="step-figure">
           <img src="../../Images/step-2/magnetic_base_removal.jpg" alt="Remove magnetic base of build plate to reveal aluminium heat plate.">
           <figcaption>Figure 1: Remove magnetic base.</figcaption>
         </figure>
       </li>
       <li>
-        You'll find four screws already holding the manual levelling knobs to the aluminium bed. Reuse these to mount the bed plate and tip disposal, and swap the existing springs for the 3D-printed standoffs.
+        You'll find four screws already holding the manual levelling knobs to the aluminium bed. Reuse these screws to mount the bed plate and tip disposal, and if you would like you can swap the existing springs for the 3D-printed standoffs.
         <figure class="step-figure step-figure--md">
           <div class="step-video">
             <iframe src="https://www.youtube-nocookie.com/embed/FHeAjnZPFO4"
@@ -131,6 +154,7 @@
 </footer>
 
 <script src="../../js/theme.js"></script>
-<script src="../../js/lightbox.js?v=2"></script>
+<script src="../../js/step-checklist.js"></script>
+<script src="../../js/lightbox.js?v=4"></script>
 </body>
 </html>

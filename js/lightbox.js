@@ -1,5 +1,6 @@
-/** Click any in-step reference photo (.step-figure img), parts-list
- *  thumbnail (.part-thumb img) or BOM callout photo (.bom-callout-photo img)
+/** Click any in-step reference photo (.step-figure img), parts-list or
+ *  sub-step parts-panel thumbnail (.part-thumb img), or BOM callout photo
+ *  (.bom-callout-photo img)
  *  to view it larger
  *  in a full-screen overlay. Generic — works on every matching image
  *  already on the page, no per-image markup needed beyond the existing
@@ -60,11 +61,16 @@
 
     const openThis = () => {
       const figcaption = img.closest('figure') && img.closest('figure').querySelector('figcaption');
-      const partName = card && card.querySelector('.part-name');
+      // parts-list card, or a part in a sub-step's "Parts needed" panel
+      const named = card || img.closest('.need-item--part');
+      const partName = named && named.querySelector('.part-name');
       const callout = img.closest('.bom-callout');
       const calloutTitle = callout && callout.querySelector('h4');
       const caption = figcaption || partName || calloutTitle;
-      open(img.currentSrc || img.src, img.alt, caption ? caption.textContent : '');
+      // innerText, not textContent: a name may break across lines with a <br>
+      // ("USB extension<br>(if needed)"), which textContent would run together
+      open(img.currentSrc || img.src, img.alt,
+           caption ? (caption.innerText || caption.textContent).trim() : '');
     };
     const ignore = (e) => card && e.target.closest('.part-check, [data-no-toggle]');
     trigger.addEventListener('click', (e) => {

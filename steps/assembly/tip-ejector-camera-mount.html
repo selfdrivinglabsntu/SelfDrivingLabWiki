@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="../../css/tokens.css">
 <link rel="stylesheet" href="../../css/base.css">
 <link rel="stylesheet" href="../../css/sections.css">
-<link rel="stylesheet" href="../../css/build.css?v=6">
+<link rel="stylesheet" href="../../css/build.css?v=12">
 </head>
 <body>
 
@@ -47,20 +47,92 @@
     <div class="need-card">
       <h3 class="need-heading">You will need</h3>
       <div class="need-list">
-        <div class="need-item">
-          <img class="need-icon" src="../../Icons/screw.png" alt="M5 x 10mm screw">
-          <span class="need-label">M5 x 10mm<br>x 2</span>
+        <div class="need-item" data-need="m5-x-20mm-x-4">
+          <img class="need-icon" src="../../Icons/screw.png" alt="4x M5 x 20mm screw">
+          <span class="need-label">M5 x 20mm<br>x 4</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
         </div>
-        <div class="need-item">
-          <img class="need-icon" src="../../Icons/screw.png" alt="M3 x 6mm screw">
-          <span class="need-label">M3 x 6mm<br>x 2</span>
+        <div class="need-item" data-need="m5-x-20-40mm-x-2">
+          <img class="need-icon" src="../../Icons/screw.png" alt="M5 screw, 20 to 45mm long">
+          <span class="need-label">M5 x<br>20–45mm<br>x 2</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item" data-need="m3-x-4mm-x-4">
+          <img class="need-icon" src="../../Icons/screw.png" alt="M3 x 4mm screw">
+          <span class="need-label">M3 x 4mm<br>x 4</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
         </div>
       </div>
     </div>
 
-    <h3>Steps</h3>
+    <div class="need-card">
+      <div class="need-list need-list--parts">
+        <div class="need-item need-item--part" data-need="tip-ejector">
+          <h4 class="part-name">Tip Ejector</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/tip-ejector.png" alt="Tip Ejector"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="camera-mount">
+          <h4 class="part-name">Camera Mount</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/camera-mount.png" alt="Camera Mount"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part need-item--photo" data-need="usb-camera">
+          <h4 class="part-name">USB Camera</h4>
+          <div class="part-thumb"><img src="../../Icons/usb-camera.jpg" alt="USB camera module"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part need-item--photo" data-need="usb-extension">
+          <h4 class="part-name">USB extension<br>(if needed)</h4>
+          <div class="part-thumb"><img src="../../Icons/usb-extension.jpg" alt="USB extension lead"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Instructions</h3>
     <ol>
-      <li>TBD</li>
+      <li>
+        First attach the Tip Ejector to the Tip Disposal. Use the bottom 4 holes and 4x M5 20mm screws.
+        <figure class="step-figure step-figure--sm">
+          <img src="../../Images/step-3/attach_tip_ejector.jpg" alt="Red tip ejector bar bolted to the pale blue tip disposal chute, four screws through the bar's lower holes">
+          <figcaption>Figure 1: The tip ejector bolted to the tip disposal. The screws go through the bottom four holes — the upper holes stay empty.</figcaption>
+        </figure>
+      </li>
+      <li>
+        Next, attach the Camera Mount, use 2x M5 screws of length anywhere from 20mm to 40mm.
+        <figure class="step-figure">
+          <img src="../../Images/step-3/attach_camera_mount.jpg" alt="Camera mount arm screwed to the side of the red tip ejector with two screws, its rectangular window facing out">
+          <figcaption>Figure 2: The camera mount screwed to the tip ejector, with the window that holds the camera facing outwards.</figcaption>
+        </figure>
+      </li>
+      <li>
+        Finally, attach the USB Camera, use 4x M3 4mm screws.
+        <figure class="step-figure step-figure--sm">
+          <img src="../../Images/step-3/attach_usb_camera.jpg" alt="Assembly mounted on the machine with the USB camera board fixed into the camera mount and its lead running off to the side">
+          <figcaption>Figure 3: The finished assembly in place, with the camera board fixed into the mount and its lead routed clear of the ejector.</figcaption>
+        </figure>
+        <figure class="step-figure step-figure--md">
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/p6D8G-EQuFg"
+                    title="Installing the tip ejector and camera mount"
+                    loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+          <figcaption>Assembly</figcaption>
+        </figure>
+      </li>
+      <li>
+        The assembly shpuld look like this.
+        <figure class="step-figure step-figure--sm">
+          <img src="../../Images/step-3/perspective_view.jpg" alt="Finished setup">
+          <figcaption>Figure 4: Final setup.</figcaption>
+        </figure>
+      </li>
+      <li>You will need a USB extension for your USB Camera if the cable is too short or short to reach your computer. A short cable carries the RISK of dragging the
+        laptop along with it when the bed plate moves. 
+        Pro-tip: one of our extensions was faulty and was giving us an out of focus image, replace the extension if you face the same problem. 
+      </li>
     </ol>
   </div>
 
@@ -95,6 +167,7 @@
 </footer>
 
 <script src="../../js/theme.js"></script>
-<script src="../../js/lightbox.js?v=2"></script>
+<script src="../../js/step-checklist.js"></script>
+<script src="../../js/lightbox.js?v=4"></script>
 </body>
 </html>
