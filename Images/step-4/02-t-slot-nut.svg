@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 316" width="560" height="316" role="img"
+     aria-label="Cross-section through the gantry extrusion: a screw passes down through the linear rail and threads into a T-slot nut, which is pulled up under the slot lips and clamps the rail onto the extrusion. The X-axis belt lies in the bottom of the same slot, below the nut.">
+  <title>T-slot nut and screw clamping the linear rail to the gantry extrusion, with the belt in the slot below</title>
+
+  <defs>
+    <!-- section hatch: marks the extrusion as cut solid metal, so the lips
+         overhanging the nut read as material rather than outline -->
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#B4BCC8" stroke-width="1.1"/>
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="560" height="316" rx="8" fill="#FFFFFF"/>
+
+  <g font-family="Inter, 'Segoe UI', system-ui, -apple-system, sans-serif">
+
+    <!-- gantry extrusion, sectioned through one T-slot: narrow opening at the
+         top face, widening into the channel the nut lives in -->
+    <path d="M30 150 H240 V182 H185 V262 H355 V182 H300 V150 H530 V296 H30 Z" fill="#EDF0F4"/>
+    <path d="M30 150 H240 V182 H185 V262 H355 V182 H300 V150 H530 V296 H30 Z"
+          fill="url(#hatch)" stroke="#1F2530" stroke-width="2.5" stroke-linejoin="round"/>
+
+    <!-- linear rail, split either side of the screw's counterbore + through-hole -->
+    <path d="M110 90 H230 V112 H245 V150 H110 Z"
+          fill="#39404E" stroke="#1F2530" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M450 90 H310 V112 H295 V150 H450 Z"
+          fill="#39404E" stroke="#1F2530" stroke-width="2.5" stroke-linejoin="round"/>
+
+    <!-- X-axis belt, lying in the bottom of the same slot, sectioned across its
+         width — the nut drops in above it, so nothing here gets pinched -->
+    <rect x="225" y="244" width="90" height="18" rx="3" fill="#2B3038" stroke="#12161C" stroke-width="2"/>
+    <rect x="228" y="247" width="84" height="5" rx="2" fill="#4A525F"/>
+
+    <!-- T-slot nut: wider than the slot opening, so it cannot pull back out -->
+    <rect x="200" y="182" width="140" height="48" rx="3"
+          fill="#CFE4FA" stroke="#0071E3" stroke-width="2.5"/>
+
+    <!-- screw: head nested in the rail's counterbore, shaft down into the nut -->
+    <rect x="232" y="92" width="76" height="20" rx="2" fill="#0071E3" stroke="#0A4F94" stroke-width="2"/>
+    <rect x="254" y="92" width="32" height="8" rx="1" fill="#0A4F94"/>
+    <rect x="247" y="112" width="46" height="116" fill="#0071E3" stroke="#0A4F94" stroke-width="2"/>
+    <g stroke="#FFFFFF" stroke-width="2.2" opacity=".5">
+      <line x1="247" y1="191" x2="293" y2="187"/>
+      <line x1="247" y1="200" x2="293" y2="196"/>
+      <line x1="247" y1="209" x2="293" y2="205"/>
+      <line x1="247" y1="218" x2="293" y2="214"/>
+      <line x1="247" y1="227" x2="293" y2="223"/>
+    </g>
+
+    <!-- the mechanism: tightening draws the nut up against those lips -->
+    <g fill="#0071E3" stroke="#0071E3">
+      <line x1="218" y1="223" x2="218" y2="196" stroke-width="3.5"/>
+      <polygon points="218,183 211,198 225,198" stroke="none"/>
+      <line x1="322" y1="223" x2="322" y2="196" stroke-width="3.5"/>
+      <polygon points="322,183 315,198 329,198" stroke="none"/>
+    </g>
+    <rect x="36" y="184" width="146" height="46" rx="4" fill="#FFFFFF" opacity=".9"/>
+    <line x1="182" y1="210" x2="204" y2="210" stroke="#0071E3" stroke-width="1.5"/>
+    <text x="178" y="200" text-anchor="end" font-size="17" font-weight="600" fill="#0071E3">pulls up under</text>
+    <text x="178" y="222" text-anchor="end" font-size="17" font-weight="600" fill="#0071E3">the slot lips</text>
+
+    <!-- callouts -->
+    <g stroke="#5B6472" stroke-width="1.5" fill="#5B6472">
+      <line x1="270" y1="40" x2="270" y2="86"/>
+      <circle cx="270" cy="90" r="3" stroke="none"/>
+      <line x1="102" y1="120" x2="134" y2="120"/>
+      <circle cx="138" cy="120" r="3" stroke="none"/>
+      <line x1="370" y1="208" x2="344" y2="208"/>
+      <circle cx="340" cy="208" r="3" stroke="none"/>
+      <line x1="366" y1="253" x2="321" y2="253"/>
+      <circle cx="317" cy="253" r="3" stroke="none"/>
+    </g>
+    <g fill="#FFFFFF" opacity=".9">
+      <rect x="370" y="198" width="112" height="24" rx="4"/>
+      <rect x="372" y="243" width="62" height="24" rx="4"/>
+      <rect x="42" y="268" width="176" height="24" rx="4"/>
+    </g>
+    <g font-size="18" font-weight="600" fill="#1F2530">
+      <text x="270" y="32" text-anchor="middle">Screw</text>
+      <text x="96" y="125" text-anchor="end">Linear rail</text>
+      <text x="376" y="216">T-slot nut</text>
+      <text x="378" y="261">Belt</text>
+      <text x="48" y="286">Gantry extrusion</text>
+    </g>
+
+  </g>
+</svg>

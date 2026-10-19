@@ -172,19 +172,19 @@
       </figure>
 
       <h3 id="editing-code">1.4. Editing the code</h3>
-      <p class="placeholder-note">Work in progress — detailed code changes coming later.</p>
+      <!-- <p class="placeholder-note">Work in progress — detailed code changes coming later.</p> -->
       <p>Most of the customization happens in <code>Marlin/Configuration.h</code> and <code>Marlin/Configuration_adv.h</code>:</p>
       <ol>
         <li>Disable the BL Touch sensor</li>
         <li>Define the Z-max endstop switch</li>
         <li>Set the Z-max position to <code>250</code></li>
         <li>Set the Z-max homing direction</li>
-        <li>Set the homing bump</li>
-        <li>Other changes</li>
+        <li>Set the z homing bump to <code>0</code></li>
       </ol>
-      <div class="callout-warning">
+      <!-- <div class="callout-warning"> 
         <p><strong>Note:</strong> You might not need to make the PID control changes for your compilation. But for us, the firmware would not compile without them.</p>
-      </div>
+      </div> -->
+      
 
       <h3 id="compiling">1.5. Compiling the firmware</h3>
       <ol>
