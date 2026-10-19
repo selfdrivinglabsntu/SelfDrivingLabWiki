@@ -14,8 +14,9 @@
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/sections.css">
 <link rel="stylesheet" href="../css/build.css?v=12">
+<link rel="stylesheet" href="../css/coming-soon.css">
 </head>
-<body>
+<body class="showcase-lock">
 
 <div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
 
@@ -46,6 +47,14 @@
       View Parts List
     </a>
   </div>
+
+  <!-- SHOWCASE: temporary notice. The step content below it is hidden by
+       css/coming-soon.css (body.showcase-lock). Remove both to publish. -->
+  <section class="coming-soon" aria-label="Coming soon">
+    <p class="coming-soon-eyebrow"><span class="coming-soon-dot" aria-hidden="true"></span>Work in progress</p>
+    <h2>Coming soon&hellip;</h2>
+    <p class="coming-soon-note">We&rsquo;re still writing up this part of the build guide. Check back shortly.</p>
+  </section>
 
   <div class="step-content guide">
     <p>Before diving into the production of your parts, it is important to consider your manufacturing approach. The core spirit of this open-source project is to empower you to use a 3D printer to fabricate the entire machine yourself. However, practical testing has shown that printing every component locally can be highly time-consuming, requiring significant machine calibration, print time and post-processing.</p>

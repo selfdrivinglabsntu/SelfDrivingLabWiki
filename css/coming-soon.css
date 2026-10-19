@@ -1,0 +1,53 @@
+/* HEIMDALL — showcase notice (TEMPORARY)
+   "Coming soon" treatment for the pages that aren't published yet. A page opts
+   in by linking this file and dropping a .coming-soon block in; adding
+   `showcase-lock` to <body> also hides everything inside .step-main except the
+   step heading, so no draft content is on show.
+
+   TO GO LIVE: delete this file, the <link>s to it, the .coming-soon blocks and
+   the showcase-lock class on <body>. Nothing else references it. */
+
+.coming-soon{
+  position:relative;overflow:hidden;
+  margin:8px 0 40px;
+  padding:clamp(30px,6vw,52px) clamp(22px,4vw,40px);
+  border:1px solid var(--line-2);border-radius:12px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 9%,var(--bg-2)),var(--bg-2));
+  text-align:center;
+}
+/* accent hairline along the top edge */
+.coming-soon::before{
+  content:"";position:absolute;inset:0 0 auto;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+}
+.coming-soon-eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);
+  border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);
+  border-radius:99px;padding:6px 14px;margin-bottom:20px;
+}
+.coming-soon-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--accent);
+  animation:coming-soon-pulse 2.4s ease-out infinite;
+}
+@keyframes coming-soon-pulse{
+  0%{box-shadow:0 0 0 0 var(--glow)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+.coming-soon h2{
+  font-family:var(--display);font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(28px,4.4vw,44px);line-height:1.06;margin:0;
+}
+.coming-soon-note{max-width:46ch;margin:14px auto 0;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.coming-soon-dot{animation:none}}
+
+/* ---------- step pages: heading only, nothing below it ---------- */
+body.showcase-lock .step-main > *:not(.step-head):not(.coming-soon){display:none!important}
+body.showcase-lock .step-head .step-status,
+/* draft chrome that lives inside the heading block */
+body.showcase-lock .step-head .parts-progress,
+body.showcase-lock .step-head .parts-head-btn{display:none}
+/* Pip narrates step progress / lock state — nothing to narrate while locked */
+body.showcase-lock .mascot{display:none}
