@@ -324,6 +324,16 @@
   overflow:hidden;border:1px solid var(--line-2)}
 .step-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
+/* ---------- tutorial video list (steps/tutorial-videos.html) ----------
+   One <li> per video, in watch order — the list marker carries the number.
+   .step-video already draws the 16/9 box, so all this has to do is open up
+   the spacing from the tight default .step-content ol uses for prose steps. */
+.step-content .video-steps{gap:30px}
+.step-content .video-steps .step-figure{margin-top:6px}
+/* caption sits ABOVE its player here (see the page markup), so the list
+   number lines up with the title rather than the player's bottom edge */
+.step-content .video-steps figcaption{margin:0 0 10px;text-align:left;color:var(--muted)}
+
 /* ---------- explanation card (sub-step pages) ----------
    Same fixed-light "island" surface as .need-card / .callout-important,
    just with a visible --accent border instead of the vertical bar, and a

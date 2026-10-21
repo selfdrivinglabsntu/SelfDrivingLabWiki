@@ -28,4 +28,7 @@ Thumbs.db
 settings.local.json
 
 #large files
-assets/Hero.mp4
+assets/hero.mp4
+
+# master media kept out of the published site (never drop this folder to Netlify)
+_originals/

@@ -1,0 +1,122 @@
+/* HEIMDALL — showcase sneak peek (TEMPORARY)
+   Teaser treatment for the pages that aren't published yet. A page opts in by
+   linking this file + js/sneak-peek.js, putting `showcase-peek` on <body>,
+   dropping a .sneak-peek banner in, and marking its content region with
+   `data-peek`. That region reads normally down to --peek-cut; everything below
+   it is frosted over and faded out, so there's something to look at without the
+   half-written parts being readable.
+
+   --peek-cut is set per page by js/sneak-peek.js (about a third of the way down,
+   snapped to a block boundary). The value below is the pre-script fallback, so the draft
+   is never briefly on show and the treatment still holds up without JS.
+
+   TO GO LIVE: delete this file and js/sneak-peek.js, the <link>s and <script>s
+   to them, the .sneak-peek blocks, the data-peek attributes (and the wrapper
+   div that carries it on steps/parts-list.html), the showcase-peek class on
+   <body>, and the showcase guard in js/build-step.js. */
+
+/* ---------------- the banner ---------------- */
+.sneak-peek{
+  position:relative;overflow:hidden;
+  margin:4px 0 32px;
+  padding:clamp(20px,3.2vw,30px) clamp(20px,3.2vw,32px);
+  border:1px solid var(--line-2);border-radius:12px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 9%,var(--bg-2)),var(--bg-2));
+}
+/* accent hairline along the top edge */
+.sneak-peek::before{
+  content:"";position:absolute;inset:0 0 auto;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+}
+.sneak-peek-eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);
+  border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);
+  border-radius:99px;padding:6px 14px;margin-bottom:16px;
+}
+.sneak-peek-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--accent);
+  animation:sneak-peek-pulse 2.4s ease-out infinite;
+}
+@keyframes sneak-peek-pulse{
+  0%{box-shadow:0 0 0 0 var(--glow)}
+  70%{box-shadow:0 0 0 9px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+.sneak-peek h2{
+  font-family:var(--display);font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(22px,3vw,32px);line-height:1.08;margin:0;
+}
+.sneak-peek-note{max-width:56ch;margin:11px 0 0;color:var(--muted);font-size:15px;line-height:1.6}
+@media (prefers-reduced-motion:reduce){.sneak-peek-dot{animation:none}}
+
+/* ---------------- the frosted half ---------------- */
+/* z-index:0 (not auto) so the veil below stays above the content it covers,
+   whatever the content's own stacking is. */
+body.showcase-peek [data-peek]{
+  position:relative;z-index:0;
+  --peek-cut:34vh;                       /* js/sneak-peek.js overrides this */
+  --peek-tail:clamp(190px,26vh,300px);   /* how much frosted content shows */
+  max-height:calc(var(--peek-cut) + var(--peek-tail));
+  overflow:hidden;
+}
+body.showcase-peek [data-peek]::after{
+  content:"";position:absolute;left:0;right:0;top:var(--peek-cut);bottom:0;z-index:3;
+  /* no pointer-events:none — the veil is meant to swallow clicks, hovers and
+     text selection on the half it covers */
+  -webkit-backdrop-filter:blur(9px) saturate(.82);
+  backdrop-filter:blur(9px) saturate(.82);
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--bg) 0%,transparent),
+    color-mix(in srgb,var(--bg) 55%,transparent) 48%,
+    var(--bg) 97%);
+  /* ramps the blur in over the first 110px instead of starting on a hard edge */
+  -webkit-mask-image:linear-gradient(180deg,color-mix(in srgb,#000 0%,transparent),#000 110px);
+  mask-image:linear-gradient(180deg,color-mix(in srgb,#000 0%,transparent),#000 110px);
+}
+/* no backdrop-filter (older Firefox/Safari): lean on the wash instead */
+@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){
+  body.showcase-peek [data-peek]::after{
+    background:linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 0%,transparent),
+      color-mix(in srgb,var(--bg) 88%,transparent) 42%,
+      var(--bg) 72%);
+  }
+}
+/* data-peek-from on the region itself means "frost all of it" — a step with
+   nothing but placeholder text. Cut at 0 up front so it is never briefly
+   readable before the script runs, and stays frosted with JS off. */
+body.showcase-peek [data-peek][data-peek-from]{--peek-cut:0px}
+
+/* A pinned cut (data-peek-from) holds back one specific block rather than
+   "the rest of the page", so the long ease-in above would leave the top of
+   that block readable. Bite almost immediately, and blur harder. */
+body.showcase-peek [data-peek].is-peek-pinned::after{
+  -webkit-backdrop-filter:blur(15px) saturate(.75);
+  backdrop-filter:blur(15px) saturate(.75);
+  -webkit-mask-image:linear-gradient(180deg,color-mix(in srgb,#000 0%,transparent),#000 20px);
+  mask-image:linear-gradient(180deg,color-mix(in srgb,#000 0%,transparent),#000 20px);
+}
+
+/* label on the faded-out bottom edge — only once the script has measured, so
+   a region too short to tease doesn't end up labelled */
+body.showcase-peek [data-peek].is-peeking::before{
+  content:"Full write-up coming soon";
+  position:absolute;left:0;right:0;bottom:11px;z-index:4;text-align:center;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted-2);
+}
+/* short regions (placeholder stubs) aren't worth teasing — see js/sneak-peek.js */
+body.showcase-peek [data-peek].is-peek-off{max-height:none;overflow:visible}
+body.showcase-peek [data-peek].is-peek-off::after{display:none}
+
+/* ---------------- progress chrome ---------------- */
+/* Nothing to track while the guide is unfinished, so the status chip, the
+   gathered-parts counter and "Mark step complete" stay out of the way.
+   Navigation (back links, prev/next, the printing-instructions button) stays. */
+body.showcase-peek .step-head .step-status,
+body.showcase-peek .step-head .parts-progress,
+body.showcase-peek .complete-btn,
+body.showcase-peek .step-actions .hint{display:none}
+body.showcase-peek .step-actions:not(:has(a)){display:none}

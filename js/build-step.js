@@ -7,7 +7,7 @@
  *  - reversible completion (Mark complete ⇄ Undo) — undoing re-locks later steps,
  *  - prev / next / back navigation, generated from the level order.
  */
-import { LEVELS, load, persist, indexOf, isOpen } from './build-core.js?v=2';
+import { LEVELS, load, persist, indexOf, isOpen } from './build-core.js?v=3';
 import { initMascot } from './mascot.js';
 
 const id = document.body.dataset.step;
@@ -29,7 +29,11 @@ const actionsEl = document.querySelector('.step-actions');
 const statusText = document.querySelector('.step-status-text');
 
 // ---- lock gate ----
-const locked = lv ? !isOpen(state, id) : false;
+// SHOWCASE (temporary): the sneak-peek pages tease their content whatever the
+// reader's progress is, so the gate would hide the very thing they came for.
+// Drop this guard along with css/sneak-peek.css — see its header.
+const showcase = document.body.classList.contains('showcase-peek');
+const locked = lv && !showcase ? !isOpen(state, id) : false;
 
 if (locked) {
   // Block access: hide the content + completion, show a locked notice.

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.dataset.theme=localStorage.getItem('piper-theme')||'dark';</script>
+<title>Tutorial Videos — HEIMDALL build</title>
+<meta name="description" content="Video walkthroughs for building your own HEIMDALL automated pipette, in the order you'll do them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/sections.css">
+<link rel="stylesheet" href="../css/build.css?v=13">
+<link rel="stylesheet" href="../css/sneak-peek.css?v=2">
+</head>
+<!-- SHOWCASE: the videos are published except the last one, which is held
+     back behind the frost — data-peek marks the region and data-peek-from on
+     the final player pins the cut there, so its title still reads as a
+     what's-next label (see css/sneak-peek.css). Move data-peek-from up to the
+     <li> to hold the title back too. The class also keeps the progress lock
+     and completion chrome out of the way. -->
+<body class="showcase-peek" data-step="tutorial-videos">
+
+<div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
+
+<header class="build-nav">
+  <div class="build-nav-inner">
+    <a href="../index.html" class="build-brand" aria-label="HEIMDALL home">
+      <img src="../assets/logo.png" alt="HEIMDALL @NTU MSE"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="brand-text" style="display:none"><span class="mark"></span>HEIMDALL</span>
+    </a>
+    <div class="build-nav-actions">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to light theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="../build.html" class="back">&larr; Build hub</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap step-main">
+  <div class="step-head">
+    <span class="step-num">Step 07</span>
+    <h1>Tutorial Videos</h1>
+    <p class="lead">Follow along on video &mdash; play them in the order they're listed.</p>
+    <span class="step-status"><span class="step-status-text">In progress</span></span>
+  </div>
+
+  <!-- SHOWCASE: temporary sneak-peek banner. Everything here is watchable
+       except the last video, frosted over by css/sneak-peek.css +
+       js/sneak-peek.js. Remove all of it to publish. -->
+  <section class="sneak-peek" aria-label="Sneak peek">
+    <p class="sneak-peek-eyebrow"><span class="sneak-peek-dot" aria-hidden="true"></span>Work in progress</p>
+    <h2>Sneak peek</h2>
+    <p class="sneak-peek-note">Keep an eye out &mdash; exciting stuff is coming soon.</p>
+  </section>
+
+  <div class="step-content" data-peek>
+    <ol class="video-steps">
+      <li>
+        <figure class="step-figure step-figure--md">
+          <figcaption>Remove aluminium extrusion from gantry</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/vyhKQZYol98"
+                    title="Video 1 — Remove aluminium extrusion from gantry"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li>
+        <figure class="step-figure step-figure--md">
+          <figcaption>Removal of nozzle kit mount</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/fYQbU91SsUo"
+                    title="Video 2 — Removal of nozzle kit mount"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li>
+        <figure class="step-figure step-figure--md">
+          <figcaption>Remove bottom casing</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/tbuB1RJZPmE"
+                    title="Video 3 — Remove bottom casing"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li>
+        <figure class="step-figure step-figure--md">
+          <figcaption>Attaching the z-limit switch to its mount</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/n6sbS_cUnkk"
+                    title="Video 4 — Attaching the z-limit switch to its mount"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li>
+        <figure class="step-figure step-figure--md">
+          <figcaption>Putting the bottom casing back on</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/c5hFjptMhyg"
+                    title="Video 5 — Putting the bottom casing back on"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li>
+        <figure class="step-figure step-figure--md">
+          <figcaption>Mounting the z-limit switch on the printer</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/1weTSBbteEg"
+                    title="Video 6 — Mounting the z-limit switch on the printer"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li>
+        <figure class="step-figure step-figure--md">
+          <figcaption>Filing T-slot nuts</figcaption>
+          <div class="step-video" data-peek-from>
+            <iframe src="https://www.youtube-nocookie.com/embed/2Jq90UJsP24"
+                    title="Video 7 — Filing T-slot nuts"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+    </ol>
+  </div>
+
+  <div class="step-actions">
+    <button class="btn btn-solid complete-btn" type="button">Mark step complete</button>
+    <span class="hint">You can undo this anytime.</span>
+  </div>
+
+  <nav class="step-nav" aria-label="Step navigation"></nav>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-col">
+      <div class="foot-line"><img class="foot-logo-ngenuity" src="/assets/logo.png" alt="Heimdall_logo"> &mdash; Automated liquid handling</div>
+      <div class="foot-line">
+        <a href="https://www.ngenuitylab.net/" target="_blank">
+          <img class="foot-logo-ngenuity" src="/assets/NGenuity_lab_logo.png" alt="NGenuity_lab_logo">
+        </a> &mdash; Self-driving labs for materials science
+      </div>
+    </div>
+    <div class="foot-col foot-col-center">
+      <div class="foot-links">
+        <a href="#">GitHub</a>
+        <a href="https://www.ngenuitylab.net/contact/">Reach Us</a>
+      </div>
+    </div>
+    <div class="foot-col foot-col-end">
+      <a href="https://www.ntu.edu.sg" target="_blank">
+        <img class="foot-logo-ntu" src="/assets/ntu_logo.png" alt="Nanyang Technological University">
+      </a>
+    </div>
+    <div class="foot-copyright">&copy; 2026 NGenuity Lab &middot; NTU School of Materials Science &amp; Engineering</div>
+  </div>
+</footer>
+
+<script src="../js/theme.js"></script>
+<script type="module" src="../js/build-step.js?v=3"></script>
+<script src="../js/sneak-peek.js?v=2"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@
  * toggle: it opens every level, then re-locks back to the start (clearing all
  * progress) on the next click.
  */
-import { LEVELS, load, persist, isOpen } from './build-core.js?v=2';
+import { LEVELS, load, persist, isOpen } from './build-core.js?v=3';
 import { initMascot } from './mascot.js';
 
 const state = load();

@@ -22,6 +22,7 @@ export const LEVELS = [
   { id: 'software',         num: '04', title: 'Software',            sub: 'Install the control GUI and connect to your HEIMDALL.',     file: 'software.html' },
   { id: 'calibration',      num: '05', title: 'Calibration',         sub: 'Tune volumes and coordinates so every draw is accurate.',   file: 'calibration.html' },
   { id: 'first-run',        num: '06', title: 'First Run',           sub: 'Load a protocol and run your first automated dispense.',    file: 'first-run.html' },
+  { id: 'tutorial-videos',  num: '07', title: 'Tutorial Videos',     sub: "Follow along on video &mdash; the build steps in the order you'll do them.", file: 'tutorial-videos.html' },
 ];
 
 export function indexOf(id) {

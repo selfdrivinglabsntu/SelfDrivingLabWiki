@@ -13,10 +13,10 @@
 <link rel="stylesheet" href="../../css/tokens.css">
 <link rel="stylesheet" href="../../css/base.css">
 <link rel="stylesheet" href="../../css/sections.css">
-<link rel="stylesheet" href="../../css/build.css?v=12">
-<link rel="stylesheet" href="../../css/coming-soon.css">
+<link rel="stylesheet" href="../../css/build.css?v=13">
+<link rel="stylesheet" href="../../css/sneak-peek.css?v=2">
 </head>
-<body class="showcase-lock">
+<body class="showcase-peek">
 
 <div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
 
@@ -44,15 +44,17 @@
     <p class="lead">Mount the bed plate, tip disposal chute, and tip catcher onto the deck.</p>
   </div>
 
-  <!-- SHOWCASE: temporary notice. The step content below it is hidden by
-       css/coming-soon.css (body.showcase-lock). Remove both to publish. -->
-  <section class="coming-soon" aria-label="Coming soon">
-    <p class="coming-soon-eyebrow"><span class="coming-soon-dot" aria-hidden="true"></span>Work in progress</p>
-    <h2>Coming soon&hellip;</h2>
-    <p class="coming-soon-note">We&rsquo;re still writing up this part of the build guide. Check back shortly.</p>
+  <!-- SHOWCASE: temporary sneak-peek banner. The content below it reads for
+       about a third of its length and is frosted over after that, by
+       css/sneak-peek.css + js/sneak-peek.js (see data-peek). Remove all of
+       it to publish. -->
+  <section class="sneak-peek" aria-label="Sneak peek">
+    <p class="sneak-peek-eyebrow"><span class="sneak-peek-dot" aria-hidden="true"></span>Work in progress</p>
+    <h2>Sneak peek</h2>
+    <p class="sneak-peek-note">Keep an eye out &mdash; exciting stuff is coming soon.</p>
   </section>
 
-  <div class="step-content">
+  <div class="step-content" data-peek>
     <div class="need-card">
       <h3 class="need-heading">You will need</h3>
       <div class="need-list">
@@ -165,5 +167,6 @@
 <script src="../../js/theme.js"></script>
 <script src="../../js/step-checklist.js"></script>
 <script src="../../js/lightbox.js?v=4"></script>
+<script src="../../js/sneak-peek.js?v=2"></script>
 </body>
 </html>
