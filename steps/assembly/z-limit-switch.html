@@ -10,13 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/tokens.css">
+<link rel="stylesheet" href="../../css/tokens.css?v=16">
 <link rel="stylesheet" href="../../css/base.css">
 <link rel="stylesheet" href="../../css/sections.css">
-<link rel="stylesheet" href="../../css/build.css?v=13">
-<link rel="stylesheet" href="../../css/sneak-peek.css?v=2">
+<link rel="stylesheet" href="../../css/build.css?v=16">
 </head>
-<body class="showcase-peek">
+<body>
 
 <div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
 
@@ -44,16 +43,7 @@
     <p class="lead">An external z-limit switch is installed to perform z homing upwards.</p>
   </div>
 
-  <!-- SHOWCASE: temporary sneak-peek banner. The content below it reads for
-       about a third of its length and is frosted over after that, by
-       css/sneak-peek.css + js/sneak-peek.js (see data-peek). Remove all of
-       it to publish. -->
-  <section class="sneak-peek" aria-label="Sneak peek">
-    <p class="sneak-peek-eyebrow"><span class="sneak-peek-dot" aria-hidden="true"></span>Work in progress</p>
-    <h2>Sneak peek</h2>
-    <p class="sneak-peek-note">Keep an eye out &mdash; exciting stuff is coming soon.</p>
-  </section>
-  <div class="step-content" data-peek>
+  <div class="step-content">
     <div class="need-card">
       <h3 class="need-heading">You will need</h3>
       <div class="need-list">
@@ -112,15 +102,6 @@
           <img src="../../Images/step-1/z_limit_switch.jpeg" alt="The z-limit switch">
           <figcaption>Figure 3: Photograph of the z-limit switch mounted</figcaption>
         </figure>
-        <figure class="step-figure step-figure--md">
-          <div class="step-video">
-            <iframe src="https://www.youtube-nocookie.com/embed/4QV0IE3b0fI"
-                    title="How to screw in the z-limit switch mounting screw"
-                    loading="lazy" allowfullscreen
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-          </div>
-          <figcaption>Assembly</figcaption>
-        </figure>
       </li>
     </ol>
 
@@ -135,6 +116,53 @@
         <p>Traditionally, z-homing on the Ender 3 S1 is performed using a BL Touch sensor. This sensor operates strictly in the downward direction, meaning the Z = 0 reference point is only established when the probe physically contacts the print bed. This is not suitable for the purpose of our project as the bed plate is occupied by liquid handling apparatus such as the well plates, sample solution holders, tip holder and the tip ejection module. These obstructions will prevent homing in downwards direction. Thus, a limit switch is installed on the top of the printer frame to perform z-homing upwards i.e. when the gantry moves upwards and hits the limit switch the Z_Max, Z=250, is recorded.</p>
       </div>
     </div>
+
+    <h3>Tutorial videos</h3>
+    <p>Guided tutorial-videos for your convenience.</p>
+    <ul class="video-links">
+      <li>
+        <a href="../tutorial-videos.html#video-1">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 1</span>
+          <span class="vl-title">Remove aluminium extrusion from gantry</span>
+        </a>
+      </li>
+      <li>
+        <a href="../tutorial-videos.html#video-2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 2</span>
+          <span class="vl-title">Removal of nozzle kit mount</span>
+        </a>
+      </li>
+      <li>
+        <a href="../tutorial-videos.html#video-3">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 3</span>
+          <span class="vl-title">Remove bottom casing</span>
+        </a>
+      </li>
+      <li>
+        <a href="../tutorial-videos.html#video-4">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 4</span>
+          <span class="vl-title">Attaching the z-limit switch to its mount</span>
+        </a>
+      </li>
+      <li>
+        <a href="../tutorial-videos.html#video-5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 5</span>
+          <span class="vl-title">Putting the bottom casing back on</span>
+        </a>
+      </li>
+      <li>
+        <a href="../tutorial-videos.html#video-6">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 6</span>
+          <span class="vl-title">Mounting the z-limit switch on the printer</span>
+        </a>
+      </li>
+    </ul>
   </div>
 
   <div class="step-actions">
@@ -171,6 +199,5 @@
 <script src="../../js/chip-version.js"></script>
 <script src="../../js/step-checklist.js"></script>
 <script src="../../js/lightbox.js?v=4"></script>
-<script src="../../js/sneak-peek.js?v=2"></script>
 </body>
 </html>

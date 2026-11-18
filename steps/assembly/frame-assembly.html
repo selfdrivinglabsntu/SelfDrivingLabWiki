@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.dataset.theme=localStorage.getItem('piper-theme')||'dark';</script>
+<title>Frame assembly — Assembly — HEIMDALL build</title>
+<meta name="description" content="How to assemble the frame for your HEIMDALL build.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/tokens.css?v=16">
+<link rel="stylesheet" href="../../css/base.css">
+<link rel="stylesheet" href="../../css/sections.css">
+<link rel="stylesheet" href="../../css/build.css?v=16">
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
+
+<header class="build-nav">
+  <div class="build-nav-inner">
+    <a href="../../index.html" class="build-brand" aria-label="HEIMDALL home">
+      <img src="../../assets/logo.png" alt="HEIMDALL @NTU MSE"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="brand-text" style="display:none"><span class="mark"></span>HEIMDALL</span>
+    </a>
+    <div class="build-nav-actions">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to light theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="../assembly.html" class="back">← Assembly</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap step-main">
+  <div class="step-head">
+    <span class="step-num">Assembly · Sub-step 3 of 4</span>
+    <h1>Frame assembly</h1>
+    <p class="lead">Build up the structural frame that everything else mounts to.</p>
+  </div>
+
+  <div class="step-content">
+    <div class="need-card">
+      <h3 class="need-heading">You will need</h3>
+      <div class="need-list">
+        <div class="need-item" data-need="m8-x-150mm-x-1">
+          <img class="need-icon" src="../../Icons/screw.png" alt="M8 x 150mm screw">
+          <span class="need-label">M8 x 150mm<br>x 1</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item" data-need="m3-x-30mm-x-8">
+          <img class="need-icon" src="../../Icons/screw.png" alt="M3 x 30mm screw">
+          <span class="need-label">M3 x 30mm<br>x 8</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item" data-need="m2-x-6mm-x-10">
+          <img class="need-icon" src="../../Icons/screw.png" alt="M2 x 6mm screw">
+          <span class="need-label">M2 x 6mm<br>x 10</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item" data-need="flanged-bushing">
+          <img class="need-icon" src="../../Icons/bushing.svg" alt="Flanged self-lubricating bushing">
+          <span class="need-label">Flanged<br>bushing</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="need-card">
+      <div class="need-list need-list--parts">
+        <div class="need-item need-item--part" data-need="frame">
+          <h4 class="part-name">Frame</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/frame.png" alt="Frame"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="frame-linear-actuator-mount">
+          <h4 class="part-name">Frame Linear Actuator Mount</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/frame-linear-actuator-mount.png" alt="Frame Linear Actuator Mount"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="pipette-bracket">
+          <h4 class="part-name">Pipette Bracket</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/pipette-bracket.png" alt="Pipette Bracket"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="pipette">
+          <h4 class="part-name">Pipette</h4>
+          <div class="part-thumb"><img src="../../Images/components/pipette.png" alt="Precipette single-channel adjustable-volume pipette"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="driver-gear">
+          <h4 class="part-name">Driver Gear</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/driver-gear.png" alt="Driver Gear: small helical gear with a slotted collar and grub-screw holes"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="driven-gear">
+          <h4 class="part-name">Driven Gear</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/driven-gear.png" alt="Driven Gear: large helical gear on a hub that clamps around the pipette"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-important">
+      <p><strong>Before you start:</strong> the linear rail should already be mounted on the X-axis gantry &mdash;
+        that is <a href="t-slot-nuts.html">Filing T-slot nuts</a>, the previous sub-step. The frame clamps onto its
+        carriage, so there is nothing to attach it to until the rail is down and running smoothly.</p>
+    </div>
+
+    <h3>Instructions</h3>
+    <ol>
+      <li>
+        Take the Frame to the bench, open side of the "C" facing you. It gives you three shelves to work
+        between: the <strong>top plate</strong>, bored for the stepper motor; the <strong>middle shelf</strong>, with a
+        small bore for the lead screw and a large bore for the pipette; and the <strong>bottom shelf</strong>, which
+        carries the lower end of the lead screw. The leg below the bottom shelf is what clamps onto the linear rail.
+        <figure class="step-figure step-figure--sm step-figure--plate">
+          <img src="../../Images/step-4/03-frame.png" alt="CAD render of the Frame: a C-shape with three horizontal shelves &mdash; the top plate bored for the stepper motor, the middle shelf with a small bore for the lead screw and a large bore for the pipette, and the bottom shelf below it &mdash; with the rail leg hanging under the bottom shelf">
+          <figcaption>Figure 1: The Frame on its own. Top plate, middle shelf and bottom shelf, with the rail leg hanging below.</figcaption>
+        </figure>
+      </li>
+      <li>
+        Feed the M8 x 150mm screw through the bottom shelf, through the middle shelf up to top plate until its lower end sits in the bottom
+        shelf. Use a Flanged Self Lubricating Bushing to ensure that the screw rotates smoothly. Slide the Driver Gear such that it sits
+        on the middle shelf. No need to screw in the Driver Gear just yet.
+        <div class="step-figure-group">
+          <figure class="step-figure">
+            <img src="../../Images/step-4/11-coupler-on-motor.webp" alt="The metal shaft coupler held on the stepper motor's shaft while a hex key tightens its grub screw, with the printed actuator mount on the bench behind">
+            <figcaption>Figure 2: Tightening the shaft coupler's grub screw onto the stepper motor shaft.</figcaption>
+          </figure>
+          <figure class="step-figure">
+            <img src="../../Images/step-4/07-screw-through-frame-labelled.webp" alt="The frame lying flat on the bench with the M8 screw run down through it, three parts labelled: the brass flanged bushing seated in the bottom shelf, the driver gear sitting on the screw at the middle shelf, and the M8 x 150 mm screw itself">
+            <figcaption>Figure 3: The M8 screw runs down through the frame with the driver gear on it at the middle shelf and the flanged bushing on the bottom shelf.</figcaption>
+          </figure>
+        </div>
+      </li>
+      <li>
+        Place the Frame Linear Actuator Mount on top of the top plate. Place the stepper motor on top of the top plate and bring the shaft coupler up
+        to note down which position to screw in the shaft coupler to the stepper motor. Then place the combined module through the holes and screw in the
+        M8 screw to the shaft coupler.
+        <div class="step-figure-group">
+          <figure class="step-figure">
+            <img src="../../Images/step-4/10-motor-offered-up.webp" alt="The frame lying on the bench with the M8 screw held up to it in one hand and the stepper motor offered up to the frame with the other">
+            <figcaption>Figure 4: Place the M8 screw inside the stepper motor through the top shelf and Frame Linear Actuator Mount.</figcaption>
+          </figure>
+          <figure class="step-figure">
+            <img src="../../Images/step-4/06-coupler-tighten.jpg" alt="Hand reaching in with a long hex key through the side opening of the frame to tighten the grub screw on the metal shaft coupler, which sits under the top plate with the blue actuator mount and the stepper motor above it">
+            <figcaption>Figure 5: Tightening the shaft coupler's grub screw onto the stepper motor shaft.</figcaption>
+          </figure>
+        </div>
+        <figure class="step-figure step-figure--sm">
+          <img src="../../Images/step-4/08-lead-screw-lower-end.webp" alt="The frame stood upright with the lead screw running down through the middle shelf, the driver gear on it, and a hex key reaching in to the lower end of the screw at the bottom shelf">
+          <figcaption>Figure 6: Bolt the stepper motor to the top shelf using ideally four M3 x 30mm screws.</figcaption>
+        </figure>
+      </li>
+      <li>
+        Secure the Frame to the linear rail carriage using M3 x 30mm screws.
+        <div class="step-figure-group">
+          <figure class="step-figure">
+            <img src="../../Images/step-4/09-frame-to-rail-carriage.webp" alt="Close-up of the frame's leg held against the linear rail carriage, with small screws resting on the bottom shelf and the lead screw running down behind them">
+            <figcaption>Figure 7: Align four M3 x 30mm screws with the linear carriage for ease of mounting the Frame to the carriage.</figcaption>
+          </figure>
+          <figure class="step-figure">
+            <img src="../../Images/step-4/12-frame-mounted.webp" alt="The frame mounted on the printer with the Creality stepper motor sitting on the top plate, the lead screw and driver gear running down inside the frame, and a hand working at the bottom shelf">
+            <figcaption>Figure 8: Attach Frame to linear rail carriage securely.</figcaption>
+          </figure>
+        </div>
+      </li>
+    </ol>
+
+    <h3>Tutorial videos</h3>
+    <p>Guided tutorial-videos for your convenience.</p>
+    <ul class="video-links">
+      <li>
+        <a href="../tutorial-videos.html#video-9">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 9</span>
+          <span class="vl-title">Frame assembly — part 1</span>
+        </a>
+      </li>
+      <li>
+        <a href="../tutorial-videos.html#video-10">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 10</span>
+          <span class="vl-title">Frame assembly — part 2</span>
+        </a>
+      </li>
+      <li>
+        <a href="../tutorial-videos.html#video-11">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 11</span>
+          <span class="vl-title">Frame assembly — part 3</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="step-actions">
+    <a class="btn btn-solid" href="../assembly.html">← Back to Assembly</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-col">
+      <div class="foot-line"><img class="foot-logo-ngenuity" src="/assets/logo.png" alt="Heimdall_logo"> — Automated liquid handling</div>
+      <div class="foot-line">
+        <a href="https://www.ngenuitylab.net/" target="_blank">
+          <img class="foot-logo-ngenuity" src="/assets/NGenuity_lab_logo.png" alt="NGenuity_lab_logo">
+        </a> — Self-driving labs for materials science
+      </div>
+    </div>
+    <div class="foot-col foot-col-center">
+      <div class="foot-links">
+        <a href="#">GitHub</a>
+        <a href="https://www.ngenuitylab.net/contact/">Reach Us</a>
+      </div>
+    </div>
+    <div class="foot-col foot-col-end">
+      <a href="https://www.ntu.edu.sg" target="_blank">
+        <img class="foot-logo-ntu" src="/assets/ntu_logo.png" alt="Nanyang Technological University">
+      </a>
+    </div>
+    <div class="foot-copyright">© 2026 NGenuity Lab · NTU School of Materials Science & Engineering</div>
+  </div>
+</footer>
+
+<script src="../../js/theme.js"></script>
+<script src="../../js/step-checklist.js"></script>
+<script src="../../js/lightbox.js?v=4"></script>
+</body>
+</html>

@@ -8,6 +8,10 @@
     --line:#1A2029;
     --line-2:#242C38;
     --text:#E9EDF2;
+    /* body copy in long-form guide prose — brighter than --muted, which stays
+       for chrome (nav, captions, labels) where dimness is intentional.
+       NB: --body is the font-family token, hence the separate name. */
+    --prose:#9AA4B2;
     --muted:#79828E;
     --muted-2:#565E6A;
     --accent:#57CDFF;      /* ice-blue glow */
@@ -37,6 +41,16 @@
                                --accent-2 itself (#79F2D8) is tuned for a dark bg */
     --panel-bg:#EAF2F5;   /* pale blue-gray info panel — e.g. the "You will need" card */
 
+    /* in-step figure card. Unlike the island tokens above, this one DOES flip:
+       a fixed-white mat around a photo reads as a hard white border on the
+       near-black page. Photos are opaque and need no mat, so dark mode uses a
+       near-background surface and drops the light-mode drop shadow. Figures
+       holding transparent line art opt back into the white mat with
+       .step-figure--plate — without it that artwork disappears into the page. */
+    --figure-bg:var(--surface);
+    --figure-caption:var(--muted);
+    --figure-shadow:none;
+
     --display:'Sora',system-ui,sans-serif;
     --body:'Inter',system-ui,sans-serif;
     --mono:'IBM Plex Mono',ui-monospace,monospace;
@@ -57,6 +71,7 @@
     --line:#D2D2D7;
     --line-2:#E8E8ED;
     --text:#1D1D1F;
+    --prose:#55555A;
     --muted:#6E6E73;
     --muted-2:#86868B;
     --accent:#0071E3;
@@ -69,4 +84,7 @@
        deeper shade of the dark-theme #EAF2F5 so they stand out more against
        the light page background */
     --panel-bg:#DAE6EC;
+    --figure-bg:var(--island-bg);
+    --figure-caption:var(--island-muted);
+    --figure-shadow:0 1px 3px rgba(15,18,23,.06),0 10px 26px rgba(15,18,23,.08);
   }

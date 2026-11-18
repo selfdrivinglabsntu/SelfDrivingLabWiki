@@ -7,7 +7,7 @@
  *  - reversible completion (Mark complete ⇄ Undo) — undoing re-locks later steps,
  *  - prev / next / back navigation, generated from the level order.
  */
-import { LEVELS, load, persist, indexOf, isOpen } from './build-core.js?v=3';
+import { LEVELS, load, persist, indexOf, isOpen } from './build-core.js?v=6';
 import { initMascot } from './mascot.js';
 
 const id = document.body.dataset.step;
@@ -29,11 +29,7 @@ const actionsEl = document.querySelector('.step-actions');
 const statusText = document.querySelector('.step-status-text');
 
 // ---- lock gate ----
-// SHOWCASE (temporary): the sneak-peek pages tease their content whatever the
-// reader's progress is, so the gate would hide the very thing they came for.
-// Drop this guard along with css/sneak-peek.css — see its header.
-const showcase = document.body.classList.contains('showcase-peek');
-const locked = lv && !showcase ? !isOpen(state, id) : false;
+const locked = lv ? !isOpen(state, id) : false;
 
 if (locked) {
   // Block access: hide the content + completion, show a locked notice.
@@ -108,4 +104,40 @@ if (nav) {
     ? '<a class="btn btn-solid step-next" href="' + next.file + '">' + next.title + ' →</a>'
     : '<a class="btn btn-solid step-next" href="../build.html">Finish ✓</a>');
   nav.innerHTML = parts.join('');
+}
+
+// ---- deep links from other pages (foo.html#some-anchor) ----
+// Landing on a fragment is unreliable on these pages: <html> carries
+// scroll-behavior:smooth, the video players are loading="lazy", and the
+// browser may restore a scroll position for a URL it has seen before. In
+// practice that leaves the reader short of the target or well past it — a
+// click into tutorial-videos.html#video-5 landed on video 13. So re-apply
+// the jump after load and once more once layout has settled, instantly and
+// only while the reader has not started scrolling themselves.
+if (location.hash) {
+  let target = null;
+  try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); }
+  catch (_) { /* malformed escape in the hash */ }
+
+  if (target) {
+    let userScrolled = false;
+    // not 'scroll': our own scrollIntoView below fires that too
+    const MOVES = ['wheel', 'touchmove', 'keydown'];
+    const noteScroll = () => { userScrolled = true; };
+    MOVES.forEach((e) => window.addEventListener(e, noteScroll, { passive: true }));
+
+    const land = () => {
+      // a locked page hides its content — nothing to scroll to
+      if (userScrolled || target.closest('[hidden]')) return;
+      target.scrollIntoView({ block: 'start', behavior: 'auto' });
+    };
+
+    window.addEventListener('load', () => {
+      land();
+      setTimeout(() => {
+        land();
+        MOVES.forEach((e) => window.removeEventListener(e, noteScroll));
+      }, 400);
+    }, { once: true });
+  }
 }

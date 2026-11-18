@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.dataset.theme=localStorage.getItem('piper-theme')||'dark';</script>
+<title>Filing T-slot nuts — Assembly — HEIMDALL build</title>
+<meta name="description" content="Filing the T-slot nuts to fit the gantry extrusion, then mounting the linear rail on them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/tokens.css?v=16">
+<link rel="stylesheet" href="../../css/base.css">
+<link rel="stylesheet" href="../../css/sections.css">
+<link rel="stylesheet" href="../../css/build.css?v=16">
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
+
+<header class="build-nav">
+  <div class="build-nav-inner">
+    <a href="../../index.html" class="build-brand" aria-label="HEIMDALL home">
+      <img src="../../assets/logo.png" alt="HEIMDALL @NTU MSE"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="brand-text" style="display:none"><span class="mark"></span>HEIMDALL</span>
+    </a>
+    <div class="build-nav-actions">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to light theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="../assembly.html" class="back">← Assembly</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap step-main">
+  <div class="step-head">
+    <span class="step-num">Assembly · Sub-step 2 of 4</span>
+    <h1>Filing T-slot nuts and Mounting Linear Rail</h1>
+    <p class="lead">Fit the T-slot nuts to the gantry extrusion, then mount the linear rail on them.</p>
+  </div>
+
+  <div class="step-content">
+    <div class="need-card">
+      <h3 class="need-heading">You will need</h3>
+      <div class="need-list">
+        <div class="need-item" data-need="t-slot-nuts">
+          <img class="need-icon" src="../../Icons/t-slot-nuts.webp" alt="T-slot nuts">
+          <span class="need-label">T-slot nuts<br>x 2&ndash;3</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item" data-need="m3-x-6mm-x-2-3">
+          <img class="need-icon" src="../../Icons/screw.png" alt="M3 x 6mm screw">
+          <span class="need-label">M3 x 6mm<br>x 2&ndash;3</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item" data-need="flat-file">
+          <img class="need-icon" src="../../Icons/file.svg" alt="Flat file">
+          <span class="need-label">Flat file</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="need-card">
+      <div class="need-list need-list--parts">
+        <div class="need-item need-item--part" data-need="linear-rail">
+          <h4 class="part-name">Linear Rail</h4>
+          <div class="part-thumb"><img src="../../Images/components/linear-rail.jpg" alt="Linear Rail"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Explanations</h3>
+    <div class="explain-card">
+      <svg class="explain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+      <div class="explain-body">
+        <h4>How does the X-axis gantry of a 3D printer work?</h4>
+        <p>The X-axis gantry belt system in a 3D printer is responsible for moving the printhead horizontally from left to right or right to left along the X-axis. The belt can be thought of as a loop that connects the stepper motor to the printhead. The X-axis stepper motor rotates its drive pulley which is connected to the belt, therefore, when the X-axis stepper motor rotates it pulls the belt along it, moving the printhead.</p>
+      </div>
+    </div>
+    <div class="explain-card">
+      <svg class="explain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+      <div class="explain-body">
+        <h4>Why do we need a linear carriage?</h4>
+        <p>The main purpose of the linear carriage is to provide a platform to connect the Frame Assembly to the X-axis belt along with providing smooth and high-precision linear motion.</p>
+      </div>
+    </div>
+    <div class="explain-card">
+      <svg class="explain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+      <div class="explain-body">
+        <h4>Why do we need to file the T-slot nuts?</h4>
+        <p>T-slot nuts for M3 screws for aluminium extrusions come in standard sizes, and getting off-the-shelf nuts is much easier than making custom ones. Our X-axis gantry extrusion needs to accommodate both the timing belt and the T-slot nuts within the same slot, which means we need to ensure that there is sufficient clearance for both components to fit without interfering with each other. To achieve this, we file down the T-slot nuts to reduce their height, creating enough clearance for the timing belt to run underneath while still allowing the nuts to sit securely within the extrusion.</p>
+      </div>
+    </div>
+    <figure class="step-figure step-figure--md step-figure--plate">
+      <img src="../../Images/step-4/02-t-slot-nut.svg" alt="Cross-section through the gantry extrusion: a screw passes down through the linear rail and threads into a T-slot nut sitting in the slot, with arrows showing the nut pulled up under the slot lips, and the X-axis belt lying in the bottom of the same slot below the nut">
+      <figcaption>Figure 1: Section through the joint. The nut is wider than the slot opening, so tightening the screw pulls it up under the lips and clamps the rail onto the extrusion. The X-axis belt runs along the bottom of the same slot, below the nut.</figcaption>
+    </figure>
+
+    <h3>Instructions</h3>
+    <ol>
+      <li>
+        <strong>File each T-slot nut down until it fits.</strong> The goal is for the nut to drop into the
+        slot and, with a little force applied using a tool such as an Allen key, rotate into position and sit
+        snugly underneath the extrusion's T-slot lips. It should be secure without being excessively tight or
+        requiring too much force to turn. You are aiming for the T-slot nuts to slide with a bit of applied
+        finger force but not freely.
+        <div class="callout-important">
+          <p><strong>Note:</strong> 2&ndash;3 T-slot nuts is sufficient.</p>
+        </div>
+        <div class="callout-warning">
+          <p><strong>&#9888; Warning:</strong> Do the filing away from the printer and clean up afterwards. Steel
+            filings on the gantry end up in the belt and the bearings.</p>
+        </div>
+      </li>
+      <li>
+        <strong>Mount the linear rail.</strong> Line the linear rail up with the T-slot nuts and screw them
+        down using M3 &times; 6&nbsp;mm screws.
+        <figure class="step-figure step-figure--md">
+          <img src="../../Images/step-4/01-linear-rail.jpg" alt="Hand driving a screw with a small screwdriver through one of the holes along the centre of the black linear rail, mounted on the printer's X-axis gantry">
+          <figcaption>Figure 2: Screwing the linear rail down onto the X-axis gantry, 2-3 screws should be fine.</figcaption>
+        </figure>
+      </li>
+    </ol>
+
+    <h3>Tutorial videos</h3>
+    <p>Guided tutorial-videos for your convenience.</p>
+    <ul class="video-links">
+      <li>
+        <a href="../tutorial-videos.html#video-7">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 7</span>
+          <span class="vl-title">Filing T-slot nuts</span>
+        </a>
+      </li>
+      <li>
+        <a href="../tutorial-videos.html#video-8">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 8</span>
+          <span class="vl-title">Mounting the linear rail</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="step-actions">
+    <a class="btn btn-solid" href="../assembly.html">← Back to Assembly</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-col">
+      <div class="foot-line"><img class="foot-logo-ngenuity" src="/assets/logo.png" alt="Heimdall_logo"> — Automated liquid handling</div>
+      <div class="foot-line">
+        <a href="https://www.ngenuitylab.net/" target="_blank">
+          <img class="foot-logo-ngenuity" src="/assets/NGenuity_lab_logo.png" alt="NGenuity_lab_logo">
+        </a> — Self-driving labs for materials science
+      </div>
+    </div>
+    <div class="foot-col foot-col-center">
+      <div class="foot-links">
+        <a href="#">GitHub</a>
+        <a href="https://www.ngenuitylab.net/contact/">Reach Us</a>
+      </div>
+    </div>
+    <div class="foot-col foot-col-end">
+      <a href="https://www.ntu.edu.sg" target="_blank">
+        <img class="foot-logo-ntu" src="/assets/ntu_logo.png" alt="Nanyang Technological University">
+      </a>
+    </div>
+    <div class="foot-copyright">© 2026 NGenuity Lab · NTU School of Materials Science & Engineering</div>
+  </div>
+</footer>
+
+<script src="../../js/theme.js"></script>
+<script src="../../js/step-checklist.js"></script>
+<script src="../../js/lightbox.js?v=4"></script>
+</body>
+</html>

@@ -98,8 +98,11 @@
 .step-content{border-top:1px solid var(--line);padding-top:28px}
 .step-content h3{font-family:var(--display);font-weight:600;font-size:17px;margin:26px 0 10px}
 .step-content h3:first-child{margin-top:0}
-.step-content p,.step-content li{color:var(--muted);font-size:15px;line-height:1.68}
+.step-content p,.step-content li{color:var(--prose);font-size:15px;line-height:1.68}
 .step-content ul,.step-content ol{padding-left:22px;display:flex;flex-direction:column;gap:7px}
+/* an instruction step that other pages deep-link to (e.g. Calibration points at
+   the tip ejector step) has to clear the sticky header when it is jumped to */
+.step-content ol > li[id]{scroll-margin-top:100px}
 .step-content code{font-family:var(--mono);font-size:.9em;background:var(--surface);
   border:1px solid var(--line-2);border-radius:4px;padding:1px 6px;color:var(--text)}
 .placeholder-note{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
@@ -298,10 +301,15 @@
    block element with an opaque background still paints BELOW the fixed,
    z-index:0 .ambient grid layer unless it's lifted into its own stacking
    context, so the grid showed through even though the image is opaque. */
-.step-figure:has(img){position:relative;z-index:1;background:var(--island-bg);
-  border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(15,18,23,.06),0 10px 26px rgba(15,18,23,.08)}
+.step-figure:has(img){position:relative;z-index:1;background:var(--figure-bg);
+  border-radius:12px;padding:20px;box-shadow:var(--figure-shadow)}
+/* opt back into the fixed-white mat: for transparent PNG/SVG line art, the mat
+   is what makes the artwork legible, so it must not follow the theme */
+.step-figure--plate:has(img){background:var(--island-bg);
+  box-shadow:0 1px 3px rgba(15,18,23,.06),0 10px 26px rgba(15,18,23,.08)}
 .step-figure img{width:100%;border-radius:6px;display:block}
-.step-figure figcaption{margin-top:10px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--island-muted);text-align:center}
+.step-figure figcaption{margin-top:10px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--figure-caption);text-align:center}
+.step-figure--plate figcaption{color:var(--island-muted)}
 .step-figure-group{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:12px}
 /* margin:0 (not just margin-top) — .step-figure's own margin shorthand
    sets left/right:auto for standalone centering, and auto side-margins on
@@ -329,10 +337,34 @@
    .step-video already draws the 16/9 box, so all this has to do is open up
    the spacing from the tight default .step-content ol uses for prose steps. */
 .step-content .video-steps{gap:30px}
+/* each <li> is an anchor target for deep links from the sub-step pages */
+.step-content .video-steps > li{scroll-margin-top:100px}
 .step-content .video-steps .step-figure{margin-top:6px}
 /* caption sits ABOVE its player here (see the page markup), so the list
    number lines up with the title rather than the player's bottom edge */
 .step-content .video-steps figcaption{margin:0 0 10px;text-align:left;color:var(--muted)}
+
+/* ---------- links into the tutorial videos (sub-step pages) ----------
+   One row per clip, linking to steps/tutorial-videos.html at that video's
+   anchor. A bare <a> is color:inherit;text-decoration:none site-wide
+   (base.css), so each row carries its own affordance instead: accent play
+   icon, a border that lights up, and a nudge on hover. */
+.step-content .video-links{list-style:none;padding-left:0;gap:8px;margin:12px 0 0}
+.video-links a{display:flex;align-items:center;gap:12px;padding:11px 14px;
+  background:var(--surface);border:1px solid var(--line-2);border-radius:9px;
+  transition:border-color .2s,background .2s,transform .2s}
+.video-links a:hover{border-color:var(--accent);background:var(--bg-2);transform:translateX(3px)}
+.video-links a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.video-links svg{flex:none;width:18px;height:18px;color:var(--accent)}
+/* --muted, not the dimmer --muted-2 used for pure chrome: this label carries
+   the video number, so it has to clear AA against the row at 11.5px */
+.video-links .vl-num{flex:none;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted)}
+.video-links .vl-title{flex:1 1 auto;min-width:0;color:var(--text);font-size:14.5px;line-height:1.45}
+@media(max-width:560px){
+  .video-links a{align-items:flex-start}
+  .video-links svg,.video-links .vl-num{margin-top:1px}
+}
 
 /* ---------- explanation card (sub-step pages) ----------
    Same fixed-light "island" surface as .need-card / .callout-important,
@@ -346,6 +378,44 @@
 .explain-body h4{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.02em;
   text-transform:uppercase;color:var(--island-text);margin-bottom:10px}
 .explain-body p{color:var(--island-muted);font-size:14px;line-height:1.7}
+/* base.css zeroes every margin, so an explain card's own blocks need their own
+   rhythm — without this its paragraphs run together. */
+.explain-body > * + *{margin-top:10px}
+/* A list inside an explain card. The card paints --panel-bg, a pale island in
+   BOTH themes, so list text must take the island tokens like .explain-body p
+   above: inheriting --text would put near-white on pale blue in dark mode.
+   padding-left repeats .step-content ul's 22px so a card used outside
+   .step-content still clears its markers; that rule's flex gap spaces the
+   items, so no per-item margin here. */
+.explain-body ul{padding-left:22px}
+.explain-body li{color:var(--island-muted);font-size:14px;line-height:1.7}
+.explain-body li strong{color:var(--island-text);font-weight:600}
+/* base.css makes every <a> color:inherit;text-decoration:none, so a link in
+   here would be invisible as a link. --island-link is the token for exactly
+   this: legible on the fixed-light panels in both themes (see .part-more). */
+.explain-body a{color:var(--island-link);text-decoration:underline}
+.explain-body li::marker{color:var(--accent)}
+/* Same reason .callout-warning and .guide-table override it below: a code chip
+   sitting on a pale island must not use the dark --surface/--text pair. */
+.step-content .explain-card code{background:#f1f3f6;color:var(--island-text)}
+
+/* Expandable explain card — a native <details>, so it needs no JS and is
+   keyboard-operable for free. .explain-card is display:flex with the icon as a
+   flex child; a <details> has to stack instead, hence the block override. */
+details.explain-card{display:block}
+details.explain-card > summary{display:flex;align-items:center;gap:16px;cursor:pointer;
+  font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.02em;
+  text-transform:uppercase;color:var(--island-text);list-style:none}
+/* both halves of hiding the default triangle — WebKit uses its own pseudo */
+details.explain-card > summary::-webkit-details-marker{display:none}
+details.explain-card > summary::marker{content:""}
+/* chevron, rotated when open */
+details.explain-card > summary::after{content:"";flex:none;margin-left:auto;width:8px;height:8px;
+  border-right:2px solid var(--island-muted);border-bottom:2px solid var(--island-muted);
+  transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s}
+details.explain-card[open] > summary::after{transform:rotate(-135deg)}
+details.explain-card > summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+details.explain-card > .explain-body{margin-top:14px}
 
 @media(max-width:520px){
   .explain-card{padding:18px 20px;gap:12px}
@@ -406,16 +476,37 @@
 }
 .is-step-locked .guide-toc{display:none}
 .step-content .guide-features{margin:0}
-.step-content .guide-features li{color:var(--island-text);font-size:14.5px}
+/* --island-text is the dark ink for pale island panels. A .guide-features list
+   is used BOTH inside an island (.need-card / .explain-card) and bare on the
+   ambient page, where that ink rendered near-black on the dark canvas — so the
+   island colour is scoped to the islands and the bare list takes prose colour. */
+.step-content .guide-features li{color:var(--prose);font-size:14.5px}
+.step-content .need-card .guide-features li,
+.step-content .explain-card .guide-features li{color:var(--island-text)}
 .guide-section{padding-top:34px;margin-top:34px;border-top:1px solid var(--line);scroll-margin-top:100px}
 .step-content .guide-section h2{font-family:var(--display);font-weight:700;font-size:clamp(21px,2.6vw,26px);margin-bottom:12px}
 .guide-section h4{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.06em;
   text-transform:uppercase;color:var(--text);margin:22px 0 6px}
 .guide-section .explain-body h4{font-weight:700;font-size:14px;letter-spacing:.02em;color:var(--island-text);margin:0 0 10px}
 .guide h3{scroll-margin-top:100px}
-.guide-section p + p{margin-top:10px}
+/* ".guide-section" alone would miss the intro paragraphs, which sit directly
+   under .step-content.guide ABOVE the first section — with more than one of
+   them they ran together as a single block (no margin on <p> by default). */
+.guide-section p + p,
+.step-content.guide > p + p{margin-top:10px}
 .guide-section ul,.guide-section ol{margin:10px 0}
 .guide-section strong{color:var(--text);font-weight:600}
+/* ...but NOT inside the fixed-light "island" panels (see --island-* in
+   tokens.css): those stay pale in BOTH themes, while --text flips to
+   near-white in dark mode — which painted <strong> near-white on near-white,
+   at a contrast ratio of 1.04. It wiped out the Set/Save button names on the
+   calibration page and the whole part-category column on printing
+   instructions. .callout-warning needs no entry: its own amber rule wins. */
+.step-content .guide-table strong,
+.step-content .need-card strong,
+.step-content .explain-card strong,
+.step-content .callout-important strong,
+.step-content .guide-diagram strong{color:var(--island-text)}
 .guide-section > p a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
 .code-block{position:relative;z-index:1;margin:10px 0 14px;background:#0f1217;color:#e6e9ee;
   border:1px solid var(--line-2);border-radius:8px;padding:14px 18px;overflow-x:auto;
@@ -424,8 +515,10 @@
 .callout-warning{position:relative;z-index:1;background:var(--island-bg);border:1px solid #e8a33d;
   border-left:4px solid #e8a33d;border-radius:10px;padding:14px 18px;margin:14px 0}
 .step-content .callout-warning p{color:var(--island-text);font-size:14px;line-height:1.6;margin:0}
+.step-content .callout-warning p + p{margin-top:10px}
 .step-content .callout-warning strong{color:#b36b00}
 .step-content .callout-warning code{background:#f1f3f6;color:var(--island-text)}
+.step-content .callout-important code{background:#f1f3f6;color:var(--island-text)}
 .guide-table-wrap{position:relative;z-index:1;background:var(--panel-bg);border-radius:12px;padding:6px 20px;
   margin-top:12px;overflow-x:auto}
 .guide-table{width:100%;min-width:460px;border-collapse:collapse;font-size:14px}
@@ -435,6 +528,32 @@
   text-transform:uppercase;color:var(--island-muted)}
 .guide-table td{color:var(--island-text);line-height:1.55}
 .step-content .guide-table code{background:#f1f3f6;color:var(--island-text);white-space:nowrap}
+
+/* ---------- schematic diagrams inside a guide (.guide-diagram) ----------
+   Same pale --panel-bg island as .guide-table-wrap, so an inline <svg> line
+   drawing sits on a surface that is light in BOTH themes — which is why the
+   strokes/labels below key off the fixed --island-* tokens rather than
+   --text/--muted (those flip with the theme and would go invisible here). */
+.guide-diagram{position:relative;z-index:1;background:var(--panel-bg);border-radius:12px;
+  padding:20px 22px 14px;margin-top:14px;overflow-x:auto}
+.guide-diagram svg{display:block;width:100%;min-width:560px;height:auto}
+.guide-diagram text{font-family:var(--mono);font-size:11px;fill:var(--island-text)}
+.guide-diagram .d-muted{fill:var(--island-muted);font-size:10px}
+.guide-diagram .d-head{font-family:var(--display);font-size:12px;font-weight:700}
+.guide-diagram .d-label{fill:var(--island-link);font-weight:600}
+/* fill:none on every stroked shape — an SVG <path>/<rect> defaults to black fill */
+.guide-diagram .d-line,.guide-diagram .d-dash,.guide-diagram .d-arrow{fill:none;stroke-width:1.5}
+.guide-diagram .d-line{stroke:var(--island-text);stroke-opacity:.5}
+.guide-diagram .d-dash{stroke:var(--island-muted);stroke-opacity:.9;stroke-dasharray:4 4}
+.guide-diagram .d-arrow{stroke:var(--island-link)}
+.guide-diagram .d-arrow--dash{stroke-dasharray:4 3}
+.guide-diagram .d-box{fill:var(--island-text);fill-opacity:.06;stroke:var(--island-text);
+  stroke-opacity:.45;stroke-width:1.5}
+.guide-diagram .d-liquid{fill:var(--island-link);fill-opacity:.2;stroke:none}
+/* markers do NOT inherit fill from the element that references them */
+.guide-diagram marker path{fill:var(--island-link)}
+.guide-diagram figcaption{margin-top:12px;font-family:var(--mono);font-size:11.5px;
+  color:var(--island-muted);text-align:center}
 .step-figure--lg{max-width:760px}
 
 .step-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:42px}

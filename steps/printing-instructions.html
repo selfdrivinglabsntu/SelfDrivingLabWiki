@@ -10,13 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/tokens.css?v=16">
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/sections.css">
-<link rel="stylesheet" href="../css/build.css?v=13">
-<link rel="stylesheet" href="../css/sneak-peek.css?v=2">
+<link rel="stylesheet" href="../css/build.css?v=16">
 </head>
-<body class="showcase-peek">
+<body>
 
 <div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
 
@@ -48,17 +47,7 @@
     </a>
   </div>
 
-  <!-- SHOWCASE: temporary sneak-peek banner. The content below it reads for
-       about a third of its length and is frosted over after that, by
-       css/sneak-peek.css + js/sneak-peek.js (see data-peek). Remove all of
-       it to publish. -->
-  <section class="sneak-peek" aria-label="Sneak peek">
-    <p class="sneak-peek-eyebrow"><span class="sneak-peek-dot" aria-hidden="true"></span>Work in progress</p>
-    <h2>Sneak peek</h2>
-    <p class="sneak-peek-note">Keep an eye out &mdash; exciting stuff is coming soon.</p>
-  </section>
-
-  <div class="step-content guide" data-peek>
+  <div class="step-content guide">
     <p>Before diving into the production of your parts, it is important to consider your manufacturing approach. The core spirit of this open-source project is to empower you to use a 3D printer to fabricate the entire machine yourself. However, practical testing has shown that printing every component locally can be highly time-consuming, requiring significant machine calibration, print time and post-processing.</p>
     <p>If you are on a tight timeline or need maximum structural reliability right out of the box, we highly suggest outsourcing these files to a commercial 3D printing service (such as JLCPCB, PCBWay or Craftcloud) for rapid production.</p>
 
@@ -153,6 +142,5 @@
 </footer>
 
 <script src="../js/theme.js"></script>
-<script src="../js/sneak-peek.js?v=2"></script>
 </body>
 </html>

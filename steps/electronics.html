@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.dataset.theme=localStorage.getItem('piper-theme')||'dark';</script>
+<title>Electronics — HEIMDALL build</title>
+<meta name="description" content="Solder the control board, wire the motor and 12V supply, flash the ESP32 and mount the electronics enclosure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/tokens.css?v=16">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/sections.css">
+<link rel="stylesheet" href="../css/build.css?v=16">
+</head>
+<body data-step="electronics">
+
+<div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
+
+<header class="build-nav">
+  <div class="build-nav-inner">
+    <a href="../index.html" class="build-brand" aria-label="HEIMDALL home">
+      <img src="../assets/logo.png" alt="HEIMDALL @NTU MSE"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="brand-text" style="display:none"><span class="mark"></span>HEIMDALL</span>
+    </a>
+    <div class="build-nav-actions">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to light theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="../build.html" class="back">← Build hub</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap step-main has-toc">
+  <div class="step-head">
+    <span class="step-num">Step 04</span>
+    <h1>Electronics</h1>
+    <p class="lead">Solder the control board, wire the motor and the 12V supply, flash the ESP32, and mount it all in the enclosure.</p>
+    <span class="step-status"><span class="step-status-text">In progress</span></span>
+  </div>
+
+  <aside class="guide-toc" aria-label="On this page">
+    <p class="guide-toc-title">On this page</p>
+    <!-- links are generated from the section headings by js/toc.js -->
+    <ol class="guide-toc-list"></ol>
+  </aside>
+
+  <div class="step-content guide">
+    <div class="need-card">
+      <h3 class="need-heading">Components &amp; materials</h3>
+      <ul class="guide-features">
+        <li>Mounting Case</li>
+        <li>ESP32 Development Board</li>
+        <li>TB6612FNG Motor Driver Module</li>
+        <li>DC Barrel Jack (for 12V input)</li>
+        <li>Linear Actuator</li>
+        <li>Donut Board / Perforated PCB</li>
+        <li>Creality Extruder Breakout Board</li>
+        <li>Ender 3 S1 Extruder Breakout Board</li>
+        <li>Female Header Pins (x2, to socket the ESP32 / driver)</li>
+        <li>JST 2-Pin Male PCB Headers (x2)</li>
+        <li>JST 2-Pin Female Wire Connectors (x2)</li>
+        <li>Butt Crimp Connectors</li>
+        <li>24 AWG Hook-up Wire (recommended)</li>
+        <li>Solder</li>
+        <li>USB-C Cable</li>
+        <li>M2 &amp; M3 Screws</li>
+        <li>Molex PicoBlade (1.25mm pitch) 4-pin male Connectors</li>
+        <li>Stepper Motor JST Connector</li>
+      </ul>
+    </div>
+
+    <div class="need-card">
+      <h3 class="need-heading">Tools &amp; software</h3>
+      <ul class="guide-features">
+        <li>Soldering Iron &amp; Solder Wire</li>
+        <li>Wire Strippers</li>
+        <li>Crimping Tool (for JST / butt crimps)</li>
+        <li>Multimeter</li>
+        <li><strong>Arduino IDE</strong> &mdash; download and install it before you reach
+          <a href="#flash-esp">&sect;3</a>.</li>
+      </ul>
+    </div>
+
+    <!-- ============ 1. Soldering the PCB ============ -->
+    <section class="guide-section" id="solder-pcb">
+      <h2>1. Soldering the PCB</h2>
+      <p>Follow the schematic below to assemble your control board on the donut board.</p>
+      <figure class="step-figure step-figure--lg step-figure--plate">
+        <img src="../Images/electronics/pcb-schematic.png" alt="Wiring schematic: an ESP32 development board on the left joined to a red TB6612FNG motor driver on the right. Two signal wires run from the ESP32's right-hand pins to the driver's PWMA and AI2 inputs, a green wire runs from ESP32 GND to the driver's GND and a red wire from 3V3 to VCC. A DC barrel jack below feeds the driver's VM and GND, and the driver's A01/A02 outputs run to a linear actuator.">
+        <figcaption>Figure 1: The control board schematic — ESP32 to TB6612FNG driver, the 12V barrel jack into the driver's motor supply, and the driver's output to the linear actuator.</figcaption>
+      </figure>
+      <ol>
+        <li>Solder the female header pins onto the donut board for the ESP32 and the TB6612FNG motor driver.</li>
+        <li>Run your 24 AWG wires along the back of the board to establish the connections between the ESP32 pins, the motor driver logic pins, and the power rails.</li>
+        <li>Solder the two JST 2-pin male headers onto the board. One will serve as the dedicated 12V power supply input, and the other will serve as the motor driver output to the linear actuator.</li>
+        <li>Use a multimeter continuity tester to check the connections.</li>
+      </ol>
+    </section>
+
+    <!-- ============ 2. Wiring the motor and 12V supply ============ -->
+    <section class="guide-section" id="motor-power">
+      <h2>2. Wiring the motor and 12V power supply</h2>
+      <p>Once your main control board is soldered, prepare the external connections.</p>
+
+      <h3 id="power-supply">2.1. Power supply connection</h3>
+      <ol>
+        <li>Strip the ends of the positive and negative wires coming from your 12V DC barrel jack.</li>
+        <li>Crimp these wires into a JST 2-pin female connector housing.</li>
+        <li>Double-check your polarity (+/&minus;) against your PCB layout before plugging it into the power input JST header.</li>
+      </ol>
+
+      <h3 id="actuator-connection">2.2. Linear actuator connection</h3>
+      <ol>
+        <li>Cut the factory leads of the linear actuator to your desired length and strip the ends.</li>
+        <li>Crimp a JST 2-pin female connector housing onto the actuator leads using your crimping tool, or use butt crimps if you are extending the wires permanently.</li>
+        <li>Plug this connector into the designated motor output JST header on your board.</li>
+      </ol>
+    </section>
+
+    <!-- ============ 3. Flashing the ESP firmware ============ -->
+    <section class="guide-section" id="flash-esp">
+      <h2>3. Flashing the ESP firmware</h2>
+      <p>If you have not already done so, download the project repository &mdash; see
+        <a href="software.html">Software</a> for where to get it.</p>
+      <ol>
+        <li>Open the Arduino IDE on your computer and connect your ESP32 development board using a USB-C cable.</li>
+        <li>In the IDE menu, go to <strong>Tools &rsaquo; Board</strong> and select <strong>ESP32 Dev Module</strong> (or your specific ESP32 board variant). Then go to <strong>Tools &rsaquo; Port</strong> and select the active COM port assigned to your plugged-in board.</li>
+        <li>In the downloaded repository, open <code>ESP32/esp_comm/esp_comm.ino</code> with the Arduino IDE.</li>
+        <li>Click the <strong>Upload</strong> button (the right-arrow icon) to flash the firmware onto the board.</li>
+      </ol>
+    </section>
+
+    <!-- ============ 4. Extruder motor wiring ============ -->
+    <section class="guide-section" id="extruder-wiring">
+      <h2>4. Extruder motor wiring</h2>
+      <p>Solder or crimp your extruder motor wires to a Molex PicoBlade (1.25mm pitch) male connector.</p>
+      <div class="callout-warning">
+        <p><strong>&#9888; Warning:</strong> Check that your wire pinning matches your specific
+          stepper motor's phase coils before plugging it in. Getting the coil pairs wrong is the one
+          mistake here that can damage the driver.</p>
+      </div>
+    </section>
+
+    <!-- ============ 5. Mounting the electronics ============ -->
+    <section class="guide-section" id="mounting">
+      <h2>5. Mounting the electronics</h2>
+      <ol>
+        <li>Thread the M3 screws loosely into the T-slot nuts through the mounting holes of the electronics enclosure case.</li>
+        <li>Align the T-slot nuts with the channels on the liquid handler's aluminium extrusions, press the case flat against the frame, and tighten the screws securely.</li>
+        <li>Mount your extruder breakout board into its designated slot within the case, then plug in the extruder motor cable, and plug the main cable into the board through the top of the case.</li>
+        <li>Mount your main control PCB into the enclosure. Connect the 12V power supply JST connector, the linear actuator JST connector, and the USB-C data cable to the ESP32.</li>
+        <li>Close the enclosure with 2 M3 screws.</li>
+      </ol>
+      <figure class="step-figure step-figure--md">
+        <img src="../Images/components/assembled-pcb.jpg" alt="The open black enclosure mounted on the machine: the Creality extruder breakout board fixed at the top, and below it the green donut board carrying the red TB6612FNG driver and the socketed ESP32, with a USB-C lead plugged in and crimped red and black power wires running out of the case">
+        <figcaption>Figure 2: The finished electronics in the case — extruder breakout board above, control board with the driver and ESP32 below, USB-C and power connected.</figcaption>
+      </figure>
+      <div class="callout-important">
+        <p><strong>Next:</strong> with the ESP32 flashed and wired, carry on to
+          <a href="software.html">Software</a> to install the control GUI and connect to it.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="step-actions">
+    <button class="btn btn-solid complete-btn" type="button">Mark step complete</button>
+    <span class="hint">You can undo this anytime.</span>
+  </div>
+
+  <nav class="step-nav" aria-label="Step navigation"></nav>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-col">
+      <div class="foot-line"><img class="foot-logo-ngenuity" src="/assets/logo.png" alt="Heimdall_logo"> — Automated liquid handling</div>
+      <div class="foot-line">
+        <a href="https://www.ngenuitylab.net/" target="_blank">
+          <img class="foot-logo-ngenuity" src="/assets/NGenuity_lab_logo.png" alt="NGenuity_lab_logo">
+        </a> — Self-driving labs for materials science
+      </div>
+    </div>
+    <div class="foot-col foot-col-center">
+      <div class="foot-links">
+        <a href="#">GitHub</a>
+        <a href="https://www.ngenuitylab.net/contact/">Reach Us</a>
+      </div>
+    </div>
+    <div class="foot-col foot-col-end">
+      <a href="https://www.ntu.edu.sg" target="_blank">
+        <img class="foot-logo-ntu" src="/assets/ntu_logo.png" alt="Nanyang Technological University">
+      </a>
+    </div>
+    <div class="foot-copyright">© 2026 NGenuity Lab · NTU School of Materials Science & Engineering</div>
+  </div>
+</footer>
+
+<script src="../js/theme.js"></script>
+<script src="../js/lightbox.js?v=4"></script>
+<script src="../js/toc.js"></script>
+<script type="module" src="../js/build-step.js?v=6"></script>
+</body>
+</html>

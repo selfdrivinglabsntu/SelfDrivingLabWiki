@@ -10,13 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/tokens.css?v=16">
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/sections.css">
-<link rel="stylesheet" href="../css/build.css?v=13">
-<link rel="stylesheet" href="../css/sneak-peek.css?v=2">
+<link rel="stylesheet" href="../css/build.css?v=16">
 </head>
-<body class="showcase-peek" data-step="calibration">
+<body data-step="calibration">
 
 <div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
 
@@ -37,28 +36,837 @@
   </div>
 </header>
 
-<main class="wrap step-main">
+<main class="wrap step-main has-toc">
   <div class="step-head">
-    <span class="step-num">Step 05</span>
+    <span class="step-num">Step 06</span>
     <h1>Calibration</h1>
     <p class="lead">Tune volumes and coordinates so every draw is accurate.</p>
     <span class="step-status"><span class="step-status-text">In progress</span></span>
   </div>
 
-  <!-- SHOWCASE: temporary sneak-peek banner. This step is still a placeholder,
-       so data-peek-from on the region frosts it end to end rather than showing
-       a share of it — css/sneak-peek.css + js/sneak-peek.js. Remove all of it
-       to publish. -->
-  <section class="sneak-peek" aria-label="Sneak peek">
-    <p class="sneak-peek-eyebrow"><span class="sneak-peek-dot" aria-hidden="true"></span>Work in progress</p>
-    <h2>Sneak peek</h2>
-    <p class="sneak-peek-note">Keep an eye out &mdash; exciting stuff is coming soon.</p>
-  </section>
+  <aside class="guide-toc" aria-label="On this page">
+    <p class="guide-toc-title">On this page</p>
+    <!-- links are generated from the section headings by js/toc.js -->
+    <ol class="guide-toc-list"></ol>
+  </aside>
 
-  <div class="step-content" data-peek data-peek-from>
-    <p class="placeholder-note">Placeholder — calibration procedure coming later.</p>
-    <h3>Calibrate</h3>
-    <p>TBD — set the origin, calibrate volume per step, and verify against a reference.</p>
+  <div class="step-content guide">
+    <div class="need-card">
+      <h3 class="need-heading">What you are calibrating</h3>
+      <ul class="guide-features">
+        <li>One anchor coordinate for every item on the bed plate &mdash; stored in <code>points.yaml</code></li>
+        <li>The grid geometry and working depths of each item model &mdash; stored in <code>equipment.yaml</code></li>
+        <li>Which item sits on which anchor, and what role it plays &mdash; stored in <code>preset.yaml</code></li>
+        <li>How long the actuator runs per microlitre &mdash; stored in <code>printers.yaml</code></li>
+      </ul>
+    </div>
+
+    <p>For calibrating the 3D printer you do not need to manually enter the coordinates for every
+      tip, bottle or well on the bed. Instead, each item on the bed plate is defined by a single
+      <strong>anchor coordinate</strong> and its geometry. The anchor coordinate is the reference
+      position of the grid &mdash; typically the centre of its first well or vessel, depending on
+      which corner is selected as the starting point. The GUI uses this reference position, together
+      with the grid geometry, to calculate the coordinates of every other position automatically.</p>
+
+    <p>The geometry is essentially a grid. Whether it&rsquo;s a tip rack, bottle holder or well
+      plate, each is treated as a set of evenly spaced rows and columns. To define one, you only
+      need to specify the number of rows and columns, the centre-to-centre spacing (pitch), which
+      corner serves as the anchor point, and how far the pipette should descend when accessing it.</p>
+
+    <p>Once these parameters are set correctly, the GUI can work out where each tip, bottle or well
+      is located. This allows the pipette to pick up the correct tip, reach the stock solution just
+      below its surface, and dispense into the intended well without having to manually define every
+      position.</p>
+
+    <p>All these settings are stored in four YAML files under
+      <a href="https://github.com/selfdrivinglabsntu/SelfDrivingLab/tree/main/GUI/configs" target="_blank" rel="noopener"><code>GUI/configs</code></a>.
+      Since YAML files are plain text, you can configure the values through the GUI and still
+      inspect, compare, version-control or edit them manually whenever needed.</p>
+
+    <!-- ============ 0. The coordinate model ============ -->
+    <section class="guide-section" id="coordinate-model">
+      <h2>0. How the coordinate model works</h2>
+      <p>Before editing anything, it is worth knowing which file holds what &mdash; most calibration
+        problems turn out to be a correct number in the wrong file.</p>
+
+      <h3 id="config-files">0.1. The four configuration files</h3>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr><th>File</th><th>What it stores</th><th>Scope</th><th>Normally written by</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>points.yaml</code></td>
+              <td>Named <code>x</code> / <code>y</code> / <code>z</code> anchor coordinates, in millimetres</td>
+              <td>One entry per physical position on the deck</td>
+              <td>Configure Plate &rarr; <strong>Set</strong> &rarr; <strong>Save</strong></td>
+            </tr>
+            <tr>
+              <td><code>equipment.yaml</code></td>
+              <td>Grid size, pitch, anchor corner and working depths</td>
+              <td>One entry per equipment <em>model</em>, reusable on any deck</td>
+              <td>By hand</td>
+            </tr>
+            <tr>
+              <td><code>preset.yaml</code></td>
+              <td>Which model sits on which anchor, and its role</td>
+              <td>One entry per bed-plate layout</td>
+              <td>Configure Plate &rarr; <strong>Save Preset</strong></td>
+            </tr>
+            <tr>
+              <td><code>printers.yaml</code></td>
+              <td>Pipette limits, actuation timings, tip disposal, default preset</td>
+              <td>One entry per handler</td>
+              <td>By hand &mdash; see <a href="software.html#new-handler">Software &sect;1</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The split matters. <code>equipment.yaml</code> describes <em>what a piece of labware is</em>
+        and travels with the design; <code>points.yaml</code> describes <em>where you happened to put
+        it</em> and is specific to your machine. Two HEIMDALLs can share an equipment definition and
+        still have completely different points.</p>
+
+      <h3 id="anchor-to-grid">0.2. One anchor, every position</h3>
+      <p>Each item is treated as a regular grid. The GUI takes the anchor from <code>points.yaml</code>,
+        the pitch and grid size from <code>equipment.yaml</code>, and generates the rest:</p>
+      <pre class="code-block"><code>x = anchor.x + column × dx
+y = anchor.y + row    × dy
+z = anchor.z          # every position on an item shares one Z</code></pre>
+      <p><code>dx</code> and <code>dy</code> are the model&rsquo;s <code>x</code> and <code>y</code>
+        pitch, signed by its <code>origin</code> key &mdash; which names the corner of the grid the
+        anchor sits on:</p>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr><th><code>origin</code></th><th>Column step <code>dx</code></th><th>Row step <code>dy</code></th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>top-left</code> (used when the key is absent)</td><td>+<code>x</code></td><td>&minus;<code>y</code></td></tr>
+            <tr><td><code>top-right</code></td><td>&minus;<code>x</code></td><td>&minus;<code>y</code></td></tr>
+            <tr><td><code>bottom-left</code></td><td>+<code>x</code></td><td>+<code>y</code></td></tr>
+            <tr><td><code>bottom-right</code></td><td>&minus;<code>x</code></td><td>+<code>y</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>So a <code>96-wellplate</code> &mdash; <code>origin: bottom-left</code>, 9&nbsp;mm pitch,
+        12&nbsp;rows by 8&nbsp;columns &mdash; anchored at <code>x: 41.9, y: 101.7</code> covers
+        41.9&ndash;104.9&nbsp;mm in X and 101.7&ndash;200.7&nbsp;mm in Y: the
+        63&nbsp;&times;&nbsp;99&nbsp;mm footprint you would expect, derived from one stored
+        coordinate.</p>
+      <div class="callout-warning">
+        <p><strong>Useful consequence:</strong> if the anchor vessel is dead on but the error grows
+          as the pipette works across the plate, the fault is the <code>x</code>&nbsp;/&nbsp;<code>y</code>
+          pitch in <code>equipment.yaml</code>, not the point. Re-capturing the anchor will not fix it.</p>
+      </div>
+
+      <h3 id="stored-z">0.3. What the stored Z means</h3>
+      <p>The anchor&rsquo;s Z doesn&rsquo;t define how deep the pipette goes into an item. It is the
+        height the pipette sits at <em>over</em> that item, and the height it travels at to reach
+        the item without clipping anything. Every working move is a relative drop from there, set
+        per model by <code>z-drop</code> &mdash; and, on a tip rack, <code>z-lift</code>.</p>
+
+      <p><code>z-drop</code> is that drop: how far, in millimetres, the tip descends from the anchor
+        Z to reach its working position on that item. It is stored in <code>equipment.yaml</code>
+        rather than <code>points.yaml</code> because it describes the item itself &mdash; how far
+        down inside it the tip has to go &mdash; not where the item sits on the deck. Move the same
+        rack to the other side of the bed and its <code>z-drop</code> is unchanged; only its anchor
+        moves.</p>
+
+      <p>What counts as the working position depends on what the item is for, so the same key does
+        three slightly different jobs:</p>
+      <ul>
+        <li><strong>Tip rack</strong> &mdash; far enough down onto the tip to seat it firmly.</li>
+        <li><strong>Source</strong> &mdash; down to just below the surface of a <em>full</em> vessel.</li>
+        <li><strong>Target</strong> &mdash; just inside the mouth of the well, before the plunger fires.</li>
+      </ul>
+
+      <figure class="guide-diagram">
+        <svg viewBox="0 0 720 326" role="img" aria-labelledby="zdiag-t zdiag-d">
+          <title id="zdiag-t">How a stored anchor Z becomes the working depth</title>
+          <desc id="zdiag-d">Three columns. On a tip rack the pipette drops by z-drop onto the tip
+            and then rises by z-lift to clear the rack. On a source vessel it drops by z-drop to
+            just under the surface of a full bottle, plus a further distance that grows as the
+            bottle empties. On a target plate it drops by a small z-drop to just inside the well
+            mouth before the plunger is depressed.</desc>
+          <defs>
+            <marker id="cal-arrow" viewBox="0 0 8 8" refX="7" refY="4"
+                    markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L8,4 L0,8 Z"/>
+            </marker>
+          </defs>
+
+          <!-- deck -->
+          <line class="d-line" x1="20" y1="288" x2="700" y2="288"/>
+
+          <!-- ---------- 1. tip rack ---------- -->
+          <text class="d-head" x="120" y="20" text-anchor="middle">Tip rack</text>
+          <text class="d-muted" x="120" y="34" text-anchor="middle">type: TipHolder</text>
+          <line class="d-dash" x1="55" y1="96" x2="185" y2="96"/>
+          <text class="d-muted" x="55" y="88">anchor Z</text>
+          <rect class="d-box" x="60" y="236" width="120" height="52" rx="4"/>
+          <path class="d-line" d="M78,196 L92,196 L89,236 L81,236 Z"/>
+          <path class="d-line" d="M113,196 L127,196 L124,236 L116,236 Z"/>
+          <path class="d-line" d="M148,196 L162,196 L159,236 L151,236 Z"/>
+          <line class="d-arrow" x1="100" y1="100" x2="100" y2="190" marker-end="url(#cal-arrow)"/>
+          <text class="d-label" x="94" y="150" text-anchor="end">z-drop</text>
+          <line class="d-arrow" x1="142" y1="192" x2="142" y2="62" marker-end="url(#cal-arrow)"/>
+          <text class="d-label" x="149" y="130">z-lift</text>
+          <text class="d-muted" x="120" y="312" text-anchor="middle">press on, then lift clear</text>
+
+          <!-- ---------- 2. source ---------- -->
+          <text class="d-head" x="345" y="20" text-anchor="middle">Stock solution</text>
+          <text class="d-muted" x="345" y="34" text-anchor="middle">type: Source</text>
+          <line class="d-dash" x1="295" y1="96" x2="395" y2="96"/>
+          <text class="d-muted" x="295" y="88">anchor Z</text>
+          <rect class="d-box" x="300" y="180" width="90" height="108" rx="4"/>
+          <rect class="d-liquid" x="302" y="244" width="86" height="43"/>
+          <line class="d-dash" x1="302" y1="206" x2="388" y2="206"/>
+          <text class="d-muted" x="306" y="201">full</text>
+          <text class="d-muted" x="306" y="239">now</text>
+          <line class="d-arrow" x1="345" y1="100" x2="345" y2="202" marker-end="url(#cal-arrow)"/>
+          <text class="d-label" x="400" y="152">z-drop</text>
+          <line class="d-arrow d-arrow--dash" x1="345" y1="208" x2="345" y2="240" marker-end="url(#cal-arrow)"/>
+          <text class="d-label" x="400" y="232">+ liquid height</text>
+          <text class="d-muted" x="345" y="312" text-anchor="middle">down to just under the surface</text>
+
+          <!-- ---------- 3. target ---------- -->
+          <text class="d-head" x="600" y="20" text-anchor="middle">Target wells</text>
+          <text class="d-muted" x="600" y="34" text-anchor="middle">type: Target</text>
+          <line class="d-dash" x1="525" y1="96" x2="675" y2="96"/>
+          <text class="d-muted" x="525" y="88">anchor Z</text>
+          <rect class="d-box" x="530" y="226" width="140" height="62" rx="4"/>
+          <path class="d-line" d="M548,226 L548,276 L576,276 L576,226"/>
+          <path class="d-line" d="M588,226 L588,276 L616,276 L616,226"/>
+          <path class="d-line" d="M628,226 L628,276 L656,276 L656,226"/>
+          <rect class="d-liquid" x="590" y="258" width="24" height="18"/>
+          <line class="d-arrow" x1="602" y1="100" x2="602" y2="222" marker-end="url(#cal-arrow)"/>
+          <text class="d-label" x="610" y="160">z-drop</text>
+          <text class="d-muted" x="600" y="312" text-anchor="middle">just inside the well mouth</text>
+        </svg>
+        <figcaption>Figure 1: Every working move is relative to the stored anchor Z (not to scale)</figcaption>
+      </figure>
+
+      <div class="callout-warning">
+        <p><strong>Important:</strong> because the anchor Z doubles as the travel height over that
+          item, <code>z-drop</code> must be <em>at least</em> the distance from the item&rsquo;s rim
+          down to its working point. Set the anchor too low and the handler will cross the deck at a
+          height that drags the tip through neighbouring labware.</p>
+      </div>
+    </section>
+
+    <!-- ============ 1. points.yaml ============ -->
+    <section class="guide-section" id="points-yaml">
+      <h2>1. Storing an anchor &mdash; points.yaml</h2>
+      <p><code>points.yaml</code> is a flat list of named coordinates. Nothing in it knows what kind
+        of equipment it belongs to &mdash; it is just a place on the deck:</p>
+      <pre class="code-block"><code>bosco-96-wellplate:
+  x: 41.9
+  y: 101.7
+  z: 150.0
+bosco-falcon-tubes:
+  x: 156.9
+  y: 206.6
+  z: 249.5
+small-tip-holder-bosco:
+  x: 102.6
+  y: 66.6
+  z: 164.3</code></pre>
+      <p>The numbers are millimetres in the handler&rsquo;s own coordinate frame &mdash; exactly what
+        the Manual tab&rsquo;s <strong>Set</strong> button reads back from the machine. They are only
+        meaningful relative to the homing position, so the machine must be
+        <a href="software.html#homing">homed</a> before any coordinate is captured or used.</p>
+
+      <h3 id="capturing-anchor">1.1. Capturing an anchor from the GUI</h3>
+      <p>This is the normal route, and it is written up step by step in
+        <a href="software.html#calibrating-equipment">Software &sect;1.5, Calibrating equipment</a>.
+        In short: jog the tip to the anchor vessel, raise it by that model&rsquo;s <code>z-drop</code>,
+        then <strong>Set</strong> and <strong>Save</strong>. The GUI writes the coordinate straight
+        into <code>points.yaml</code> under the name you give it.</p>
+      <p>Raising by <code>z-drop</code> before saving is the part people skip. The stored Z is the
+        height <em>above</em> the working point (see <a href="#stored-z">&sect;0.3</a>), so if you
+        capture the position with the tip still down in the vessel, every run will drive the tip
+        <code>z-drop</code> millimetres into the bottom of it.</p>
+
+      <h3 id="editing-points">1.2. Editing points by hand</h3>
+      <p>Hand-editing is the quickest way to apply a correction you have measured. If a dry run shows
+        the tip landing 0.4&nbsp;mm short in Y across the whole plate, add 0.4 to that point&rsquo;s
+        <code>y</code> rather than re-jogging and re-capturing &mdash; it is repeatable and you can
+        see exactly what changed.</p>
+      <p>Keep the structure as the GUI writes it: two-space indentation, one key per point, and
+        <code>x</code>, <code>y</code>, <code>z</code> beneath it. Plain numbers only, no units and
+        no quotes.</p>
+
+      <h3 id="naming-points">1.3. Naming points</h3>
+      <p>Names are free-form but must be unique, because <code>preset.yaml</code> refers to them by
+        name. Including the handler is a good habit when you run more than one machine
+        (<code>bosco-96-wellplate</code>, <code>charlie-tip-holder</code>), since the points file is
+        shared across all of them.</p>
+      <div class="callout-warning">
+        <p><strong>&#9888; Warning:</strong> if a preset names a point that does not exist &mdash; a
+          typo, or a point deleted later &mdash; the equipment silently falls back to
+          <code>0, 0, 0</code> instead of raising an error. The handler will then drive to the corner
+          of its workspace. If a run heads for the corner, check the spelling of the
+          <code>origin:</code> entries in <code>preset.yaml</code> first.</p>
+      </div>
+    </section>
+
+    <!-- ============ 2. equipment.yaml ============ -->
+    <section class="guide-section" id="equipment-yaml">
+      <h2>2. Describing the hardware &mdash; equipment.yaml</h2>
+      <p>One entry per equipment <em>model</em>. This is what turns a single anchor into a full set of
+        positions, and what tells the pipette how far to descend once it gets there.</p>
+
+      <h3 id="field-reference">2.1. Field reference</h3>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr><th>Key</th><th>Units</th><th>Applies to</th><th>What it does</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>name</code></td><td>&mdash;</td><td>all</td><td>Label shown in the GUI; keep it the same as the entry key</td></tr>
+            <tr><td><code>type</code></td><td>&mdash;</td><td>all</td><td>List of roles this model may be assigned: <code>Source</code>, <code>Target</code>, <code>TipHolder</code></td></tr>
+            <tr><td><code>rows</code> / <code>columns</code></td><td>count</td><td>all</td><td>Size of the grid</td></tr>
+            <tr><td><code>x</code></td><td>mm</td><td>all</td><td>Column pitch, centre to centre</td></tr>
+            <tr><td><code>y</code></td><td>mm</td><td>all</td><td>Row pitch, centre to centre</td></tr>
+            <tr><td><code>origin</code></td><td>&mdash;</td><td>all</td><td>Which corner the anchor sits on (see <a href="#anchor-to-grid">&sect;0.2</a>); defaults to <code>top-left</code></td></tr>
+            <tr><td><code>z-drop</code></td><td>mm</td><td>all</td><td>How far the tip descends from the anchor Z to reach its working position</td></tr>
+            <tr><td><code>z-lift</code></td><td>mm</td><td><code>TipHolder</code></td><td>How far to rise after seating a tip, to clear the rack</td></tr>
+            <tr><td><code>liquid-height</code></td><td>mm</td><td><code>Source</code></td><td>Height of the liquid column when the vessel is full</td></tr>
+            <tr><td><code>liquid-amount</code></td><td>&micro;L</td><td><code>Source</code></td><td>Volume the vessel holds when full</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout-warning">
+        <p><strong>Important:</strong> the role a preset assigns must appear in that model&rsquo;s
+          <code>type</code> list. Assigning a model as a <code>Source</code> when its list only says
+          <code>["TipHolder"]</code> fails on load.</p>
+      </div>
+
+      <h3 id="tip-racks">2.2. Tip racks &mdash; picking up from the right hole</h3>
+      <pre class="code-block"><code>small-tip-holder:
+  name: small-tip-holder
+  type:
+  - TipHolder
+  rows: 5
+  columns: 11
+  x: 9
+  y: 9
+  origin: top-right
+  z-drop: 10
+  z-lift: 61</code></pre>
+      <p>To collect a tip the handler runs a fixed four-move sequence:</p>
+      <ol>
+        <li>Travel to the chosen tip&rsquo;s X/Y at the rack&rsquo;s anchor Z.</li>
+        <li>Descend <code>z-drop</code> at high feedrate, pressing the nozzle into the tip.</li>
+        <li>Rise <code>z-lift</code>, carrying the seated tip up out of the rack.</li>
+        <li>Park above the rack&rsquo;s first position, ready to travel.</li>
+      </ol>
+      <p>The X/Y of each hole comes straight from the grid, so the pitch and the anchor corner are
+        what decide whether the nozzle meets a tip or the plastic between tips. The printed racks use
+        <code>origin: top-right</code>, so the grid steps in &minus;X and &minus;Y from the anchor
+        &mdash; set the anchor on the rack&rsquo;s top-right hole, not its bottom-left.</p>
+      <p>Two depths then decide whether the tip actually stays on:</p>
+      <ul>
+        <li><strong><code>z-drop</code></strong> is the interference fit. Too little and the tip is
+          not seated and drops off in transit; too much and the nozzle bottoms out &mdash; this move
+          runs at a high feedrate, so driving into a hard stop can skip Z steps and cost you the
+          coordinate frame. Start around 10&nbsp;mm and adjust a millimetre at a time.</li>
+        <li><strong><code>z-lift</code></strong> must exceed the tip&rsquo;s length plus
+          <code>z-drop</code>, or the fitted tip will still be inside the rack when the handler
+          starts its next X/Y move and will be dragged across it. 61&nbsp;mm suits the short printed
+          racks; the taller <code>tip-holder</code> needs 95&nbsp;mm.</li>
+      </ul>
+      <p>Capture the tip rack&rsquo;s anchor with <em>no tip fitted</em>, nozzle just touching the top
+        of the tip in the anchor hole, then raise by <code>z-drop</code> before saving.</p>
+
+      <h3 id="sources">2.3. Sources &mdash; meeting the stock solution</h3>
+      <pre class="code-block"><code>2-20ml-bottle-holder:
+  name: 2-20ml-bottle-holder
+  type:
+  - Source
+  - Target
+  rows: 1
+  columns: 2
+  x: 33
+  y: 24
+  z-drop: 35
+  liquid-height: 27
+  liquid-amount: 18000</code></pre>
+      <p>A source is the one case where the descent is not fixed. The GUI tracks how much liquid it
+        believes is left in each vessel, and works out the depth for every draw:</p>
+      <pre class="code-block"><code>current liquid height = liquid-height − (liquid-height ÷ liquid-amount × volume remaining)
+total descent         = z-drop + current liquid height</code></pre>
+      <p>Which behaves like this:</p>
+      <ul>
+        <li><strong>Full vessel</strong> &mdash; the computed height is 0, so the tip descends exactly
+          <code>z-drop</code>. That position should put it just below the surface.</li>
+        <li><strong>Part-used vessel</strong> &mdash; as liquid is drawn the remaining volume falls,
+          the computed height grows, and the tip descends further, chasing the meniscus down so it
+          stays submerged without ever reaching into the bottom of the vessel.</li>
+        <li><strong>Empty vessel</strong> &mdash; the GUI warns that the vessel may be empty and falls
+          back to the full-vessel depth.</li>
+      </ul>
+      <p>So for a source, <code>z-drop</code> is the distance from the anchor Z down to
+        <em>just below the surface of a full vessel</em> &mdash; which is exactly the position the
+        Configure Plate procedure asks you to jog to before raising by <code>z-drop</code> and
+        pressing Set.</p>
+      <div class="callout-warning">
+        <p><strong>Important:</strong> <code>liquid-height</code> and <code>liquid-amount</code> must
+          describe the same fill. If you declare 18&nbsp;000&nbsp;&micro;L at 27&nbsp;mm but only fill
+          the bottle to 15&nbsp;mm, the tracking starts from a surface that is not there and the tip
+          will sit above the liquid, aspirating air, until enough volume has notionally been drawn.</p>
+      </div>
+      <p>The running estimate is per session, not persisted. If you restart the GUI mid-plate, or
+        refill a bottle, set the true starting volume by clicking the vessel in the plate layout, or
+        use <strong>Reset Volume</strong> to return everything to full &mdash; see
+        <a href="software.html#configure-plate">Software &sect;2.2</a>. Underestimating is safer than
+        overestimating: it makes the tip go deeper, not shallower.</p>
+
+      <h3 id="targets">2.4. Targets &mdash; dispensing into the well</h3>
+      <pre class="code-block"><code>96-wellplate:
+  name: 96-wellplate
+  type:
+  - Source
+  - Target
+  rows: 12
+  columns: 8
+  x: 9
+  y: 9
+  origin: bottom-left
+  z-drop: 2
+  liquid-height: 11
+  liquid-amount: 350</code></pre>
+      <p>Dispensing runs in this order:</p>
+      <ol>
+        <li>Travel to the well&rsquo;s X/Y. The handler compares the clearance height of the item it
+          has just left with that of the target and moves X/Y first or Z first accordingly, so the
+          tip passes over the taller of the two.</li>
+        <li>Descend <code>z-drop</code> into the well.</li>
+        <li>Fully depress the plunger, then dwell.</li>
+        <li>Optionally dip &mdash; descend <code>liquid-height</code> and return &mdash; to shed any
+          droplet still hanging on the tip.</li>
+        <li>Rise <code>z-drop</code> back to the anchor Z and release the plunger.</li>
+      </ol>
+      <p>For a target, <code>z-drop</code> only has to get the tip inside the mouth of the well before
+        the plunger fires, so the droplet cannot land on the rim or bridge two wells. Keep it small
+        &mdash; 2&nbsp;mm on a 96-well plate. Too deep and the tip strikes the bottom of the well; too
+        shallow and the droplet hangs on the tip instead of transferring.</p>
+      <div class="callout-warning">
+        <p><strong>&#9888; Important:</strong> a model listing both <code>Source</code> and
+          <code>Target</code> uses the <em>same</em> <code>z-drop</code> in both roles &mdash; as a
+          source it is measured to the liquid surface, as a target to the well mouth. Where one value
+          cannot serve both, define the model twice under different names with different depths.</p>
+      </div>
+      <p>The same applies to mixed labware: one entry describes one uniform vessel type. A rack
+        holding tubes of different diameters or depths needs a separate entry per vessel type, as
+        noted in <a href="software.html#configure-plate">Software &sect;2.2.2</a>.</p>
+    </section>
+
+    <!-- ============ 3. preset.yaml ============ -->
+    <section class="guide-section" id="preset-yaml">
+      <h2>3. Binding the bed plate together &mdash; preset.yaml</h2>
+      <p>A preset is one bed-plate layout: it pairs each model with the anchor it stands on and the
+        role it plays in a run.</p>
+      <pre class="code-block"><code>bosco-half-wellplate:
+  200ul-tip-box-holder:
+    equipment: 200ul-tip-box-holder
+    origin: bosco-200ul-tip-box-holder
+    type: TipHolder
+  falcon-tube-holder:
+    equipment: falcon-tube-holder
+    origin: bosco-falcon-tubes
+    type: Source
+  half-96-wellplate:
+    equipment: half-96-wellplate
+    origin: bosco-96-wellplate
+    type: Source
+  half-96-wellplate1:
+    equipment: half-96-wellplate
+    origin: bosco-upper-96-wellplate
+    type: Target</code></pre>
+      <ul>
+        <li>The top-level key is the <strong>preset name</strong>, as it appears in the Preset dropdown.</li>
+        <li>Each child key is a <strong>slot</strong> on the bed plate and must be unique within the preset.</li>
+        <li><code>equipment:</code> names an entry in <code>equipment.yaml</code>.</li>
+        <li><code>origin:</code> names an entry in <code>points.yaml</code>.</li>
+        <li><code>type:</code> is the role for this slot, and must appear in that model&rsquo;s <code>type</code> list.</li>
+      </ul>
+      <p>Note the two half-plates above: the same model, on two different anchors, in two different
+        roles. That is why the slot key and the <code>equipment:</code> value are separate fields
+        &mdash; the second slot is named <code>half-96-wellplate1</code> so the two do not collide.</p>
+      <p>Finally, a handler loads a preset on startup through its own entry in
+        <code>printers.yaml</code>:</p>
+      <pre class="code-block"><code>bosco:
+  max_vol: 100
+  min_vol: 10
+  preset: bosco-half-wellplate
+  # ...</code></pre>
+      <div class="callout-warning">
+        <p><strong>Important:</strong> any time you edit <code>printers.yaml</code> you must close and
+          re-open the GUI for the changes to take effect. After hand-editing any of the other config
+          files, restart as well &mdash; it is the only way to be sure the GUI is not still holding
+          the values it loaded earlier.</p>
+      </div>
+    </section>
+
+    <!-- ============ 4. Checking ============ -->
+    <section class="guide-section" id="checking">
+      <h2>4. Checking the calibration</h2>
+
+      <h3 id="dry-run">4.1. Dry run</h3>
+      <p>Never prove a calibration with liquid in the vessels. Work through it dry, with the
+        workspace clear enough that you can stop the machine:</p>
+      <ol>
+        <li><a href="software.html#homing">Home all axes.</a> Coordinates mean nothing until the
+          machine is homed, and an unhomed <strong>Move</strong> can drive into the frame.</li>
+        <li>In Configure Plate, select each item in turn and press <strong>Move</strong>. The tip
+          should arrive centred over the anchor vessel &mdash; the one marked with the red dot on the
+          layout map.</li>
+        <li>Check the far corner too, by running a short assignment that targets the last well of
+          each item. The anchor being right does not mean the pitch is.</li>
+        <li>Watch the plate layout for overlapping grids. Two items clipping into each other on
+          screen means they will collide in reality.</li>
+        <li>Run the full protocol dry &mdash; no tips, empty vessels &mdash; and watch each descent
+          before you trust it with reagent.</li>
+      </ol>
+      <p>With the geometry confirmed, calibrate the delivered volume against a scale:
+        <a href="#dispense-volume">&sect;6</a> below.</p>
+
+      <h3 id="troubleshooting">4.2. Troubleshooting</h3>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr><th>What you see</th><th>Where to look</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tip is off-centre by the same amount on every vessel of an item</td><td><code>x</code> / <code>y</code> of that point in <code>points.yaml</code></td></tr>
+            <tr><td>Anchor vessel is perfect, error grows across the item</td><td><code>x</code> / <code>y</code> pitch in <code>equipment.yaml</code></td></tr>
+            <tr><td>Error grows in the wrong direction, or the layout looks mirrored</td><td><code>origin</code> corner in <code>equipment.yaml</code></td></tr>
+            <tr><td>Handler drives to the corner of its workspace</td><td><code>origin:</code> in <code>preset.yaml</code> names a point that is not in <code>points.yaml</code></td></tr>
+            <tr><td>Tip is not seated and falls off in transit</td><td><code>z-drop</code> too small on the <code>TipHolder</code></td></tr>
+            <tr><td>Nozzle jams into the rack, Z loses position</td><td><code>z-drop</code> too large on the <code>TipHolder</code></td></tr>
+            <tr><td>Fitted tip is dragged across the rack</td><td><code>z-lift</code> too small</td></tr>
+            <tr><td>Tip drags across neighbouring labware while travelling</td><td>Anchor Z captured too low &mdash; see <a href="#stored-z">&sect;0.3</a></td></tr>
+            <tr><td>Aspirates air, or dips too deep, on a source</td><td><code>liquid-height</code> / <code>liquid-amount</code> do not match the actual fill; or the session&rsquo;s volume estimate is stale &mdash; use Reset Volume</td></tr>
+            <tr><td>Tip strikes the bottom of a target well</td><td><code>z-drop</code> too large on the <code>Target</code></td></tr>
+            <tr><td>Droplet hangs on the tip or lands on the well rim</td><td><code>z-drop</code> too small on the <code>Target</code>; consider the dip move</td></tr>
+            <tr><td>Edits appear to have no effect</td><td>GUI not restarted since the file was saved</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 5. printers.yaml — tip ejection ============ -->
+    <section class="guide-section" id="tip-ejection">
+      <h2>5. Calibrating the tip ejection travel &mdash; printers.yaml</h2>
+      <p>HEIMDALL doesn&rsquo;t have a separate motor for ejecting tips. Instead, it uses a fixed
+        bar bolted to the tip disposal chamber &mdash; the same part you installed in
+        <a href="assembly/bed-plate-components.html#tip-ejector">Assembly &rarr; Tip Ejector</a>.</p>
+      <p>The idea is quite simple: rather than having something push the ejection mechanism to push
+        the tip off, the machine uses the gantry&rsquo;s own movement to do the job. The gantry
+        catches the pipette&rsquo;s ejector behind the fixed bar and moves the pipette up along the
+        Z-axis, pushing the pipette upwards towards the ejector and stripping the tip off.</p>
+      <p>That makes the ejection distances geometry, not timing, and it makes them unforgiving in
+        both directions: too little travel and the tip never leaves, too much and the gantry keeps
+        pushing after the ejector has bottomed out.</p>
+
+      <h3 id="ejection-values">5.1. The five moves</h3>
+      <p>The whole sequence lives in <code>printers.yaml</code> and runs as relative moves from a
+        captured start coordinate. <a href="software.html#tip-disposal">Software &sect;1.4</a> shows the
+        sequence and walks through capturing it; this section is about getting the two Z values right.</p>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr><th>Value</th><th>Move</th><th>What it decides</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>dispose_start</code></td><td>&mdash;</td><td>The coordinate the sequence is captured against &mdash; set by walking the sequence in reverse, <a href="software.html#tip-disposal">Software &sect;1.4</a></td></tr>
+            <tr><td><code>dispose_initial_y</code></td><td>Y</td><td>Brings the pipette across to the ejector bar</td></tr>
+            <tr><td><code>dispose_initial_z</code></td><td>Z</td><td><strong>The approach height</strong> &mdash; puts the pipette&rsquo;s ejector level with the bar so it can engage</td></tr>
+            <tr><td><code>dispose_y</code></td><td>Y</td><td>Slides the ejector into engagement with the bar</td></tr>
+            <tr><td><code>dispose_actuate_z</code></td><td>Z</td><td><strong>The actuation travel</strong> &mdash; the stroke that presses the ejector and releases the tip</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout-warning">
+        <p><strong>&#9888; Warning:</strong> Before calibrating, make sure a tip is fitted but
+          contains no liquid. Keep your hand close to the power switch so you can stop the machine
+          immediately if something goes wrong.</p>
+        <p>The main risk is that the gantry may keep pushing even when something is stuck or can no
+          longer move. Since the Z-axis won&rsquo;t necessarily stop on its own, make small
+          adjustments and watch how the mechanism responds. If you hear the motor straining,
+          grinding or skipping steps, stop immediately and check what&rsquo;s obstructing the
+          movement before continuing.</p>
+      </div>
+
+      <h3 id="approach-height">5.2. The approach height &mdash; dispose_initial_z</h3>
+      <p>This is the one that decides whether the ejector engages the bar at all. The pipette has to
+        end up at the height where its ejector will pass under the bar when the next Y move slides
+        it across &mdash; too high and it misses entirely, too low and the pipette body or the
+        bracket fouls the bar as it translates.</p>
+      <ol>
+        <li><strong>Home all axes</strong>, then jog to <code>dispose_start</code> so you start
+          where the sequence starts.</li>
+        <li><strong>Apply the Y move</strong> by hand with the D-pad, so the pipette sits across from
+          the bar.</li>
+        <li><strong>Jog down in Z a millimetre at a time</strong>, watching from the side, until the
+          pipette&rsquo;s ejector is level with the part of the bar that will press it. Watch the
+          pipette, not the screen.</li>
+        <li><strong>Check the clearance before committing.</strong> From that height, jog the second
+          Y move by hand in small steps. The ejector should slide into engagement with nothing else
+          touching. If anything scrapes, come back up and try again a little higher or lower.</li>
+        <li><strong>Record the Z difference</strong> from step&nbsp;1 to step&nbsp;3 as
+          <code>dispose_initial_z</code>.</li>
+      </ol>
+      <p>Follow the sign convention already in your <code>printers.yaml</code> rather than assuming
+        one &mdash; these are relative moves, and whether a descent is written positive or negative
+        depends on how the file is set up. The safest check is to jog the move manually first and
+        confirm the pipette goes the way you expect.</p>
+
+      <h3 id="actuation-travel">5.3. The actuation travel &mdash; dispose_actuate_z</h3>
+      <p>With the ejector engaged, this is the stroke that does the work. Your pipette&rsquo;s ejector
+        has a fixed amount of travel built into it, and somewhere inside that travel is the point
+        where the tip lets go. You want to clear that point and stop &mdash; not run to the end of
+        the mechanism.</p>
+      <ol>
+        <li><strong>Find the mechanism&rsquo;s limit first.</strong> Off the machine, press the
+          pipette&rsquo;s ejector by hand through its full stroke and measure it with calipers. That
+          measurement is a ceiling you must stay under, not a target.</li>
+        <li><strong>Start short.</strong> Set <code>dispose_actuate_z</code> to roughly half that
+          stroke, restart the GUI, fit a tip and run the disposal sequence.</li>
+        <li><strong>Increase in 0.5&nbsp;mm steps</strong> until the tip releases cleanly, restarting
+          the GUI after each edit. Expect the tip to be reluctant and then suddenly free &mdash;
+          there is no gradual middle.</li>
+        <li><strong>Add a small margin</strong> &mdash; about a millimetre past the first value that
+          works &mdash; so a slightly stiff tip still releases. Stop there.</li>
+        <li><strong>Confirm you are not over-driving.</strong> Run the sequence and listen. A clean
+          ejection is quiet; a grinding or buzzing Z axis means the ejector has bottomed out and the
+          motor is skipping steps. Then home the machine and check that Z still arrives where it
+          used to &mdash; if it has shifted, you have been losing steps and the value is too
+          large.</li>
+      </ol>
+      <div class="callout-warning">
+        <p><strong>Why the margin has a ceiling:</strong> once the pipette&rsquo;s ejector reaches
+          its internal stop, the next millimetre of travel goes into the printed ejector, the pipette
+          bracket and the Z screw instead. It will usually show up first as lost Z position, and
+          later as a cracked printed part. &ldquo;It ejects more reliably&rdquo; is not a reason to
+          keep increasing this number.</p>
+      </div>
+
+      <h3 id="ejection-verify">5.4. Verifying the ejection</h3>
+      <p>One successful ejection proves very little &mdash; tips vary, and the failure you care about
+        is the intermittent one that drops a tip on the deck halfway through an overnight run.</p>
+      <ol>
+        <li><strong>Ten in a row.</strong> Pick up and eject ten tips without touching anything. Every
+          one should land in the chamber.</li>
+        <li><strong>Every tip type you use.</strong> A 1000&nbsp;&micro;L tip and a 200&nbsp;&micro;L
+          tip do not seat with the same force or release at the same point. If you run both, both
+          have to pass.</li>
+        <li><strong>Watch where they land.</strong> Tips that release but miss the chamber are a Y
+          problem &mdash; <code>dispose_y</code> and <code>dispose_initial_y</code> &mdash; not a
+          height problem.</li>
+        <li><strong>Home and re-check afterwards.</strong> Run the full sequence ten times, then home
+          and move to a known point. If it no longer lands where it did, the actuation travel is
+          over-driving the axis.</li>
+      </ol>
+      <p>Re-check after anything that changes the geometry: re-seating the pipette in its bracket,
+        reprinting the ejector or disposal chamber, moving the chamber on the bed plate, or switching
+        tip brand. The approach height in particular depends on exactly how high the pipette sits in
+        its bracket.</p>
+
+      <h3 id="ejection-troubleshooting">5.5. Troubleshooting the ejection</h3>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr><th>What you see</th><th>Where to look</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tip stays on, ejector clearly never touched the bar</td><td><code>dispose_initial_z</code> &mdash; wrong approach height, the ejector passed over or under the bar</td></tr>
+            <tr><td>Ejector engages but the tip stays on</td><td><code>dispose_actuate_z</code> too small &mdash; see <a href="#actuation-travel">&sect;5.3</a></td></tr>
+            <tr><td>Z axis grinds or buzzes at the end of the sequence</td><td><code>dispose_actuate_z</code> too large &mdash; the ejector has bottomed out</td></tr>
+            <tr><td>Machine loses Z position after a few ejections</td><td>Same &mdash; skipped steps from over-driving. Reduce the travel and re-home</td></tr>
+            <tr><td>Pipette or bracket collides while translating across</td><td><code>dispose_initial_z</code> too low, so the body fouls the bar during the Y move</td></tr>
+            <tr><td>Tip releases but lands outside the chamber</td><td><code>dispose_y</code> / <code>dispose_initial_y</code>, or the chamber has moved on the bed plate</td></tr>
+            <tr><td>Works with one tip size, not the other</td><td>Travel set with the margin too tight &mdash; recalibrate against the stiffest tip you use</td></tr>
+            <tr><td>Ejects reliably, then starts failing weeks later</td><td>Printed ejector worn or flexing, or the pipette has crept in its bracket</td></tr>
+            <tr><td>Sequence starts in the wrong place entirely</td><td><code>dispose_start</code> &mdash; recapture it, <a href="software.html#tip-disposal">Software &sect;1.4</a></td></tr>
+            <tr><td>Edits appear to do nothing</td><td>GUI not restarted since <code>printers.yaml</code> was saved</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 6. printers.yaml — dispense volume ============ -->
+    <section class="guide-section" id="dispense-volume">
+      <h2>6. Calibrating the dispense volume &mdash; printers.yaml</h2>
+      <p>Everything up to here gets the tip to the right <em>place</em>. This section is about how
+        much liquid leaves it. The two are calibrated independently, and a handler can be excellent
+        at one and useless at the other.</p>
+
+      <p>Two separate numbers decide the delivered volume:</p>
+      <ul class="guide-features">
+        <li>What the <strong>pipette itself is set to</strong> &mdash; the GUI drives the pipette&rsquo;s
+          own volume dial and reads the display back through the camera. That side is set up in
+          <a href="software.html#volume-limits">Software &sect;1.1&ndash;1.3</a>:
+          <code>min_vol</code>, <code>max_vol</code>, <code>decimal_position</code> and
+          <code>vol_adjust_position</code>.</li>
+        <li>How long the actuator <strong>works the plunger</strong> &mdash;
+          <code>aspiration_actuation_time</code> in <code>printers.yaml</code>. That is what you
+          calibrate on this page.</li>
+      </ul>
+
+      <p>The plunger stroke is open-loop. The actuator runs for a calculated length of time and
+        nothing measures how far the plunger actually travelled. Friction in the actuator, the
+        plunger force of your particular pipette, the tip you fit and the actuator&rsquo;s own speed
+        all shift the relationship between that time and the microlitres that come out, and none of
+        it can be derived from the CAD. The pipette expels what it drew, so the only ground truth is
+        the <strong>mass of the liquid that lands in the vessel</strong>.</p>
+
+      <p>You calibrate by <strong>comparison</strong>: pipette the target volume by hand with the
+        same pipette, let the machine pipette the same volume, weigh both, and change the timing
+        until the machine matches. Working mass against mass means the density of the water never
+        enters the arithmetic &mdash; both sides are the same liquid at the same temperature, so it
+        cancels. There is nothing to convert and no thermometer to read.</p>
+
+      <p>The hand-pipetted vessels are the reference, so the machine ends up as accurate as the
+        pipette driving it &mdash; no better. If the pipette itself is out of specification, have it
+        serviced before you calibrate anything against it.</p>
+
+      <h3 id="dispense-kit">6.1. What you need</h3>
+      <ul class="guide-features">
+        <li>An analytical balance reading to <strong>0.1&nbsp;mg</strong>, on a solid bench, levelled,
+          with its draught shield in use. For volumes below about 10&nbsp;&micro;L you want
+          0.01&nbsp;mg.</li>
+        <li><strong>Deionised or distilled water</strong> from a single container, left on the
+          bench long enough to stop changing temperature. Both the hand reference and the machine
+          run must be drawn from that same container.</li>
+        <li><strong>Twelve clean, dry target vessels</strong> of the type you actually run &mdash;
+          six for the hand reference and six for the machine &mdash; plus forceps or gloves.
+          Fingerprints weigh roughly a tenth of a milligram.</li>
+        <li>Tips of the brand and size you will use in real protocols. A different tip is a different
+          calibration.</li>
+      </ul>
+      <div class="callout-warning">
+        <p><strong>Before you start:</strong> finish the geometry first. If the tip is not centred in
+          the well or sits at the wrong depth, you will be weighing splashes and droplets left on the
+          rim, and no amount of timing adjustment will make the numbers settle.</p>
+      </div>
+
+      <h3 id="gravimetric-loop">6.2. The gravimetric loop</h3>
+      <p>The run itself &mdash; weigh the empty vessels, take the hand reference, dispense the same
+        volume with the machine, weigh again, adjust and repeat &mdash; is written up step by step in
+        <a href="software.html#dispense-volume">Software &sect;1.7</a>. Work through it there; it is a
+        loop, so expect three or four passes before the numbers sit where you want them. What follows
+        is what that procedure does not tell you: how to keep the weights trustworthy, and how far to
+        move the timing once you have them.</p>
+
+      <p><strong>Keeping the weights trustworthy.</strong> Five things decide whether the numbers are
+        worth acting on at all:</p>
+      <ul class="guide-features">
+        <li><strong>Prime before the first draw.</strong> Use <strong>Prime</strong> in the Manual tab
+          to fill the fluid path and clear air bubbles. An unprimed system reads low and scatters
+          badly.</li>
+        <li><strong>Pre-wet the tip.</strong> Aspirate the target volume and dispense it back into the
+          source two or three times. A dry tip loses part of the first draw to wetting its own wall,
+          which shows up as one anomalously light vessel.</li>
+        <li><strong>Weigh all twelve vessels individually</strong> &mdash; not a single tare &mdash;
+          and keep them in a known order, so each mass belongs to a known position.</li>
+        <li><strong>Leave the volume dial alone between the two sides.</strong> Set it once, let
+          <strong>Adjust&nbsp;Volume</strong> drive the dial and confirm the reading through the
+          camera, then use that identical setting for the hand reference and the machine run.</li>
+        <li><strong>Weigh each vessel immediately after filling it.</strong> Small volumes evaporate
+          while you queue at the balance, so weigh as you go rather than all at the end.</li>
+      </ul>
+
+      <p><strong>Reading the two means.</strong> Accuracy is how far the machine sits from the hand
+        reference; precision is the spread within the machine&rsquo;s own six. Report both &mdash;
+        they fail for different reasons:</p>
+      <pre class="code-block"><code>error = (m_machine &minus; m_hand) / m_hand &times; 100 %
+CV    = SD(m_machine) / m_machine &times; 100 %</code></pre>
+      <p>Both are masses in mg, straight off the balance &mdash; nothing to convert, and no
+        temperature to know, because the same water sits on both sides of the comparison. A large
+        <em>error</em> means the actuation time is wrong. A large <em>CV</em> means the handler is not
+        repeatable yet; adjusting the timing will only move the scatter around, so chase the cause in
+        <a href="#dispense-troubleshooting">&sect;6.5</a> first.</p>
+
+      <p><strong>How far to move the timing.</strong> The ESP runs the linear actuator for a
+        calculated length of time, and <code>aspiration_actuation_time</code> in
+        <code>printers.yaml</code> is the number that calculation starts from &mdash; so that one
+        value is the whole adjustment. Dispensing light means the actuator needs longer; heavy means
+        shorter. Scale it by the ratio of the two masses:</p>
+      <pre class="code-block"><code>new time &asymp; old time &times; m_hand / m_machine</code></pre>
+      <p>Treat that as a starting point rather than a solution. The stroke is not perfectly
+        proportional to time &mdash; the plunger has to overcome static friction before it moves at
+        all &mdash; so the first correction usually overshoots slightly on small volumes. One good run
+        is luck; two in a row is a calibration.</p>
+
+      <h3 id="dispense-range">6.3. Calibrate at the volumes you actually use</h3>
+      <p>One actuation time has to serve the whole working range, and because the stroke is not
+        strictly linear in time, a setting tuned at 1000&nbsp;&micro;L can be noticeably off at
+        50&nbsp;&micro;L. Check at least three points &mdash; near <code>min_vol</code>, mid-range,
+        and near <code>max_vol</code> &mdash; and record the error at each. Each point needs its own
+        hand reference: pipette that volume by hand, weigh it, and compare the machine against
+        <em>that</em> mass. A reference taken at one volume says nothing about another.</p>
+      <p>If no single value satisfies every point, favour the volume your protocols actually transfer
+        most often and accept the error elsewhere, or split the work across two handler entries in
+        <code>printers.yaml</code> with different timings. Do not average the error across a range
+        you never use.</p>
+
+      <h3 id="dispense-hygiene">6.4. What quietly ruins a gravimetric calibration</h3>
+      <p>Nearly every &ldquo;the machine will not calibrate&rdquo; case is one of these rather than a
+        bad actuation time:</p>
+      <ul class="guide-features">
+        <li><strong>Evaporation.</strong> At 10&nbsp;&micro;L, a vessel left open on the bench can
+          lose a measurable fraction while you weigh the others. Weigh immediately, cap if you can,
+          and keep the draught shield closed.</li>
+        <li><strong>A dry tip.</strong> Not pre-wetting biases the first dispense low every time.</li>
+        <li><strong>Air in the path.</strong> Bubbles compress, so part of the plunger stroke goes
+          into the bubble instead of the liquid. Re-prime and watch the tip.</li>
+        <li><strong>Static.</strong> Plastic vessels on a dry day drift on the balance by tenths of a
+          milligram. Let the reading settle, or use glass.</li>
+        <li><strong>Water from two different containers.</strong> The comparison only cancels
+          density if both sides are the same liquid at the same temperature. Draw the hand reference
+          and the machine run from one container, in one sitting.</li>
+        <li><strong>A rushed hand reference.</strong> The machine is being matched to it, so a
+          sloppy manual draw &mdash; wrong angle, released too fast, tip not pre-wetted &mdash;
+          becomes the machine&rsquo;s error. Pipette those six as carefully as you would for an
+          assay.</li>
+        <li><strong>Vibration and airflow.</strong> A balance next to a running handler or under an
+          air vent will not settle. Weigh with the handler idle.</li>
+        <li><strong>Changing anything afterwards.</strong> A new tip brand, a different pipette, a
+          re-tensioned or replaced actuator, or a rebuilt carriage all invalidate the number. Re-run
+          the loop.</li>
+      </ul>
+      <p>Record what you settled on &mdash; date, handler, pipette, tip, the volumes you checked,
+        the hand-reference mass and the error at each, and the final
+        <code>aspiration_actuation_time</code>. It is the only way to tell later whether the machine
+        has drifted or has always been like that, and it turns the next re-check into a ten-minute
+        job.</p>
+
+      <h3 id="dispense-troubleshooting">6.5. Troubleshooting the dispense</h3>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr><th>What you see</th><th>Where to look</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Every machine vessel light against the hand reference</td><td><code>aspiration_actuation_time</code> too short &mdash; see <a href="#gravimetric-loop">&sect;6.2</a> step&nbsp;9</td></tr>
+            <tr><td>Every machine vessel heavy against the hand reference</td><td><code>aspiration_actuation_time</code> too long</td></tr>
+            <tr><td>Machine matches the hand reference, but both are off the volume you asked for</td><td>The pipette or its dial, not the timing &mdash; <code>decimal_position</code>, see <a href="software.html#vol-adjust-position">Software &sect;1.3</a></td></tr>
+            <tr><td>First vessel light, the rest consistent</td><td>Tip not pre-wetted, or the system was not primed</td></tr>
+            <tr><td>Large scatter with no pattern</td><td>Air in the fluid path, or the actuator stalling against an over-extended plunger</td></tr>
+            <tr><td>Scatter only on the smallest volumes</td><td>Evaporation and balance resolution, not the handler &mdash; weigh faster, or move to a 0.01&nbsp;mg balance</td></tr>
+            <tr><td>Accurate mid-range, off at both ends</td><td>Non-linear stroke &mdash; calibrate at the working volume, see <a href="#dispense-range">&sect;6.3</a></td></tr>
+            <tr><td>Volume drifts downwards over a long run</td><td>Source fill estimate is stale, so the tip aspirates above the liquid &mdash; use Reset Volume</td></tr>
+            <tr><td>Droplet left hanging on the tip</td><td>Geometry, not timing &mdash; <code>z-drop</code> on the <code>Target</code>, see <a href="#targets">&sect;2.4</a></td></tr>
+            <tr><td>Displayed volume does not match what you asked for</td><td><code>decimal_position</code>, or the camera cannot read the dial &mdash; <a href="software.html#vol-adjust-position">Software &sect;1.3</a></td></tr>
+            <tr><td>Weights match an old setting exactly</td><td>GUI not restarted since <code>printers.yaml</code> was saved</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </div>
 
   <div class="step-actions">
@@ -95,8 +903,8 @@
 </footer>
 
 <script src="../js/theme.js"></script>
-<script type="module" src="../js/build-step.js?v=3"></script>
 <script src="../js/lightbox.js?v=4"></script>
-<script src="../js/sneak-peek.js?v=2"></script>
+<script src="../js/toc.js"></script>
+<script type="module" src="../js/build-step.js?v=6"></script>
 </body>
 </html>

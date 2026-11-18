@@ -10,13 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/tokens.css?v=16">
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/sections.css">
-<link rel="stylesheet" href="../css/build.css?v=13">
-<link rel="stylesheet" href="../css/sneak-peek.css?v=2">
+<link rel="stylesheet" href="../css/build.css?v=16">
 </head>
-<body class="showcase-peek" data-step="software">
+<body data-step="software">
 
 <div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
 
@@ -39,21 +38,11 @@
 
 <main class="wrap step-main has-toc">
   <div class="step-head">
-    <span class="step-num">Step 04</span>
+    <span class="step-num">Step 05</span>
     <h1>Software</h1>
     <p class="lead">Our GUI provides a visual interface for configuring the liquid handling system and creating automated workflows.</p>
     <span class="step-status"><span class="step-status-text">In progress</span></span>
   </div>
-
-  <!-- SHOWCASE: temporary sneak-peek banner. The content below it reads for
-       about a third of its length and is frosted over after that, by
-       css/sneak-peek.css + js/sneak-peek.js (see data-peek). Remove all of
-       it to publish. -->
-  <section class="sneak-peek" aria-label="Sneak peek">
-    <p class="sneak-peek-eyebrow"><span class="sneak-peek-dot" aria-hidden="true"></span>Work in progress</p>
-    <h2>Sneak peek</h2>
-    <p class="sneak-peek-note">Keep an eye out &mdash; exciting stuff is coming soon.</p>
-  </section>
 
   <aside class="guide-toc" aria-label="On this page">
     <p class="guide-toc-title">On this page</p>
@@ -61,7 +50,7 @@
     <ol class="guide-toc-list"></ol>
   </aside>
 
-  <div class="step-content guide" data-peek>
+  <div class="step-content guide">
     <div class="need-card">
       <h3 class="need-heading">Features</h3>
       <ul class="guide-features">
@@ -119,6 +108,46 @@ pip --version</code></pre>
           <pre class="code-block"><code>GEMINI_API_KEY=&lt;your key here&gt;</code></pre>
         </li>
       </ol>
+
+      <h3 id="config-files">0.5. How the coordinate model works</h3>
+      <p>Before calibration it is worth knowing what each file stores.</p>
+      <div class="guide-table-wrap">
+        <table class="guide-table">
+          <thead>
+            <tr><th>File</th><th>What it stores</th><th>Scope</th><th>Normally written by</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>points.yaml</code></td>
+              <td>Named <code>x</code> / <code>y</code> / <code>z</code> anchor coordinates, in millimetres</td>
+              <td>One entry per physical position on the deck</td>
+              <td>Configure Plate &rarr; <strong>Set</strong> &rarr; <strong>Save</strong></td>
+            </tr>
+            <tr>
+              <td><code>equipment.yaml</code></td>
+              <td>Grid size, pitch, anchor corner and working depths</td>
+              <td>One entry per equipment <em>model</em>, reusable on any deck</td>
+              <td>By hand</td>
+            </tr>
+            <tr>
+              <td><code>preset.yaml</code></td>
+              <td>Which model sits on which anchor, and its role</td>
+              <td>One entry per bed-plate layout</td>
+              <td>Configure Plate &rarr; <strong>Save Preset</strong></td>
+            </tr>
+            <tr>
+              <td><code>printers.yaml</code></td>
+              <td>Pipette limits, actuation timings, tip disposal, default preset</td>
+              <td>One entry per handler</td>
+              <td>By hand &mdash; see <a href="#new-handler">&sect;1</a> below</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The split matters. <code>equipment.yaml</code> describes <em>what a piece of labware is</em>
+        and travels with the design; <code>points.yaml</code> describes <em>where you happened to put
+        it</em> and is specific to your machine. Two HEIMDALLs can share an equipment definition and
+        still have completely different points.</p>
     </section>
 
     <!-- ============ 1. New handler ============ -->
@@ -147,12 +176,12 @@ pip --version</code></pre>
 
       <h3 id="vol-adjust-position">1.3. Calibrating volume adjust position</h3>
       <p><a href="#running-gui">Run the GUI</a> and <a href="#connecting">connect to the printer</a>.</p>
-      <p>Go to the <a href="#manual">Manual tab</a>. Open your camera and use the <a href="#dpad">D-pad</a> to adjust the pipette until you can clearly see the volume readout in the center of the camera feed. Use the <a href="#position-control">Set button</a> to get this position, and edit <code>vol_adjust_position</code> to this coordinate.</p>
+      <p>Go to the <a href="#manual">Manual tab</a>. Open your camera and use the <a href="#dpad">D-pad</a> to adjust the pipette until you can clearly see the volume readout of the pipette in the center of the camera feed. Use the <a href="#position-control">Set button</a> to get this position, and edit <code>vol_adjust_position</code> to this coordinate.</p>
 
       <h3 id="tip-disposal">1.4. Calibrating tip disposal sequence</h3>
       <p>This is what the tip disposal sequence looks like:</p>
-      <figure class="step-figure step-figure--lg">
-        <img src="../Images/GUI_&amp;_Firmware/tip_disposal sequence.png" alt="Five-stage tip disposal sequence: go to vol_adjust_position, move by dispose_initial_y, dispose_initial_z, dispose_y, then dispose_actuate_z">
+      <figure class="step-figure step-figure--lg step-figure--plate">
+        <img src="../Images/GUI_&amp;_Firmware/tip_disposal sequence.png" alt="Five-stage tip disposal sequence: go to dispose_start, move by dispose_initial_y, dispose_initial_z, dispose_y, then dispose_actuate_z">
         <figcaption>Figure 4: Tip disposal sequence</figcaption>
       </figure>
       <p style="margin-top:18px">To calibrate the tip disposal sequence, use the D-pad to move your pipette until it is in the tip ejection position.</p>
@@ -172,7 +201,27 @@ pip --version</code></pre>
         <li>Select your corresponding <strong>Type</strong> and <strong>Model</strong>, and ensure <strong>(new)</strong> is selected in the origin dropdown menu.</li>
         <li>Go to the <strong>Manual</strong> tab.</li>
         <li>Home the liquid handler (all axes).</li>
-        <li>Use the D-pad to move the pipette directly over the equipment's physical <strong>Anchor Position</strong>. Ensure the tip is perfectly centered over the vessel and lowered to a depth just below the surface level of the liquid.</li>
+        <li>Use the D-pad to move the pipette directly over the equipment's physical <strong>Anchor Position</strong>. Ensure the tip is perfectly centered over the vessel and lowered to a depth just below the surface level of the liquid.
+          <details class="explain-card">
+            <summary>
+              <svg class="explain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+              <span>How do the anchor point and calibration work?</span>
+            </summary>
+            <div class="explain-body">
+              <p>You do not need to enter coordinates by hand for every tip, bottle or well on the bed. Each item is defined by a single <strong>anchor coordinate</strong> and its geometry. The anchor is the reference position of the grid &mdash; typically the centre of its first well or vessel, depending on which corner is selected as the starting point. The GUI uses that reference together with the grid geometry to calculate every other position automatically.</p>
+              <p>The geometry is essentially a grid. Whether it is a tip rack, bottle holder or well plate, each is treated as a set of evenly spaced rows and columns. To define one you only need the number of rows and columns, the centre-to-centre spacing (pitch), which corner serves as the anchor, and how far the pipette should descend when accessing it.</p>
+              <pre class="code-block"><code>x = anchor.x + column &times; dx
+y = anchor.y + row    &times; dy
+z = anchor.z          # every position shares one Z</code></pre>
+              <p><code>dx</code> and <code>dy</code> are the model's pitch, signed by its <code>origin</code> key &mdash; the corner the anchor sits on. <code>top-left</code> is the default; the other three flip the sign of one or both steps.</p>
+              <p>Once those parameters are right, the GUI can work out where each tip, bottle or well sits. That is what lets the pipette pick up the correct tip, reach the stock solution just below its surface, and dispense into the intended well without every position being defined by hand.</p>
+              <p>All of it is stored in the <a href="#config-files">four YAML files</a> under <code>GUI/configs</code>. Because YAML is plain text, you can set the values through the GUI and still inspect, compare, version-control or edit them by hand whenever you need to.</p>
+            </div>
+          </details>
+        </li>
         <li>
           Open your local configuration file at <code>GUI/configs/equipment.yaml</code>, locate your specific equipment model, and find its defined <code>z-drop</code> value.
           <div class="step-figure-group">
@@ -185,21 +234,77 @@ pip --version</code></pre>
               <figcaption>Figure 7: z-drop value of an equipment model</figcaption>
             </figure>
           </div>
+          <div class="explain-card">
+            <svg class="explain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            <div class="explain-body">
+              <h4>What does the stored z-drop mean?</h4>
+              <p>The anchor&rsquo;s Z doesn&rsquo;t define how deep the pipette goes into an item. It is the height the pipette sits at over that item, and the height it travels at to reach the item without clipping anything. Every working move is a relative drop from there, set per model by <code>z-drop</code>.</p>
+              <p><code>z-drop</code> is that drop: how far, in millimetres, the tip descends from the anchor Z to reach its working position on that item.</p>
+              <ul>
+                <li><strong>Tip rack</strong> &mdash; far enough down onto the tip to seat it firmly.</li>
+                <li><strong>Source</strong> &mdash; down to just below the surface of a full vessel.</li>
+                <li><strong>Target</strong> &mdash; just inside the mouth of the well, before the plunger fires.</li>
+              </ul>
+            </div>
+          </div>
         </li>
-        <li>Return to the manual controls and <strong>raise</strong> the pipette upward by that exact <code>z-drop</code> value.</li>
+        <li>Return to the manual controls and <strong>raise</strong> the pipette by that exact <code>z-drop</code> value. For a tip rack &mdash; any <code>TipHolder</code> type &mdash; raise by its <code>z-lift</code> instead: the pipette leaves this height carrying a tip, so the anchor has to sit high enough for that tip to clear the rack.</li>
         <li>Switch back to the <strong>Configure Plate</strong> tab, and on the active equipment menu, click <strong>Set</strong> to capture the coordinates, then click <strong>Save</strong>.</li>
       </ol>
       <p>Repeat steps 1–8 for any other equipment.</p>
+      <div class="callout-important">
+        <p><strong>Note:</strong> <strong>Set</strong> and <strong>Save</strong> write these coordinates to
+          <code>points.yaml</code>, which is plain text &mdash; so a point can also be edited by hand. When you
+          have already measured a correction, changing the number there is quicker than re-jogging and
+          re-capturing. Keep the structure the GUI writes: <code>x</code>, <code>y</code> and <code>z</code>
+          beneath each point name, two-space indented, plain numbers with no units or quotes.</p>
+      </div>
 
-      <h3 id="dispense-volume">1.6. Calibrating pipette dispense volume</h3>
+      <h3 id="sources">1.6. Sources &mdash; meeting the stock solution</h3>
+      <p>A Source is the one case where the descent is not fixed. The GUI tracks how much liquid it
+        believes is left in each vessel and works out the depth for every draw:</p>
+      <pre class="code-block"><code>current liquid height = liquid-height &minus; (liquid-height &divide; liquid-amount &times; volume remaining)
+total descent         = z-drop + current liquid height</code></pre>
+      <ul>
+        <li><strong>Full vessel</strong> &mdash; the computed height is 0, so the tip descends exactly
+          <code>z-drop</code>, putting it just below the surface.</li>
+        <li><strong>Part-used vessel</strong> &mdash; as liquid is drawn the computed height grows and
+          the tip descends further, chasing the meniscus down so it stays submerged without reaching
+          into the bottom.</li>
+        <li><strong>Empty vessel</strong> &mdash; the GUI warns the vessel may be empty and falls back
+          to the full-vessel depth.</li>
+      </ul>
+      <p>So for a Source, <code>z-drop</code> is the distance from the anchor Z down to
+        <em>just below the surface of a full vessel</em> &mdash; exactly the position
+        <a href="#calibrating-equipment">&sect;1.5</a> asks you to jog to before raising by
+        <code>z-drop</code> and pressing <strong>Set</strong>. Both
+        <code>liquid-height</code> and <code>liquid-amount</code> are set per model in
+        <code>equipment.yaml</code> (<a href="#new-equipment">&sect;3.1</a>).</p>
+      <div class="callout-warning">
+        <p><strong>Important:</strong> <code>liquid-height</code> and <code>liquid-amount</code> must
+          describe the same fill. If you declare 18&nbsp;000&nbsp;&micro;L at 27&nbsp;mm but only fill
+          the bottle to 15&nbsp;mm, the tracking starts from a surface that is not there, and the tip
+          will sit above the liquid aspirating air until enough volume has notionally been drawn.</p>
+      </div>
+      <p>The running estimate is <strong>per session, not persisted</strong>. After restarting the GUI
+        mid-plate, or refilling a bottle, set the true starting volume by clicking the vessel in the
+        plate layout, or use <strong>Reset Volume</strong> to return everything to full &mdash; see
+        <a href="#configure-plate">&sect;2.2</a>. Underestimating is safer than overestimating: it
+        makes the tip go deeper, not shallower.</p>
+
+      <h3 id="dispense-volume">1.7. Calibrating pipette dispense volume</h3>
       <p>The liquid handler controls volume delivery using a linear actuator that runs for a calculated duration of time. Because friction, tubing diameter, and actuator speed vary by setup, you must calibrate the relationship between actuator runtime and actual volume dispensed.</p>
-      <p>This is achieved by running a test protocol, weighing the dispensed liquid on a precision scale, and adjusting the software timing factor accordingly.</p>
+      <p>This is achieved by pipetting the same volume twice &mdash; once by hand with the pipette, once with the machine &mdash; weighing both on a precision scale, and adjusting the software timing factor until the machine matches the hand-pipetted reference. Because you are comparing weight against weight, with the same water on both sides, there is no density conversion to do and no temperature to measure.</p>
       <ol>
-        <li><strong>Prepare the test:</strong> Fill a source vessel with deionised water. Weigh a few (we did six) empty, clean target vessels. We recommend using a scale that can measure to 0.1 mg.</li>
-        <li><strong>Execute a test run:</strong> Place the target vessels into the holder. Use the GUI to program the handler to dispense a set target volume into the target vessels.</li>
-        <li><strong>Weigh the yield:</strong> Record the weight of the dispensed liquid in mg, and divide by 1.0033 to get the volume in μL.</li>
-        <li><strong>Calculate and adjust:</strong> If the weight is lower than expected, your actuator needs to run longer. If the weight is higher than expected, the actuator needs to run for a shorter duration. Open <code>printers.yaml</code> and edit <code>aspiration_actuation_time</code>.</li>
-        <li><strong>Repeat:</strong> Repeat this process until the physical weight consistently matches your target UI volume entry within your laboratory's acceptable margin of error.</li>
+        <li><strong>Prepare the test:</strong> Fill a source vessel with deionised water. Weigh two sets of empty, clean target vessels &mdash; we used six per set, one set for the hand reference and one for the machine. We recommend using a scale that can measure to 0.1 mg. Both sets must be filled from the same water.</li>
+        <li><strong>Take the hand reference:</strong> With the same pipette, the same tip type and the same volume setting, dispense the target volume by hand into the first set of vessels and weigh each one. Their mean weight in mg is what the machine has to reproduce.</li>
+        <li><strong>Execute a test run:</strong> Place the second set of target vessels into the holder. Use the GUI to program the handler to dispense that same target volume into them.</li>
+        <li><strong>Weigh the yield:</strong> Record the weight of the dispensed liquid in mg and compare the machine's mean against the hand reference. Both are the same liquid, so compare the weights directly &mdash; there is nothing to convert.</li>
+        <li><strong>Calculate and adjust:</strong> If the machine's weight is lower than the hand reference, your actuator needs to run longer. If it is higher, the actuator needs to run for a shorter duration. Open <code>printers.yaml</code> and edit <code>aspiration_actuation_time</code> &mdash; this is the duration the ESP runs the linear actuator for, so it is the only value you change.</li>
+        <li><strong>Repeat:</strong> Repeat this process until the machine's weight consistently matches the hand-pipetted reference within your laboratory's acceptable margin of error.</li>
       </ol>
       <div class="callout-warning">
         <p><strong>Important:</strong> Any time you edit the <code>printers.yaml</code> configuration file, you must close and re-open the GUI for the changes to take effect.</p>
@@ -443,7 +548,7 @@ python main.py</code></pre>
     <section class="guide-section" id="advanced-operation">
       <h2>3. Advanced operation</h2>
 
-      <h3>3.1. Setting up new equipment</h3>
+      <h3 id="new-equipment">3.1. Setting up new equipment</h3>
       <p>To add a completely custom piece of equipment or rack that is not included by default, you must define its physical dimensions and layout parameters in the configuration files.</p>
       <ol>
         <li>Open your configuration directory and locate the <code>equipment.yaml</code> file.</li>
@@ -467,6 +572,9 @@ python main.py</code></pre>
           </tbody>
         </table>
       </div>
+
+      <p>What the GUI does with <code>liquid-height</code> and <code>liquid-amount</code> once they are
+        set is in <a href="#sources">&sect;1.6</a>.</p>
     </section>
   </div>
 
@@ -506,7 +614,6 @@ python main.py</code></pre>
 <script src="../js/theme.js"></script>
 <script src="../js/lightbox.js?v=4"></script>
 <script src="../js/toc.js"></script>
-<script type="module" src="../js/build-step.js?v=3"></script>
-<script src="../js/sneak-peek.js?v=2"></script>
+<script type="module" src="../js/build-step.js?v=6"></script>
 </body>
 </html>

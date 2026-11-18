@@ -1,0 +1,25 @@
+<svg width="90" height="254" viewBox="0 0 90 254" fill="none" xmlns="http://www.w3.org/2000/svg">
+<title>Flat file</title>
+<defs>
+  <clipPath id="bladeClip">
+    <path d="M33 85 H57 L51 228 L45 246 L39 228 Z"/>
+  </clipPath>
+</defs>
+<g stroke="#100F0D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+  <path d="M45 6c-7.5 0-13.5 7-14.5 16.5L28 57c-.4 4 2 7.5 5 7.5h24c3 0 5.4-3.5 5-7.5l-2.5-34.5C58.5 13 52.5 6 45 6z"/>
+  <path d="M31 64h28v12H31z"/>
+  <path d="M40.5 76h9l2.5 9H38z"/>
+  <path d="M33 85 H57 L51 228 L45 246 L39 228 Z"/>
+</g>
+<g clip-path="url(#bladeClip)" stroke="#100F0D" stroke-width="2.6" stroke-linecap="round" fill="none">
+  <path d="M34.1 112 L56.4 100"/>
+  <path d="M34.7 126 L55.8 114"/>
+  <path d="M35.3 140 L55.2 128"/>
+  <path d="M35.9 154 L54.6 142"/>
+  <path d="M36.5 168 L54.0 156"/>
+  <path d="M37.1 182 L53.4 170"/>
+  <path d="M37.7 196 L52.8 184"/>
+  <path d="M38.2 210 L52.3 198"/>
+  <path d="M38.8 224 L51.7 212"/>
+</g>
+</svg>

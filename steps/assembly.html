@@ -10,13 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/tokens.css?v=16">
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/sections.css">
-<link rel="stylesheet" href="../css/build.css?v=13">
-<link rel="stylesheet" href="../css/sneak-peek.css?v=2">
+<link rel="stylesheet" href="../css/build.css?v=16">
 </head>
-<body class="showcase-peek" data-step="assembly">
+<body data-step="assembly">
 
 <div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
 
@@ -44,15 +43,6 @@
     <p class="lead">Mechanical build — the frame, motion axes and the pipette mount.</p>
     <span class="step-status"><span class="step-status-text">In progress</span></span>
   </div>
-
-  <!-- SHOWCASE: temporary sneak-peek banner. No data-peek here: the sub-step
-       cards below are navigation, and each sub-step page does its own
-       own sneak-peek treatment. Remove this block to publish. -->
-  <section class="sneak-peek" aria-label="Sneak peek">
-    <p class="sneak-peek-eyebrow"><span class="sneak-peek-dot" aria-hidden="true"></span>Work in progress</p>
-    <h2>Sneak peek</h2>
-    <p class="sneak-peek-note">Keep an eye out &mdash; exciting stuff is coming soon.</p>
-  </section>
 
   <section class="parts-banner">
     <div class="parts-banner-inner">
@@ -83,7 +73,7 @@
           <p>An external z-limit switch is installed to perform z homing upwards.</p>
           <span class="step-card-time">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-            3–4 hours
+            2–3 hours
           </span>
         </div>
         <a class="step-card-start" href="assembly/z-limit-switch.html">Start</a>
@@ -92,40 +82,40 @@
       <div class="assembly-step-card">
         <span class="step-card-dot" aria-hidden="true"></span>
         <div class="step-card-body">
-          <h3>Installing the Bed Plate, Tip Disposal and Tip Catcher</h3>
-          <p>Mount the bed plate, tip disposal, and tip catcher onto the deck.</p>
+          <h3>Filing T-slot nuts and Mounting Linear Rail</h3>
+          <p>File the T-slot nuts to fit the gantry extrusion, then mount the linear rail on them.</p>
           <span class="step-card-time">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-            45-50 mins
+            45 mins – 1 hour
           </span>
         </div>
-        <a class="step-card-start" href="assembly/tip-disposal-bed-plate.html">Start</a>
+        <a class="step-card-start" href="assembly/t-slot-nuts.html">Start</a>
       </div>
 
       <div class="assembly-step-card">
         <span class="step-card-dot" aria-hidden="true"></span>
         <div class="step-card-body">
-          <h3>Installing the Tip Ejector and Camera Mount</h3>
-          <p>Fit the tip ejector mechanism and mount the onboard camera.</p>
+          <h3>Frame assembly</h3>
+          <p>Build up the structural frame that houses the pipette and volume correction system.</p>
           <span class="step-card-time">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-            15 mins
+            2–3 hours
           </span>
         </div>
-        <a class="step-card-start" href="assembly/tip-ejector-camera-mount.html">Start</a>
+        <a class="step-card-start" href="assembly/frame-assembly.html">Start</a>
       </div>
 
       <div class="assembly-step-card">
         <span class="step-card-dot" aria-hidden="true"></span>
         <div class="step-card-body">
-          <h3>Installing the Frame</h3>
-          <p>Installing the Frame, the main part of the liquid handling module that houses the pipette and volume correction system.</p>
+          <h3>Installing Bed Plate and components</h3>
+          <p>Mount the bed plate and tip disposal on the deck, then fit the tip catcher, tip ejector, camera mount and camera.</p>
           <span class="step-card-time">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-            3–4 hours
+            1 hour
           </span>
         </div>
-        <a class="step-card-start" href="assembly/frame.html">Start</a>
+        <a class="step-card-start" href="assembly/bed-plate-components.html">Start</a>
       </div>
     </div>
   </div>
@@ -164,8 +154,7 @@
 </footer>
 
 <script src="../js/theme.js"></script>
-<script type="module" src="../js/build-step.js?v=3"></script>
+<script type="module" src="../js/build-step.js?v=6"></script>
 <script src="../js/lightbox.js?v=4"></script>
-<script src="../js/sneak-peek.js?v=2"></script>
 </body>
 </html>

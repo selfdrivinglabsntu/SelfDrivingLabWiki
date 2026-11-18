@@ -10,19 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/tokens.css?v=16">
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/sections.css">
-<link rel="stylesheet" href="../css/build.css?v=13">
-<link rel="stylesheet" href="../css/sneak-peek.css?v=2">
+<link rel="stylesheet" href="../css/build.css?v=16">
 </head>
-<!-- SHOWCASE: the videos are published except the last one, which is held
-     back behind the frost — data-peek marks the region and data-peek-from on
-     the final player pins the cut there, so its title still reads as a
-     what's-next label (see css/sneak-peek.css). Move data-peek-from up to the
-     <li> to hold the title back too. The class also keeps the progress lock
-     and completion chrome out of the way. -->
-<body class="showcase-peek" data-step="tutorial-videos">
+<body data-step="tutorial-videos">
 
 <div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
 
@@ -51,18 +44,9 @@
     <span class="step-status"><span class="step-status-text">In progress</span></span>
   </div>
 
-  <!-- SHOWCASE: temporary sneak-peek banner. Everything here is watchable
-       except the last video, frosted over by css/sneak-peek.css +
-       js/sneak-peek.js. Remove all of it to publish. -->
-  <section class="sneak-peek" aria-label="Sneak peek">
-    <p class="sneak-peek-eyebrow"><span class="sneak-peek-dot" aria-hidden="true"></span>Work in progress</p>
-    <h2>Sneak peek</h2>
-    <p class="sneak-peek-note">Keep an eye out &mdash; exciting stuff is coming soon.</p>
-  </section>
-
-  <div class="step-content" data-peek>
+  <div class="step-content">
     <ol class="video-steps">
-      <li>
+      <li id="video-1">
         <figure class="step-figure step-figure--md">
           <figcaption>Remove aluminium extrusion from gantry</figcaption>
           <div class="step-video">
@@ -73,7 +57,7 @@
           </div>
         </figure>
       </li>
-      <li>
+      <li id="video-2">
         <figure class="step-figure step-figure--md">
           <figcaption>Removal of nozzle kit mount</figcaption>
           <div class="step-video">
@@ -84,7 +68,7 @@
           </div>
         </figure>
       </li>
-      <li>
+      <li id="video-3">
         <figure class="step-figure step-figure--md">
           <figcaption>Remove bottom casing</figcaption>
           <div class="step-video">
@@ -95,7 +79,7 @@
           </div>
         </figure>
       </li>
-      <li>
+      <li id="video-4">
         <figure class="step-figure step-figure--md">
           <figcaption>Attaching the z-limit switch to its mount</figcaption>
           <div class="step-video">
@@ -106,7 +90,7 @@
           </div>
         </figure>
       </li>
-      <li>
+      <li id="video-5">
         <figure class="step-figure step-figure--md">
           <figcaption>Putting the bottom casing back on</figcaption>
           <div class="step-video">
@@ -117,7 +101,7 @@
           </div>
         </figure>
       </li>
-      <li>
+      <li id="video-6">
         <figure class="step-figure step-figure--md">
           <figcaption>Mounting the z-limit switch on the printer</figcaption>
           <div class="step-video">
@@ -128,12 +112,78 @@
           </div>
         </figure>
       </li>
-      <li>
+      <li id="video-7">
         <figure class="step-figure step-figure--md">
           <figcaption>Filing T-slot nuts</figcaption>
-          <div class="step-video" data-peek-from>
+          <div class="step-video">
             <iframe src="https://www.youtube-nocookie.com/embed/2Jq90UJsP24"
                     title="Video 7 — Filing T-slot nuts"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li id="video-8">
+        <figure class="step-figure step-figure--md">
+          <figcaption>Mounting the linear rail</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/jW65dQo2-3w"
+                    title="Video 8 — Mounting the linear rail"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li id="video-9">
+        <figure class="step-figure step-figure--md">
+          <figcaption>Frame assembly &mdash; part 1</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/Vl5pY_Kx7RM"
+                    title="Video 9 — Frame assembly, part 1"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li id="video-10">
+        <figure class="step-figure step-figure--md">
+          <figcaption>Frame assembly &mdash; part 2</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/pHffLXg3WBE"
+                    title="Video 10 — Frame assembly, part 2"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li id="video-11">
+        <figure class="step-figure step-figure--md">
+          <figcaption>Frame assembly &mdash; part 3</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/yQ7DqnsCszY"
+                    title="Video 11 — Frame assembly, part 3"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li id="video-12">
+        <figure class="step-figure step-figure--md">
+          <figcaption>Bolting on the bed plate</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/PO4E7Jk6cKo"
+                    title="Video 12 — Bolting on the bed plate"
+                    loading="lazy" allowfullscreen
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          </div>
+        </figure>
+      </li>
+      <li id="video-13">
+        <figure class="step-figure step-figure--md">
+          <figcaption>Fixing components on the bed plate</figcaption>
+          <div class="step-video">
+            <iframe src="https://www.youtube-nocookie.com/embed/P6h46hJxr9A"
+                    title="Video 13 — Fixing components on the bed plate"
                     loading="lazy" allowfullscreen
                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
           </div>
@@ -176,7 +226,6 @@
 </footer>
 
 <script src="../js/theme.js"></script>
-<script type="module" src="../js/build-step.js?v=3"></script>
-<script src="../js/sneak-peek.js?v=2"></script>
+<script type="module" src="../js/build-step.js?v=6"></script>
 </body>
 </html>

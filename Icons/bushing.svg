@@ -1,0 +1,9 @@
+<svg width="160" height="180" viewBox="0 0 160 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<title>Flanged self-lubricating bushing</title>
+<g stroke="#100F0D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+  <path d="M38 71 V150 A42 14 0 0 0 122 150 V71"/>
+  <path d="M14 40 V54 A66 22 0 0 0 146 54 V40"/>
+  <ellipse cx="80" cy="40" rx="66" ry="22"/>
+  <ellipse cx="80" cy="40" rx="30" ry="10"/>
+</g>
+</svg>

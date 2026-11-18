@@ -19,10 +19,16 @@ export const LEVELS = [
   { id: 'bom',              num: '01', title: 'Bill of Materials',   sub: "Every part, board and consumable you'll need to source.",  file: 'bom.html' },
   { id: 'printer-firmware', num: '02', title: '3D Printer Firmware', sub: "Flash the modified Marlin firmware onto the printer's mainboard.", file: 'printer-firmware.html' },
   { id: 'assembly',         num: '03', title: 'Assembly',            sub: 'Mechanical build — frame, motion axes and the pipette mount.', file: 'assembly.html' },
-  { id: 'software',         num: '04', title: 'Software',            sub: 'Install the control GUI and connect to your HEIMDALL.',     file: 'software.html' },
-  { id: 'calibration',      num: '05', title: 'Calibration',         sub: 'Tune volumes and coordinates so every draw is accurate.',   file: 'calibration.html' },
-  { id: 'first-run',        num: '06', title: 'First Run',           sub: 'Load a protocol and run your first automated dispense.',    file: 'first-run.html' },
-  { id: 'tutorial-videos',  num: '07', title: 'Tutorial Videos',     sub: "Follow along on video &mdash; the build steps in the order you'll do them.", file: 'tutorial-videos.html' },
+  { id: 'electronics',      num: '04', title: 'Electronics',        sub: 'Solder the control board, wire the motor and 12V supply, flash the ESP32.', file: 'electronics.html' },
+  { id: 'software',         num: '05', title: 'Software',            sub: 'Install the control GUI and connect to your HEIMDALL.',     file: 'software.html' },
+  // HIDDEN FOR NOW — Calibration is not ready to show. To bring it back: uncomment
+  // the line below and set Tutorial Videos' num back to '07', then restore the
+  // Calibration link in build.html's <noscript> list.
+  // { id: 'calibration',      num: '06', title: 'Calibration',         sub: 'Tune volumes and coordinates so every draw is accurate.',   file: 'calibration.html' },
+  // `open: true` — reference material rather than a build step. Other pages link
+  // into individual clips (e.g. Assembly → z-limit switch links to videos 1-6),
+  // and those links have to work wherever the reader is in the sequence.
+  { id: 'tutorial-videos',  num: '06', title: 'Tutorial Videos',     sub: "Follow along on video &mdash; the build steps in the order you'll do them.", file: 'tutorial-videos.html', open: true },
 ];
 
 export function indexOf(id) {
@@ -45,11 +51,13 @@ export function persist(state) {
   }));
 }
 
-/** Strict sequential access: previous level must be complete (or global unlock on). */
+/** Strict sequential access: previous level must be complete (or global unlock
+ *  on), except for levels flagged `open` — reference pages other steps link into. */
 export function isOpen(state, id) {
   if (state.all) return true;
   const i = indexOf(id);
   if (i <= 0) return true;
+  if (LEVELS[i] && LEVELS[i].open) return true;
   const prev = LEVELS[i - 1];
   return prev ? state.completed.has(prev.id) : true;
 }

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.dataset.theme=localStorage.getItem('piper-theme')||'dark';</script>
+<title>Installing Bed Plate and components — Assembly — HEIMDALL build</title>
+<meta name="description" content="Mounting the bed plate and tip disposal on the deck, then fitting the tip catcher, tip ejector, camera mount and camera.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/tokens.css?v=16">
+<link rel="stylesheet" href="../../css/base.css">
+<link rel="stylesheet" href="../../css/sections.css">
+<link rel="stylesheet" href="../../css/build.css?v=16">
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"><div class="grid"></div><div class="halo"></div></div>
+
+<header class="build-nav">
+  <div class="build-nav-inner">
+    <a href="../../index.html" class="build-brand" aria-label="HEIMDALL home">
+      <img src="../../assets/logo.png" alt="HEIMDALL @NTU MSE"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="brand-text" style="display:none"><span class="mark"></span>HEIMDALL</span>
+    </a>
+    <div class="build-nav-actions">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to light theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="../assembly.html" class="back">← Assembly</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap step-main">
+  <div class="step-head">
+    <span class="step-num">Assembly · Sub-step 4 of 4</span>
+    <h1>Installing Bed Plate and components</h1>
+    <p class="lead">Mount the bed plate and tip disposal on the deck, then fit the tip ejector, camera mount and camera onto them.</p>
+  </div>
+
+  <div class="step-content">
+    <div class="need-card">
+      <h3 class="need-heading">You will need</h3>
+      <div class="need-list">
+        <div class="need-item" data-need="pliers">
+          <img class="need-icon" src="../../Icons/plier.svg" alt="Pliers">
+          <span class="need-label">Pliers</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item" data-need="m5-x-10mm-x-2">
+          <img class="need-icon" src="../../Icons/screw.png" alt="M5 x 10mm screw">
+          <span class="need-label">M5 x 10mm<br>x 2</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item" data-need="m3-x-6mm-x-2">
+          <img class="need-icon" src="../../Icons/screw.png" alt="M3 x 6mm screw">
+          <span class="need-label">M3 x 6mm<br>x 2</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item" data-need="m5-x-20mm-x-4">
+          <img class="need-icon" src="../../Icons/screw.png" alt="4x M5 x 20mm screw">
+          <span class="need-label">M5 x 20mm<br>x 4</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item" data-need="m5-x-20-40mm-x-2">
+          <img class="need-icon" src="../../Icons/screw.png" alt="M5 screw, 20 to 45mm long">
+          <span class="need-label">M5 x<br>20–45mm<br>x 2</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item" data-need="m3-x-4mm-x-4">
+          <img class="need-icon" src="../../Icons/screw.png" alt="M3 x 4mm screw">
+          <span class="need-label">M3 x 4mm<br>x 4</span>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="need-card">
+      <div class="need-list need-list--parts">
+        <div class="need-item need-item--part" data-need="bed-plate">
+          <h4 class="part-name">Bed Plate</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/bed-plate.png" alt="Bed Plate"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="tip-disposal">
+          <h4 class="part-name">Tip Disposal</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/tip-disposal.png" alt="Tip Disposal"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="tip-catcher">
+          <h4 class="part-name">Tip Catcher</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/tip-catcher.png" alt="Tip Catcher"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="tip-ejector">
+          <h4 class="part-name">Tip Ejector</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/tip-ejector.png" alt="Tip Ejector"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part" data-need="camera-mount">
+          <h4 class="part-name">Camera Mount</h4>
+          <div class="part-thumb"><img src="../../Images/CAD_Images/camera-mount.png" alt="Camera Mount"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part need-item--photo" data-need="usb-camera">
+          <h4 class="part-name">USB Camera</h4>
+          <div class="part-thumb"><img src="../../Icons/usb-camera.jpg" alt="USB camera module"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+        <div class="need-item need-item--part need-item--photo" data-need="usb-extension">
+          <h4 class="part-name">USB extension<br>(if needed)</h4>
+          <div class="part-thumb"><img src="../../Icons/usb-extension.jpg" alt="USB extension lead"></div>
+          <span class="part-check need-check" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Instructions</h3>
+    <ol>
+      <li>
+        Remove the magnetic base — it's held on with a very strong adhesive. Use a pair of pliers to pull it off, and if your are finding it difficult ask a buddy to hold the printer steady while you remove the magnetic base.
+        <figure class="step-figure">
+          <img src="../../Images/step-2/magnetic_base_removal.jpg" alt="Remove magnetic base of build plate to reveal aluminium heat plate.">
+          <figcaption>Figure 1: Remove magnetic base.</figcaption>
+        </figure>
+      </li>
+      <li>
+        You'll find four screws already holding the manual levelling knobs to the aluminium bed. Reuse these screws to mount the bed plate and tip disposal, and if you would like you can swap the existing springs for the 3D-printed standoffs.
+        <div class="step-figure-group">
+          <figure class="step-figure">
+            <img src="../../Images/step-2/leveling_knob.jpeg" alt="Countersunk screw passing through the black bed plate and aluminium bed, with a standoff between the bed and the levelling knob below">
+            <figcaption>Figure 2: Bed plate corner — the countersunk screw goes through the bed plate and the aluminium bed, then down into the levelling knob. The screw head should sit flush with the plate.</figcaption>
+          </figure>
+          <figure class="step-figure">
+            <img src="../../Images/step-2/bed_plate_screw.jpeg" alt="Screw passing through the base of the tip disposal and the aluminium bed, held from underneath">
+            <figcaption>Figure 3: Tip disposal corner — the screw passes through the tip disposal base and the aluminium bed. Hold the knob steady from underneath while you tighten from the top.</figcaption>
+          </figure>
+        </div>
+        <figure class="step-figure step-figure--sm">
+          <img src="../../Images/step-2/bed_plate_tip_disposal.jpeg" alt="Finished deck: black bed plate screwed to the aluminium bed, with the tip disposal mounted at one corner">
+          <figcaption>Figure 4: Finished result — the bed plate screwed down at its corners, and the tip disposal mounted on the corner of the aluminium bed beside it. Check both sit flat and don't rock.</figcaption>
+        </figure>
+      </li>
+      <li id="tip-ejector">
+        With the tip disposal mounted, attach the Tip Ejector to it. Use the bottom 4 holes and 4x M5 20mm screws.
+        <figure class="step-figure step-figure--sm">
+          <img src="../../Images/step-3/attach_tip_ejector.jpg" alt="Red tip ejector bar bolted to the pale blue tip disposal chute, four screws through the bar's lower holes">
+          <figcaption>Figure 5: The tip ejector bolted to the tip disposal. The screws go through the bottom four holes — the upper holes stay empty.</figcaption>
+        </figure>
+      </li>
+      <li>
+        Next, attach the Camera Mount, use 2x M5 screws of length anywhere from 20mm to 40mm.
+        <figure class="step-figure">
+          <img src="../../Images/step-3/attach_camera_mount.jpg" alt="Camera mount arm screwed to the side of the red tip ejector with two screws, its rectangular window facing out">
+          <figcaption>Figure 6: The camera mount screwed to the tip ejector, with the window that holds the camera facing outwards.</figcaption>
+        </figure>
+      </li>
+      <li>
+        Finally, attach the USB Camera, use 4x M3 4mm screws.
+        <figure class="step-figure step-figure--sm">
+          <img src="../../Images/step-3/attach_usb_camera.jpg" alt="Assembly mounted on the machine with the USB camera board fixed into the camera mount and its lead running off to the side">
+          <figcaption>Figure 7: The finished assembly in place, with the camera board fixed into the mount and its lead routed clear of the ejector.</figcaption>
+        </figure>
+      </li>
+      <li>
+        The assembly shpuld look like this.
+        <figure class="step-figure step-figure--sm">
+          <img src="../../Images/step-3/perspective_view.jpg" alt="Finished setup">
+          <figcaption>Figure 8: Final setup.</figcaption>
+        </figure>
+      </li>
+      <li>You will need a USB extension for your USB Camera if the cable is too short to reach your computer. A short cable carries the RISK of dragging the
+        laptop along with it when the bed plate moves.
+        Pro-tip: one of our extensions was faulty and was giving us an out of focus image, replace the extension if you face the same problem.
+      </li>
+    </ol>
+
+    <h3>Tutorial videos</h3>
+    <p>Guided tutorial-videos for your convenience.</p>
+    <ul class="video-links">
+      <li>
+        <a href="../tutorial-videos.html#video-12">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 12</span>
+          <span class="vl-title">Bolting on the bed plate</span>
+        </a>
+      </li>
+      <li>
+        <a href="../tutorial-videos.html#video-13">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.4l6 3.6-6 3.6z" fill="currentColor" stroke="none"/></svg>
+          <span class="vl-num">Video 13</span>
+          <span class="vl-title">Fixing components on the bed plate</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="step-actions">
+    <a class="btn btn-solid" href="../assembly.html">← Back to Assembly</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-col">
+      <div class="foot-line"><img class="foot-logo-ngenuity" src="/assets/logo.png" alt="Heimdall_logo"> — Automated liquid handling</div>
+      <div class="foot-line">
+        <a href="https://www.ngenuitylab.net/" target="_blank">
+          <img class="foot-logo-ngenuity" src="/assets/NGenuity_lab_logo.png" alt="NGenuity_lab_logo">
+        </a> — Self-driving labs for materials science
+      </div>
+    </div>
+    <div class="foot-col foot-col-center">
+      <div class="foot-links">
+        <a href="#">GitHub</a>
+        <a href="https://www.ngenuitylab.net/contact/">Reach Us</a>
+      </div>
+    </div>
+    <div class="foot-col foot-col-end">
+      <a href="https://www.ntu.edu.sg" target="_blank">
+        <img class="foot-logo-ntu" src="/assets/ntu_logo.png" alt="Nanyang Technological University">
+      </a>
+    </div>
+    <div class="foot-copyright">© 2026 NGenuity Lab · NTU School of Materials Science & Engineering</div>
+  </div>
+</footer>
+
+<script src="../../js/theme.js"></script>
+<script src="../../js/step-checklist.js"></script>
+<script src="../../js/lightbox.js?v=4"></script>
+</body>
+</html>
